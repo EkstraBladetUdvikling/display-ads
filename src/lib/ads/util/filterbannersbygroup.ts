@@ -2,18 +2,20 @@ import { PLACEMENTGROUPNAMES } from './getgroupname';
 
 import type { IBANNERSTATEBANNER } from '../types/admanager';
 
-export const filterBannersByGroup = (banners: IBANNERSTATEBANNER[], isNoconsent: boolean, _premium: boolean) => {
-  if (isNoconsent) {
-    const filteredBanners = banners.filter((banner) => banner.siteName.toLowerCase() === PLACEMENTGROUPNAMES.noconsent);
+export const filterBannersByGroup = (banners: IBANNERSTATEBANNER[], isNoconsent: boolean) => {
+	if (isNoconsent) {
+		const filteredBanners = banners.filter(
+			(banner) => banner.siteName.toLowerCase() === PLACEMENTGROUPNAMES.noconsent
+		);
 
-    return filteredBanners;
-  }
+		return filteredBanners;
+	}
 
-  const filteredBanners = banners.filter(
-    (banner) =>
-      banner.siteName.toLowerCase() !== PLACEMENTGROUPNAMES.noconsent &&
-      banner.siteName.toLowerCase() !== PLACEMENTGROUPNAMES.test
-  );
+	const filteredBanners = banners.filter(
+		(banner) =>
+			banner.siteName.toLowerCase() !== PLACEMENTGROUPNAMES.noconsent &&
+			banner.siteName.toLowerCase() !== PLACEMENTGROUPNAMES.test
+	);
 
-  return filteredBanners;
+	return filteredBanners;
 };

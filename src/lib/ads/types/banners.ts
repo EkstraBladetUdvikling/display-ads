@@ -31,7 +31,6 @@ export interface IBannerInit {
 	ebSegments: string[];
 	highImpactEnabled: boolean;
 	keywords: IKeywords;
-	consent: boolean;
 	pageContext: PAGETYPES;
 	prebidEidsAllowed: boolean;
 	premium: boolean;

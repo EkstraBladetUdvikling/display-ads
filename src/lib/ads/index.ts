@@ -3,7 +3,6 @@ export {
 	addCustomPlacement,
 	addPlacement,
 	getElementIds,
-	getGroupName,
 	getKeyValues,
 	getLiveBlogBanners,
 	getUserType,
@@ -112,26 +111,9 @@ class BannerHandler {
 
 	private init(initOptions: IBannerInit) {
 		const {
-			// anonId,
-			// articleId,
-			// device: userAgentDevice,
-			// ebSegments,
-			// highImpactEnabled,
-			// isFrontpage,
-			// keywords: escKeywords,
-			// noConsent,
-			// prebidEidsAllowed,
-			// premium,
-			// relativePath,
-			// reloadOnBack,
-			// test,
-			// topscroll: topscrollAllowed,
-			// topscrollWeekCount
-
 			anonIds,
 			articleId,
 			adPlacements,
-			consent,
 			device: userAgentDevice,
 			ebSegments,
 			highImpactEnabled,
@@ -153,7 +135,7 @@ class BannerHandler {
 		// pubads setup
 		window.googletag.cmd.push(() => {
 			window.googletag.pubads().setPublisherProvidedId(anonIds.base);
-			window.googletag.pubads().setTargeting('test', `${test}`);
+			window.googletag.pubads().setTargeting('test', true);
 			window.googletag.pubads().enableSingleRequest();
 			window.googletag.pubads().collapseEmptyDivs();
 			window.googletag.pubads().disableInitialLoad();
@@ -206,14 +188,13 @@ class BannerHandler {
 
 		const defaultKeywords = {
 			article: articleId,
-			ekstra_bladet: [],
 			screen: getSizeValues(device),
 			userType
 		};
 
 		const pp_audiences = escKeywords.Relevance_Audiences;
 
-		const split = String(Math.floor(Math.random() * 20) + 1); /** EBCD-17036 */
+		const split = String(Math.floor(Math.random() * 20) + 1);
 
 		const keywords = { ...defaultKeywords, ...escKeywords, pp_audiences, split };
 		const keyValues = getKeyValues(relativePath, articleId);
@@ -252,11 +233,7 @@ class BannerHandler {
 		/**
 		 * Handle actual banners
 		 */
-		const banners = filterBannersByGroup(
-			adPlacements as IBANNERSTATEBANNER[],
-			noConsentGroup,
-			premium
-		);
+		const banners = filterBannersByGroup(adPlacements as IBANNERSTATEBANNER[], noConsentGroup);
 		const adUnits: IBANNERSTATEBANNER[] = [];
 		const dynamicPlacements: IBANNERSTATEBANNER[] = [];
 		const liveBlogPlacements: IBANNERSTATEBANNER[] = [];
@@ -264,7 +241,6 @@ class BannerHandler {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
 				banner.cleanName = name.replace(`${siteName}_`, '');
-				banner.lwName = name.replace('eb_', 'ekstra_bladet_');
 
 				/**
 				 * insufficient info
@@ -328,8 +304,7 @@ class BannerHandler {
 				}
 
 				if (banner.cleanName.indexOf('topscroll') !== -1) {
-					if (topscrollAllowed)
-						handleTopScroll(topscrollWeekCount, banner.lwName, defineTag, prefixId);
+					if (topscrollAllowed) handleTopScroll(topscrollWeekCount, banner.lwName, defineTag);
 				} else {
 					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 				}
