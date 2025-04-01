@@ -1,7 +1,5 @@
 // const disallowedSection = '';
 
-import { PUBLIC_livewrappedKey } from '$env/static/public';
-
 //   if (!consent && disallowedSection) return;
 
 //   const firstScript = document.querySelector('script');
@@ -46,12 +44,13 @@ import { PUBLIC_livewrappedKey } from '$env/static/public';
 //   }
 
 import { page } from '$app/state';
+import BannerHandler from './bannerhandler';
+import { PUBLIC_livewrappedKey } from '$env/static/public';
 
-export async function adsInit(consent: string | boolean) {
-	console.log('adsInit', consent, page);
+export function adsInit(consent: string | boolean) {
 	const disallowedSection = '';
 
-	if (!consent && disallowedSection) return;
+	if (!consent && disallowedSection) return null;
 
 	const firstScript = document.querySelector('script');
 	const lwScript = document.createElement('script');
@@ -78,13 +77,10 @@ export async function adsInit(consent: string | boolean) {
 		keywords
 	} = page.data;
 
-	console.log(page.url);
-
-	console.log({
+	return new BannerHandler({
+		adPlacements,
 		anonIds,
 		articleId,
-		adPlacements,
-		consent,
 		device,
 		ebSegments,
 		highImpactEnabled,
@@ -97,4 +93,38 @@ export async function adsInit(consent: string | boolean) {
 		topscroll: true,
 		topscrollWeekCount: 7
 	});
+}
+
+export class AdsInterface {
+	private bannerHandler: BannerHandler | null = null;
+
+	constructor(consent: string | boolean) {
+		this.bannerHandler = adsInit(consent);
+	}
+
+	public updateContext() {
+		const {
+			adPlacements,
+			anonIds,
+			articleId,
+			device,
+			ebSegments,
+			highImpactEnabled,
+			pageContext,
+			premium,
+			keywords
+		} = page.data;
+
+		this.bannerHandler?.updateContext({
+			adPlacements,
+			anonIds,
+			articleId,
+			device,
+			ebSegments,
+			highImpactEnabled,
+			pageContext,
+			premium,
+			keywords
+		});
+	}
 }

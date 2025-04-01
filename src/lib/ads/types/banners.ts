@@ -1,8 +1,6 @@
 import { DEVICE } from '../state';
 import type { ebDynamicBanners } from '../dynamicbanners/DynamicBanners';
 import type { IAdmanagerBanners, PAGETYPES } from './admanager';
-import type { init } from '../index';
-import { PLACEMENTGROUPNAMES } from '../util/getgroupname';
 
 import type { ILoadAdData } from './livewrapped';
 
@@ -31,14 +29,15 @@ export interface IBannerInit {
 	ebSegments: string[];
 	highImpactEnabled: boolean;
 	keywords: IKeywords;
+	lwReplaceValues?: string[];
 	pageContext: PAGETYPES;
 	prebidEidsAllowed: boolean;
 	premium: boolean;
 	relativePath: string;
 	reloadOnBack: boolean;
-	test: boolean;
+	test?: boolean;
 	topscroll: boolean;
-	topscrollWeekCount: string;
+	topscrollWeekCount: number;
 }
 
 export interface ICustomPlacement extends Partial<ILoadAdData> {
@@ -55,6 +54,5 @@ export interface ISiteBanners {
 	getKeyValues: typeof getKeyValues;
 	getLiveBlogBanners: Awaited<typeof getLiveBlogBanners>;
 	getUserType: typeof getUserType;
-	init: typeof init;
 	updateORTBData: typeof updateORTBData;
 }

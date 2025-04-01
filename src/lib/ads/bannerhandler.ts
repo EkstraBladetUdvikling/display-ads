@@ -17,7 +17,7 @@ import {
 	addPlacement,
 	filterBannersByGroup,
 	getElementIds,
-	getKeyValues,
+	// getKeyValues,
 	getSizeValues,
 	getUserType,
 	onPersisted,
@@ -36,7 +36,10 @@ class BannerHandler {
 	private livewrappedTimeout = 2500;
 	private renderedBanners: string[] = [];
 
+	private initOptions: IBannerInit;
+
 	constructor(initOptions: IBannerInit) {
+		this.initOptions = initOptions;
 		this.init(initOptions);
 
 		onPersisted(() => {
@@ -65,6 +68,13 @@ class BannerHandler {
 
 	public replayAds() {
 		BANNERSTATE.placements.forEach((placementName) => addPlacement(placementName));
+	}
+
+	public updateContext(initOptions: Partial<IBannerInit>) {
+		console.log('updateContext', initOptions);
+		console.log('prev initOptions', this.initOptions);
+
+		// TODO: FIND A way to keep all ads in the queue
 	}
 
 	private complete() {
@@ -121,7 +131,7 @@ class BannerHandler {
 			keywords: escKeywords,
 			prebidEidsAllowed,
 			premium,
-			relativePath,
+			// relativePath,
 			reloadOnBack,
 			topscroll: topscrollAllowed,
 			topscrollWeekCount
@@ -140,30 +150,32 @@ class BannerHandler {
 			window.googletag.pubads().collapseEmptyDivs();
 			window.googletag.pubads().disableInitialLoad();
 			if (adPlacements) {
-				window.googletag.pubads().addEventListener('slotRenderEnded', (event: any) => {
-					const slotElementId = event.slot.getSlotElementId();
-					const adUnitPath = event.slot.getAdUnitPath();
-					const bannerWrapper = document.getElementById(slotElementId.replace('_', '_wrapper_'));
-					const bannerData = adPlacements.find((banner) => `/${banner.invCode}` === adUnitPath);
-					if (event.isEmpty && bannerWrapper) {
-						bannerWrapper.classList.add('hidden');
-					} else {
-						// Came from addCustomPlacement and wont be found in bannerData
-						if (!bannerData) return;
+				window.googletag
+					.pubads()
+					.addEventListener('slotRenderEnded', (event: googletag.events.SlotRenderEndedEvent) => {
+						const slotElementId = event.slot.getSlotElementId();
+						const adUnitPath = event.slot.getAdUnitPath();
+						const bannerWrapper = document.getElementById(slotElementId.replace('_', '_wrapper_'));
+						const bannerData = adPlacements.find((banner) => `/${banner.invCode}` === adUnitPath);
+						if (event.isEmpty && bannerWrapper) {
+							bannerWrapper.classList.add('hidden');
+						} else {
+							// Came from addCustomPlacement and wont be found in bannerData
+							if (!bannerData) return;
 
-						// add the banner to list of rendered banners unless its a topbanner
-						if (
-							bannerData.name.indexOf('topbanner') === -1 &&
-							bannerData.name.indexOf('megaboard_top') === -1
-						) {
-							this.renderedBanners.push(slotElementId);
+							// add the banner to list of rendered banners unless its a topbanner
+							if (
+								bannerData.name.indexOf('topbanner') === -1 &&
+								bannerData.name.indexOf('megaboard_top') === -1
+							) {
+								this.renderedBanners.push(slotElementId);
+							}
+							// add the has-content class to show our ad marking
+							if (bannerData.annoncemarkering && bannerWrapper) {
+								bannerWrapper.classList.add('has-content');
+							}
 						}
-						// add the has-content class to show our ad marking
-						if (bannerData.annoncemarkering && bannerWrapper) {
-							bannerWrapper.classList.add('has-content');
-						}
-					}
-				});
+					});
 			}
 		});
 
@@ -197,12 +209,7 @@ class BannerHandler {
 		const split = String(Math.floor(Math.random() * 20) + 1);
 
 		const keywords = { ...defaultKeywords, ...escKeywords, pp_audiences, split };
-		const keyValues = getKeyValues(relativePath, articleId);
-		keywords.ekstra_bladet = [...keywords.ekstra_bladet, ...keyValues];
-
-		if (premium) {
-			keywords.ekstra_bladet.push('plus');
-		}
+		// const keyValues = getKeyValues(relativePath, articleId);
 
 		window.lwhb.cmd.push(() => {
 			/**
@@ -210,15 +217,15 @@ class BannerHandler {
 			 */
 			const eids = prebidEidsAllowed ? anonIds.adform : undefined;
 			if (eids) window.lwhb.csKeyValues({ eb_anon_uuid_adform: eids });
+		});
 
-			/**
-			 * Adding keywords to GPT
-			 */
-			window.googletag.cmd.push(() => {
-				for (const [key, value] of Object.entries(keywords)) {
-					window.googletag.pubads().setTargeting(key, value);
-				}
-			});
+		/**
+		 * Adding keywords to GPT
+		 */
+		window.googletag.cmd.push(() => {
+			for (const [key, value] of Object.entries(keywords)) {
+				window.googletag.pubads().setTargeting(key, value);
+			}
 		});
 
 		updateORTBData(keywords);
@@ -241,6 +248,9 @@ class BannerHandler {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
 				banner.cleanName = name.replace(`${siteName}_`, '');
+				banner.lwName = initOptions.lwReplaceValues
+					? name.replace(initOptions.lwReplaceValues[0], initOptions.lwReplaceValues[1])
+					: name;
 
 				/**
 				 * insufficient info
@@ -337,7 +347,7 @@ class BannerHandler {
 
 		BANNERSTATE.init({
 			adUnits,
-			pageContext,
+			context: pageContext,
 			device,
 			dynamicPlacements,
 			ebLive: !!initOptions.relativePath.match(/eblive/),
@@ -351,4 +361,6 @@ class BannerHandler {
 	}
 }
 
-export const init = (initOptions: IBannerInit): BannerHandler => new BannerHandler(initOptions);
+// export const init = (initOptions: IBannerInit): BannerHandler => new BannerHandler(initOptions);
+
+export default BannerHandler;

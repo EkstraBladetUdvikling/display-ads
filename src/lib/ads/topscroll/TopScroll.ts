@@ -20,11 +20,10 @@ function getCurrentPeriodEndTime(): number {
 	return nextShowStarts.getTime();
 }
 
-function getTopscrollAllowed(allowedCountPrPeriod: string = ''): boolean {
+function getTopscrollAllowed(allowedCount: number = 2): boolean {
 	if (BANNERSTATE.premium) return false;
 
 	const status = localStorage ? localStorage.getItem('topscrollStatus') : null;
-	const allowedCount = allowedCountPrPeriod === '' ? 2 : parseFloat(allowedCountPrPeriod);
 
 	if (status === null) {
 		return true;
@@ -90,7 +89,7 @@ interface IPrepareObj {
 }
 
 export function handleTopScroll(
-	topscrollWeekCount: string,
+	topscrollWeekCount: number,
 	adUnitName: string,
 	defineTag: IDefineTag,
 	callbackMethod?: () => void

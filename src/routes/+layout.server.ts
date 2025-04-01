@@ -24,7 +24,7 @@ const adPlacements = [
 		devices: ['DESKTOP', 'TABLET'],
 		siteName: 'feltet_forside',
 		name: 'feltet_forside_halfpage3',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage3',
+		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage2',
 		allowedFormats: ['banner'],
 		annoncemarkering: true,
 		sizes: [
@@ -75,12 +75,32 @@ const adPlacements = [
 		allowedOnPlus: false,
 		pageTypes: ['FRONTPAGE'],
 		isFluid: true
+	},
+	{
+		placementId: '22902737223',
+		devices: ['DESKTOP', 'TABLET'],
+		siteName: 'feltet_forside',
+		name: 'feltet_artikler_halfpage1',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage1',
+		allowedFormats: ['banner', 'native'],
+		annoncemarkering: true,
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		],
+		allowedOnPlus: false,
+		pageTypes: ['ARTICLE'],
+		isFluid: true
 	}
 ];
 
-export const load = async () => {
+export const load = async ({ request }) => {
 	const anonId = crypto.randomUUID();
 	const anonId_adform = crypto.randomUUID();
+
+	const userAgent = request.headers.get('user-agent');
+	console.log('userAgent', userAgent);
 
 	return {
 		adPlacements,

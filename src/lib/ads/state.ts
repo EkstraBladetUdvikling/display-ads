@@ -56,8 +56,8 @@ const STATE: IBannerState = {
 	reloadOnBack: true,
 	renderCalled: false,
 	waiting: [],
-	winHeight: window.innerHeight,
-	winWidth: window.innerWidth
+	winHeight: 0,
+	winWidth: 0
 };
 
 function init(updateKeys: Partial<IBannerState>): void {
@@ -69,6 +69,8 @@ function init(updateKeys: Partial<IBannerState>): void {
 			}
 		}
 	}
+	STATE.winHeight = window.innerHeight;
+	STATE.winWidth = window.innerWidth;
 }
 
 function setupDone(): void {
