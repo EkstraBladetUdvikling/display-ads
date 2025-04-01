@@ -1,5 +1,3 @@
-import type { PLACEMENTGROUPNAMES } from './util/getgroupname';
-
 import { type IBANNERSTATEBANNER, PAGETYPES } from './types/admanager';
 
 import { DEVICE } from './util/device';
@@ -12,8 +10,6 @@ export interface IBannerState {
 	context: PAGETYPES;
 	dynamicPlacements: IBANNERSTATEBANNER[];
 	device: DEVICE;
-	ebLive: boolean;
-	groupName: PLACEMENTGROUPNAMES | null;
 	placements: string[];
 	premium: boolean;
 	ready: boolean;
@@ -31,7 +27,6 @@ export enum STATEKEY {
 	context = 'context',
 	device = 'device',
 	dynamicPlacements = 'dynamicPlacements',
-	groupName = 'groupName',
 	placements = 'placements',
 	premium = 'premium',
 	reloadOnBack = 'reloadOnBack',
@@ -47,8 +42,6 @@ const STATE: IBannerState = {
 	context: PAGETYPES.ARTICLE,
 	device: DEVICE.smartphone,
 	dynamicPlacements: [],
-	ebLive: false,
-	groupName: null,
 	liveBlogPlacements: [],
 	placements: [],
 	premium: false,
@@ -118,12 +111,6 @@ export const BANNERSTATE = {
 	// },
 	get dynamicPlacements(): IBANNERSTATEBANNER[] {
 		return STATE.dynamicPlacements;
-	},
-	get ebLive(): boolean {
-		return STATE.ebLive;
-	},
-	get groupName() {
-		return STATE.groupName;
 	},
 	init,
 	isReady,

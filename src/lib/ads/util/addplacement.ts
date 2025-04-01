@@ -1,5 +1,5 @@
 import { BANNERSTATE } from '../state';
-import type { ICbData, ICustomPlacement, IDefineTag, ILoadAdData } from '../types';
+import type { ICustomPlacement, IDefineTag, ILoadAdData } from '../types';
 
 export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: boolean = false) {
 	try {
@@ -44,23 +44,16 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 	}
 }
 
-export function addPlacement(placement: string, targetId?: string) {
+export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
-
+	if (!tagId) return;
 	BANNERSTATE.isReady(() => {
 		const bannerData = BANNERSTATE.adUnits.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
 		if (bannerData) {
-			const {
-				allowedFormats: allowedMediaTypes,
-				lwName: adUnitName,
-				gamSizes,
-				sizes,
-				targetId: targetIdfromData
-			} = bannerData;
+			const { allowedFormats: allowedMediaTypes, lwName: adUnitName, gamSizes, sizes } = bannerData;
 
-			const tagId = targetId ?? targetIdfromData ?? '';
 			const adPlaceholder = document.getElementById(tagId);
 			console.log('adPlaceholder', bannerData);
 			if (!adPlaceholder) throw new Error('adPlacement not found');
@@ -72,33 +65,10 @@ export function addPlacement(placement: string, targetId?: string) {
 			window.lwhb.cmd.push(() => {
 				const loadAdData: ILoadAdData = {
 					adUnitName,
-					callbackMethod: (cbData: ICbData) => {
-						try {
-							if (cbData.event.adType === 'video' && placement === 'intext') {
-								return;
-							}
-
-							if (BANNERSTATE.ebLive) {
-								const banneriFrame = document.getElementById(tagId);
-								const bannerContainer = banneriFrame?.parentElement;
-
-								if (bannerContainer && bannerContainer.offsetWidth < cbData.width) {
-									const scaleValue = bannerContainer.offsetWidth / cbData.width;
-
-									banneriFrame.style.transform = `scale(${scaleValue})`;
-								}
-							}
-						} catch (error) {
-							console.error({
-								component: 'js-admanager',
-								label: 'addPlacement.loadAdData',
-								level: 'ERROR',
-								message: (error as Error).message
-							});
-						}
-					},
 					tagId
 				};
+
+				if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
 				if (allowedMediaTypes) {
 					const lowercasedMediaTypes = allowedMediaTypes.map((str) =>

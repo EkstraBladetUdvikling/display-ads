@@ -7,23 +7,12 @@ export {
 	getLiveBlogBanners,
 	getUserType,
 	handleHalfPage,
-	PLACEMENTGROUPNAMES,
 	updateORTBData
 } from './util';
 
 import { handleTopScroll } from './topscroll/TopScroll';
 import { addHighImpact, highimpactInit } from './highimpact';
-import {
-	addPlacement,
-	filterBannersByGroup,
-	getElementIds,
-	// getKeyValues,
-	getSizeValues,
-	getUserType,
-	onPersisted,
-	PLACEMENTGROUPNAMES,
-	updateORTBData
-} from './util';
+import { getElementIds, getSizeValues, getUserType, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
 
@@ -33,6 +22,7 @@ import type { IBannerInit, IDefineTag } from './types';
 import { getDeviceInfo } from './util/isipados';
 
 class BannerHandler {
+	private device: DEVICE;
 	private livewrappedTimeout = 2500;
 	private renderedBanners: string[] = [];
 
@@ -40,7 +30,13 @@ class BannerHandler {
 
 	constructor(initOptions: IBannerInit) {
 		this.initOptions = initOptions;
+		const { device: userAgentDevice } = initOptions;
+
+		this.device =
+			userAgentDevice === DEVICE.desktop ? getDeviceInfo(userAgentDevice).device : userAgentDevice;
+
 		this.init(initOptions);
+		this.setupAdUnits();
 
 		onPersisted(() => {
 			this.replaceAds();
@@ -66,15 +62,13 @@ class BannerHandler {
 		}
 	}
 
-	public replayAds() {
-		BANNERSTATE.placements.forEach((placementName) => addPlacement(placementName));
-	}
-
 	public updateContext(initOptions: Partial<IBannerInit>) {
 		console.log('updateContext', initOptions);
 		console.log('prev initOptions', this.initOptions);
+		this.initOptions = { ...this.initOptions, ...initOptions };
 
-		// TODO: FIND A way to keep all ads in the queue
+		BANNERSTATE.reset();
+		this.setupAdUnits();
 	}
 
 	private complete() {
@@ -120,22 +114,7 @@ class BannerHandler {
 	}
 
 	private init(initOptions: IBannerInit) {
-		const {
-			anonIds,
-			articleId,
-			adPlacements,
-			device: userAgentDevice,
-			ebSegments,
-			highImpactEnabled,
-			pageContext,
-			keywords: escKeywords,
-			prebidEidsAllowed,
-			premium,
-			// relativePath,
-			reloadOnBack,
-			topscroll: topscrollAllowed,
-			topscrollWeekCount
-		} = initOptions;
+		const { anonIds, adPlacements, prebidEidsAllowed, reloadOnBack } = initOptions;
 
 		/**
 		 * Google Publisher Tag setup
@@ -193,14 +172,39 @@ class BannerHandler {
 		 */
 		window.lwhb = window.lwhb || { cmd: [] };
 
-		const device =
-			userAgentDevice === DEVICE.desktop ? getDeviceInfo(userAgentDevice).device : userAgentDevice;
+		window.lwhb.cmd.push(() => {
+			/**
+			 * Adding userid to livewrapped
+			 */
+			const eids = prebidEidsAllowed ? anonIds.adform : undefined;
+			if (eids) window.lwhb.csKeyValues({ eb_anon_uuid_adform: eids });
+		});
+	}
+
+	/**
+	 * setupAdUnits
+	 * @returns
+	 */
+	private setupAdUnits() {
+		const {
+			articleId,
+			adPlacements,
+			ebSegments,
+			highImpactEnabled,
+			pageContext,
+			keywords: escKeywords,
+			lwReplaceValues,
+			premium,
+			reloadOnBack,
+			topscroll: topscrollAllowed,
+			topscrollWeekCount
+		} = this.initOptions;
 
 		const userType = getUserType(ebSegments);
 
 		const defaultKeywords = {
 			article: articleId,
-			screen: getSizeValues(device),
+			screen: getSizeValues(this.device),
 			userType
 		};
 
@@ -210,14 +214,6 @@ class BannerHandler {
 
 		const keywords = { ...defaultKeywords, ...escKeywords, pp_audiences, split };
 		// const keyValues = getKeyValues(relativePath, articleId);
-
-		window.lwhb.cmd.push(() => {
-			/**
-			 * Adding userid to livewrapped
-			 */
-			const eids = prebidEidsAllowed ? anonIds.adform : undefined;
-			if (eids) window.lwhb.csKeyValues({ eb_anon_uuid_adform: eids });
-		});
 
 		/**
 		 * Adding keywords to GPT
@@ -234,13 +230,10 @@ class BannerHandler {
 
 		if (!adPlacements) return;
 
-		const noConsentGroup = window.ebCMP.noConsentGroup();
-		const groupName = noConsentGroup ? PLACEMENTGROUPNAMES.noconsent : undefined;
-
 		/**
 		 * Handle actual banners
 		 */
-		const banners = filterBannersByGroup(adPlacements as IBANNERSTATEBANNER[], noConsentGroup);
+		const banners = adPlacements as IBANNERSTATEBANNER[];
 		const adUnits: IBANNERSTATEBANNER[] = [];
 		const dynamicPlacements: IBANNERSTATEBANNER[] = [];
 		const liveBlogPlacements: IBANNERSTATEBANNER[] = [];
@@ -248,8 +241,8 @@ class BannerHandler {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
 				banner.cleanName = name.replace(`${siteName}_`, '');
-				banner.lwName = initOptions.lwReplaceValues
-					? name.replace(initOptions.lwReplaceValues[0], initOptions.lwReplaceValues[1])
+				banner.lwName = lwReplaceValues
+					? name.replace(lwReplaceValues[0], lwReplaceValues[1])
 					: name;
 
 				/**
@@ -318,7 +311,7 @@ class BannerHandler {
 				} else {
 					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 				}
-
+				console.log('banner', adUnits);
 				if (highImpactEnabled) addHighImpact(banner, targetId);
 
 				/**
@@ -348,10 +341,8 @@ class BannerHandler {
 		BANNERSTATE.init({
 			adUnits,
 			context: pageContext,
-			device,
+			device: this.device,
 			dynamicPlacements,
-			ebLive: !!initOptions.relativePath.match(/eblive/),
-			groupName,
 			liveBlogPlacements,
 			premium,
 			reloadOnBack

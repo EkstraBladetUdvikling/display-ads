@@ -1,7 +1,4 @@
-export { filterBannersByGroup } from './filterbannersbygroup';
-
 export { getElementIds } from './getelementids';
-export { PLACEMENTGROUPNAMES } from './getgroupname';
 export { getKeyValues } from './getkeyvalues';
 export { getLiveBlogBanners } from './getliveblogbanners';
 export { getSizeValues } from './getsizesvalues';

@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { addPlacement } from "./util/addplacement";
+	import { getElementIds } from "./util";
 
   let { placementName, placementType } = $props();
 
-  const targetId = `ad-${placementName}`;
+  const {prefixId,targetId} = getElementIds(placementName);
 
   onMount(()=>{
     addPlacement(placementName, targetId);
   })
 </script>
 
-<div class="wrapper wrapper--{placementName} wrapper--{placementType}">
+<div class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">
   <div class="text">Annonce:</div>
   <div class="target {placementType} {placementName}" id={targetId}></div>
 </div>

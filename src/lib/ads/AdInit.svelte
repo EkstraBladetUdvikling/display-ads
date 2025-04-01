@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { getContext } from "svelte";
-	import { adsInit, AdsInterface } from "./init";
+	import { AdsInterface } from "./init";
 	import { browser } from "$app/environment";
-
 
   const consentStatus = getContext('consent') as () => string | boolean;
 

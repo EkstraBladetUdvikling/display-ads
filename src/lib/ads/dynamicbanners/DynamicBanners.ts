@@ -6,7 +6,7 @@ import type { ICbData, ILoadAdData } from '../types/livewrapped';
 import { onPersisted, sortPlacements } from '../util';
 
 let handlingDynamic = false;
-export function handleDynamicBanners(handlingDynamicArg = handlingDynamic): void {
+export function handleDynamicBanners(handlingDynamicArg = handlingDynamic, hasVideo = false): void {
 	try {
 		if (handlingDynamicArg) return;
 
@@ -70,7 +70,7 @@ export function handleDynamicBanners(handlingDynamicArg = handlingDynamic): void
 						/**
 						 * @description remove first element(video) in sizes and formats if the article has video
 						 */
-						if (window.ebJwPlayers) {
+						if (hasVideo) {
 							const indexOfVideo = allowedFormats.indexOf(ALLOWEDFORMATS.VIDEO);
 							const stringifiedOneOne = JSON.stringify([1, 1]);
 
