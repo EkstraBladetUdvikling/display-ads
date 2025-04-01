@@ -1,15 +1,30 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { addPlacement } from "./util/addplacement";
+	import { onDestroy } from "svelte";
+
+	import { afterNavigate } from "$app/navigation";
+	import { browser } from "$app/environment";
+
+  import { addPlacement } from "./util/addplacement";
 	import { getElementIds } from "./util";
+	import { removePlacement } from "./util/removeplacement";
 
   let { placementName, placementType } = $props();
 
   const {prefixId,targetId} = getElementIds(placementName);
 
-  onMount(()=>{
-    addPlacement(placementName, targetId);
-  })
+  afterNavigate(() => {
+    console.log('MYADS AdPlacement afterNavigate: ', placementName, targetId, browser);
+    if (browser) {
+      addPlacement(placementName, targetId);
+    }
+  });
+
+  onDestroy(() => {
+    console.log('MYADS AdPlacement onDestroy: ', placementName, targetId);
+    if (browser) removePlacement(targetId);
+  });
+
+
 </script>
 
 <div class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">

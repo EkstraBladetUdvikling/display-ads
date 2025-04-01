@@ -23,7 +23,7 @@ const adPlacements = [
 		placementId: '22902736710',
 		devices: ['DESKTOP', 'TABLET'],
 		siteName: 'feltet_forside',
-		name: 'feltet_forside_halfpage3',
+		name: 'feltet_forside_halfpage2',
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage2',
 		allowedFormats: ['banner'],
 		annoncemarkering: true,
@@ -79,9 +79,26 @@ const adPlacements = [
 	{
 		placementId: '22902737223',
 		devices: ['DESKTOP', 'TABLET'],
-		siteName: 'feltet_forside',
+		siteName: 'feltet_artikler',
 		name: 'feltet_artikler_halfpage1',
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage1',
+		allowedFormats: ['banner', 'native'],
+		annoncemarkering: true,
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		],
+		allowedOnPlus: false,
+		pageTypes: ['ARTICLE'],
+		isFluid: true
+	},
+	{
+		placementId: '22902737223',
+		devices: ['DESKTOP', 'TABLET'],
+		siteName: 'feltet_artikler',
+		name: 'feltet_artikler_halfpage2',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage2',
 		allowedFormats: ['banner', 'native'],
 		annoncemarkering: true,
 		sizes: [
@@ -100,7 +117,7 @@ export const load = async ({ request }) => {
 	const anonId_adform = crypto.randomUUID();
 
 	const userAgent = request.headers.get('user-agent');
-	console.log('userAgent', userAgent);
+	console.log('MYADS userAgent', userAgent);
 
 	return {
 		adPlacements,

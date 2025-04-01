@@ -1,9 +1,11 @@
 <script lang="ts">
 	import AdInit from "$lib/ads/AdInit.svelte";
+	import AdPlacement from "$lib/ads/AdPlacement.svelte";
 
 
-  console.log('AdInit');
+
 </script>
 
 <h1>We went here</h1>
-<AdInit />
+
+<AdPlacement placementName="monster3" placementType="monster" />

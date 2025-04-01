@@ -9,14 +9,13 @@
 
   let { children } = $props();
 
-  let consent = 'unset';
+  let consent: 'unset' | boolean = 'unset';
 
   setContext('consent', () => consent);
 
   if (browser) {
     window.ebCMP.doWeHaveConsent({
-      callback: (consentStatus) => {
-        console.log('consent', consentStatus);
+      callback: (consentStatus: boolean) => {
         consent = consentStatus;
       },
       consentTo: 'iab',

@@ -67,6 +67,7 @@ function init(updateKeys: Partial<IBannerState>): void {
 }
 
 function setupDone(): void {
+	console.log('MYADS STATE.setupDone');
 	STATE.ready = true;
 	handleWaiting();
 }
@@ -78,6 +79,7 @@ function handleWaiting(): void {
 }
 
 function isReady(callback: () => void): void {
+	console.log('MYADS isReady', STATE.ready, STATE.waiting);
 	if (STATE.ready) {
 		return callback();
 	} else {

@@ -34,9 +34,11 @@ declare global {
 			loaded: boolean;
 			ortb2: (inputObj: IOrtb2Data) => void;
 			prepareAd: (ILoadAdData) => void;
+			refresh: (inputObj: string[], bool: boolean) => void;
+			removeAdUnit: (tagId: string) => void;
 			render: () => void;
 			renderAd: () => void;
-			refresh: (inputObj: string[], bool: boolean) => void;
+			resetPage: (bool: boolean) => void;
 		};
 		pbjs: {
 			getConfig: () => { ortb2: IOrtb2Data };

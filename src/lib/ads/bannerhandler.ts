@@ -35,7 +35,8 @@ class BannerHandler {
 		this.device =
 			userAgentDevice === DEVICE.desktop ? getDeviceInfo(userAgentDevice).device : userAgentDevice;
 
-		this.init(initOptions);
+		this.init();
+		console.log('MYADS BANNERHANDLER CONSTRUCTOR', this.initOptions);
 		this.setupAdUnits();
 
 		onPersisted(() => {
@@ -63,16 +64,20 @@ class BannerHandler {
 	}
 
 	public updateContext(initOptions: Partial<IBannerInit>) {
-		console.log('updateContext', initOptions);
-		console.log('prev initOptions', this.initOptions);
+		console.log('MYADS updateContext param initOptions', initOptions);
+		console.log('MYADS updateContext this.initOptions', this.initOptions);
 		this.initOptions = { ...this.initOptions, ...initOptions };
 
 		BANNERSTATE.reset();
+		this.init();
 		this.setupAdUnits();
 	}
 
 	private complete() {
+		console.log('MYADS BANNERSTATE.completeCalled', BANNERSTATE.completeCalled);
+
 		if (!BANNERSTATE.completeCalled) {
+			console.log('MYADS BANNERSTATE.completeCalled', BANNERSTATE.completeCalled);
 			BANNERSTATE.completeCalled = true;
 			BANNERSTATE.isReady(() => {
 				if (window.lwhb) {
@@ -83,6 +88,7 @@ class BannerHandler {
 						BANNERSTATE.renderCalled = true;
 					});
 				}
+				console.log('MYADS complete ');
 
 				setTimeout(() => {
 					if (window.lwhb && window.lwhb.loaded && window.lwhb.adsRendered) return;
@@ -113,8 +119,8 @@ class BannerHandler {
 		});
 	}
 
-	private init(initOptions: IBannerInit) {
-		const { anonIds, adPlacements, prebidEidsAllowed, reloadOnBack } = initOptions;
+	private init() {
+		const { anonIds, adPlacements, prebidEidsAllowed, reloadOnBack } = this.initOptions;
 
 		/**
 		 * Google Publisher Tag setup
@@ -124,7 +130,7 @@ class BannerHandler {
 		// pubads setup
 		window.googletag.cmd.push(() => {
 			window.googletag.pubads().setPublisherProvidedId(anonIds.base);
-			window.googletag.pubads().setTargeting('test', true);
+			// window.googletag.pubads().setTargeting('test', true);
 			window.googletag.pubads().enableSingleRequest();
 			window.googletag.pubads().collapseEmptyDivs();
 			window.googletag.pubads().disableInitialLoad();
@@ -220,7 +226,9 @@ class BannerHandler {
 		 */
 		window.googletag.cmd.push(() => {
 			for (const [key, value] of Object.entries(keywords)) {
-				window.googletag.pubads().setTargeting(key, value);
+				if (value) {
+					window.googletag.pubads().setTargeting(key, value);
+				}
 			}
 		});
 
@@ -240,6 +248,7 @@ class BannerHandler {
 		banners.forEach((banner) => {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
+
 				banner.cleanName = name.replace(`${siteName}_`, '');
 				banner.lwName = lwReplaceValues
 					? name.replace(lwReplaceValues[0], lwReplaceValues[1])
@@ -311,7 +320,7 @@ class BannerHandler {
 				} else {
 					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 				}
-				console.log('banner', adUnits);
+
 				if (highImpactEnabled) addHighImpact(banner, targetId);
 
 				/**
@@ -351,7 +360,5 @@ class BannerHandler {
 		BANNERSTATE.setupDone();
 	}
 }
-
-// export const init = (initOptions: IBannerInit): BannerHandler => new BannerHandler(initOptions);
 
 export default BannerHandler;

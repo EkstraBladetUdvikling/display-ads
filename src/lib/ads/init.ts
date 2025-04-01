@@ -31,8 +31,6 @@ export function adsInit(consent: string | boolean) {
 		keywords
 	} = page.data;
 
-	console.log('adsInit', adPlacements);
-
 	return new BannerHandler({
 		adPlacements,
 		anonIds,
@@ -70,7 +68,7 @@ export class AdsInterface {
 			premium,
 			keywords
 		} = page.data;
-
+		console.log('MYADS updateContext', page.data);
 		this.bannerHandler?.updateContext({
 			adPlacements,
 			anonIds,
