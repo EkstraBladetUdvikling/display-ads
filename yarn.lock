@@ -10,6 +10,11 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
+"@ekstra-bladet/eb-cmp@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@ekstra-bladet/eb-cmp/-/eb-cmp-3.0.1.tgz#4dbf94515ef05b0c9f5b1934fccd959342f967c5"
+  integrity sha512-61leyxkU53RsK7Z2Za6g5VK7VMvrMHWOW/6m0lsmGWFwlD4bXNPbesQP/H9bYaFtwKwhIO4aTlU2Lqc1iG6OuA==
+
 "@esbuild/aix-ppc64@0.25.2":
   version "0.25.2"
   resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.25.2.tgz#b87036f644f572efb2b3c75746c97d1d2d87ace8"
@@ -456,6 +461,11 @@
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.7.tgz#4158d3105276773d5b7695cd4834b1722e4f37a8"
   integrity sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==
+
+"@types/googletag@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@types/googletag/-/googletag-3.3.0.tgz#5c0d7717c3b9f4489aa3a03693d940f994564514"
+  integrity sha512-9qQzN/lgjEbj+69S6uYSijZHxlSFA5K+t19x0qqwW13r0fD3xQsBJFrDWyIDOk0zlh7+IVkoIPAZYP9hk13d0w==
 
 "@types/json-schema@^7.0.15":
   version "7.0.15"
