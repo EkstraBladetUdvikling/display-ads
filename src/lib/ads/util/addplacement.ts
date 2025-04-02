@@ -46,25 +46,23 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 
 export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
-	console.log('MYADS adPlaceholder tagId:', tagId, placement);
 
-	if (!tagId) return;
 	BANNERSTATE.isReady(() => {
-		console.log('MYADS BANNERSTATE.isReady', BANNERSTATE.adUnits);
 		const bannerData = BANNERSTATE.adUnits.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
-		console.log('MYADS bannerData', bannerData, BANNERSTATE.adUnits);
+
+		console.log('addPlacement', tagId);
+		const adPlaceholder = document.getElementById(tagId);
+
+		if (!adPlaceholder) throw new Error('adPlacement not found');
+
+		while (adPlaceholder.firstChild) {
+			adPlaceholder.firstChild.remove();
+		}
+
 		if (bannerData) {
 			const { allowedFormats: allowedMediaTypes, lwName: adUnitName, gamSizes, sizes } = bannerData;
-
-			const adPlaceholder = document.getElementById(tagId);
-			console.log('MYADS adPlaceholder', bannerData);
-			if (!adPlaceholder) throw new Error('adPlacement not found');
-
-			while (adPlaceholder.firstChild) {
-				adPlaceholder.firstChild.remove();
-			}
 
 			window.lwhb.cmd.push(() => {
 				const loadAdData: ILoadAdData = {
@@ -89,8 +87,6 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 					window.lwhb.prepareAd(loadAdData);
 				}
 			});
-
-			console.log('MYADS adPlaceholder after push');
 		}
 	});
 }

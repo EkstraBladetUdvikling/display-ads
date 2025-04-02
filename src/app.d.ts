@@ -1,5 +1,11 @@
 interface IUnknowObject {
-	[id: string]: IUnknowObject | string | number | boolean | Array<string | number | boolean>;
+	[id: string]:
+		| IUnknowObject
+		| string
+		| number
+		| boolean
+		| Array<string | number | boolean>
+		| number[][];
 }
 
 interface IOrtb2Data {
@@ -25,6 +31,12 @@ declare global {
 	interface Window {
 		ebCMP: IEBCMP;
 		googletag: googletag;
+		highImpactJs: {
+			cmd: Array<() => void>;
+			defineSlot: (inputObj: IUnknowObject) => void;
+			setConfig: (inputObj: IUnknowObject) => void;
+			setTemplateConfig: (placementName: string, inputObj: IUnknowObject) => void;
+		};
 		lwhb: {
 			adsRendered: boolean;
 			cmd: Array<() => void>;

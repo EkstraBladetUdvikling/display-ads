@@ -1,4 +1,4 @@
-import { BANNERSTATE } from './state';
+import { BANNERSTATE, DEVICE } from './state';
 import type { IBANNERSTATEBANNER } from './types/admanager';
 
 /* setup high impact */
@@ -15,7 +15,7 @@ export function highimpactInit() {
 			});
 		}
 
-		const peekAmount = window.ebJS.options.device === 'desktop' ? '600px' : '60vh';
+		const peekAmount = BANNERSTATE.device === DEVICE.desktop ? '600px' : '60vh';
 		if (window.highImpactJs.setTemplateConfig) {
 			window.highImpactJs.setTemplateConfig('midscroll', {
 				peekAmount
@@ -42,13 +42,13 @@ export function highimpactInit() {
 		}
 	});
 
-	window.addEventListener('message', (event) => {
-		if (typeof event.data === 'string' && event.data.indexOf('high-impact-js') !== -1) {
-			if (event.data.indexOf('AD_RENDERED') !== -1 && event.data.indexOf('origins') !== -1) {
-				const data = JSON.parse(event.data);
-			}
-		}
-	});
+	// window.addEventListener('message', (event) => {
+	// 	if (typeof event.data === 'string' && event.data.indexOf('high-impact-js') !== -1) {
+	// 		if (event.data.indexOf('AD_RENDERED') !== -1 && event.data.indexOf('origins') !== -1) {
+	// 			const data = JSON.parse(event.data);
+	// 		}
+	// 	}
+	// });
 }
 
 export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
@@ -68,7 +68,7 @@ export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 				});
 			}
 		});
-	} else if (banner.cleanName?.indexOf('skins') !== -1) {
+	} else if (banner.cleanName?.indexOf('megaboard_top') !== -1) {
 		window.highImpactJs.cmd.push(() => {
 			if (window.highImpactJs.defineSlot) {
 				window.highImpactJs.defineSlot({

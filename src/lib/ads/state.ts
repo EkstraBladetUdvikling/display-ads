@@ -29,28 +29,30 @@ export enum STATEKEY {
 	dynamicPlacements = 'dynamicPlacements',
 	placements = 'placements',
 	premium = 'premium',
+	ready = 'ready',
 	reloadOnBack = 'reloadOnBack',
 	renderCalled = 'renderCalled',
 	liveBlogPlacements = 'liveBlogPlacements',
+	waiting = 'waiting',
 	winHeight = 'winHeight',
 	winWidth = 'winWidth'
 }
 
 const STATE: IBannerState = {
-	adUnits: [],
-	completeCalled: false,
-	context: PAGETYPES.ARTICLE,
-	device: DEVICE.smartphone,
-	dynamicPlacements: [],
-	liveBlogPlacements: [],
-	placements: [],
-	premium: false,
-	ready: false,
-	reloadOnBack: true,
-	renderCalled: false,
-	waiting: [],
-	winHeight: 0,
-	winWidth: 0
+	[STATEKEY.adUnits]: [],
+	[STATEKEY.completeCalled]: false,
+	[STATEKEY.context]: PAGETYPES.ARTICLE,
+	[STATEKEY.device]: DEVICE.smartphone,
+	[STATEKEY.dynamicPlacements]: [],
+	[STATEKEY.liveBlogPlacements]: [],
+	[STATEKEY.placements]: [],
+	[STATEKEY.premium]: false,
+	[STATEKEY.ready]: false,
+	[STATEKEY.reloadOnBack]: true,
+	[STATEKEY.renderCalled]: false,
+	[STATEKEY.waiting]: [],
+	[STATEKEY.winHeight]: 0,
+	[STATEKEY.winWidth]: 0
 };
 
 function init(updateKeys: Partial<IBannerState>): void {
@@ -67,7 +69,6 @@ function init(updateKeys: Partial<IBannerState>): void {
 }
 
 function setupDone(): void {
-	console.log('MYADS STATE.setupDone');
 	STATE.ready = true;
 	handleWaiting();
 }
@@ -79,7 +80,6 @@ function handleWaiting(): void {
 }
 
 function isReady(callback: () => void): void {
-	console.log('MYADS isReady', STATE.ready, STATE.waiting);
 	if (STATE.ready) {
 		return callback();
 	} else {
@@ -108,9 +108,9 @@ export const BANNERSTATE = {
 	get context(): PAGETYPES {
 		return STATE.context;
 	},
-	// get device(): DEVICE {
-	// 	return STATE.device;
-	// },
+	get device(): DEVICE {
+		return STATE.device;
+	},
 	get dynamicPlacements(): IBANNERSTATEBANNER[] {
 		return STATE.dynamicPlacements;
 	},

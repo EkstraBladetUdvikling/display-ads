@@ -36,7 +36,7 @@ class BannerHandler {
 			userAgentDevice === DEVICE.desktop ? getDeviceInfo(userAgentDevice).device : userAgentDevice;
 
 		this.init();
-		console.log('MYADS BANNERHANDLER CONSTRUCTOR', this.initOptions);
+
 		this.setupAdUnits();
 
 		onPersisted(() => {
@@ -64,20 +64,16 @@ class BannerHandler {
 	}
 
 	public updateContext(initOptions: Partial<IBannerInit>) {
-		console.log('MYADS updateContext param initOptions', initOptions);
-		console.log('MYADS updateContext this.initOptions', this.initOptions);
 		this.initOptions = { ...this.initOptions, ...initOptions };
 
 		BANNERSTATE.reset();
 		this.init();
 		this.setupAdUnits();
+		this.complete();
 	}
 
 	private complete() {
-		console.log('MYADS BANNERSTATE.completeCalled', BANNERSTATE.completeCalled);
-
 		if (!BANNERSTATE.completeCalled) {
-			console.log('MYADS BANNERSTATE.completeCalled', BANNERSTATE.completeCalled);
 			BANNERSTATE.completeCalled = true;
 			BANNERSTATE.isReady(() => {
 				if (window.lwhb) {
@@ -88,7 +84,6 @@ class BannerHandler {
 						BANNERSTATE.renderCalled = true;
 					});
 				}
-				console.log('MYADS complete ');
 
 				setTimeout(() => {
 					if (window.lwhb && window.lwhb.loaded && window.lwhb.adsRendered) return;
@@ -119,6 +114,9 @@ class BannerHandler {
 		});
 	}
 
+	/**
+	 * init
+	 */
 	private init() {
 		const { anonIds, adPlacements, prebidEidsAllowed, reloadOnBack } = this.initOptions;
 
@@ -176,7 +174,7 @@ class BannerHandler {
 		/**
 		 * LiveWrapped setup
 		 */
-		window.lwhb = window.lwhb || { cmd: [] };
+		window.lwhb = window.lwhb || { cmd: [], disableAdServerScriptLoad: true };
 
 		window.lwhb.cmd.push(() => {
 			/**
@@ -195,6 +193,7 @@ class BannerHandler {
 		const {
 			articleId,
 			adPlacements,
+
 			ebSegments,
 			highImpactEnabled,
 			pageContext,
@@ -245,14 +244,24 @@ class BannerHandler {
 		const adUnits: IBANNERSTATEBANNER[] = [];
 		const dynamicPlacements: IBANNERSTATEBANNER[] = [];
 		const liveBlogPlacements: IBANNERSTATEBANNER[] = [];
+		const useNoConsent = window.ebCMP.noConsentGroup();
 		banners.forEach((banner) => {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
-
+				console.log('siteName', siteName);
 				banner.cleanName = name.replace(`${siteName}_`, '');
 				banner.lwName = lwReplaceValues
 					? name.replace(lwReplaceValues[0], lwReplaceValues[1])
 					: name;
+
+				/**
+				 * Device filter
+				 */
+				if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
+					return;
+				} else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
+					return;
+				}
 
 				/**
 				 * insufficient info
@@ -268,6 +277,16 @@ class BannerHandler {
 				 * not allowed in plus pageContext
 				 */
 				if (premium && !allowedOnPlus) return;
+
+				/**
+				 * NoConsent filter
+				 */
+				if (
+					(useNoConsent && siteName.indexOf('noconsent') === -1) ||
+					(!useNoConsent && siteName.indexOf('noconsent') !== -1)
+				) {
+					return;
+				}
 
 				const { prefixId, targetId } = getElementIds(banner.cleanName);
 
@@ -346,7 +365,7 @@ class BannerHandler {
 				});
 			}
 		});
-
+		console.log('adUnits', adUnits);
 		BANNERSTATE.init({
 			adUnits,
 			context: pageContext,

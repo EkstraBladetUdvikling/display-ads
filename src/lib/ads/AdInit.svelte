@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { getContext } from "svelte";
-	import { AdsInterface } from "./init";
-	import { browser } from "$app/environment";
+
+  import { browser } from "$app/environment";
 	import { afterNavigate } from "$app/navigation";
+
+	import { AdsInterface } from "./init";
 
   const consentStatus = getContext('consent') as () => string | boolean;
 
@@ -11,10 +13,9 @@
   afterNavigate(() => {
     if (browser) {
       if (consentStatus() !== 'unset' && !adsInterface) {
-        console.log('MYADS AdInit ???? ');
         adsInterface = new AdsInterface(consentStatus()) as AdsInterface;
+        console.log('adsInterface', adsInterface);
       } else if (adsInterface) {
-        console.log('MYADS AdInit: ', adsInterface);
         adsInterface.updateContext();
       }
     }

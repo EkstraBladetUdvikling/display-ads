@@ -7,6 +7,8 @@ export function adsInit(consent: string | boolean) {
 
 	if (!consent && disallowedSection) return null;
 
+	window.lwhb = window.lwhb || { cmd: [], disableAdServerScriptLoad: true };
+
 	const firstScript = document.querySelector('script');
 	const lwScript = document.createElement('script');
 	lwScript.src = `//lwgadm.com/lw/pbjs?pid=${PUBLIC_livewrappedKey}`;
@@ -14,11 +16,11 @@ export function adsInit(consent: string | boolean) {
 		firstScript.parentNode.insertBefore(lwScript, firstScript);
 	}
 
-	// const gptScript = document.createElement('script');
-	// gptScript.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-	// if (firstScript && firstScript.parentNode) {
-	// 	firstScript.parentNode.insertBefore(gptScript, firstScript);
-	// }
+	const gptScript = document.createElement('script');
+	gptScript.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+	if (firstScript && firstScript.parentNode) {
+		firstScript.parentNode.insertBefore(gptScript, firstScript);
+	}
 	const {
 		adPlacements,
 		anonIds,
@@ -68,7 +70,7 @@ export class AdsInterface {
 			premium,
 			keywords
 		} = page.data;
-		console.log('MYADS updateContext', page.data);
+
 		this.bannerHandler?.updateContext({
 			adPlacements,
 			anonIds,

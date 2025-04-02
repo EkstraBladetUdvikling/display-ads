@@ -8,4 +8,4 @@
 
 <h1>We went here</h1>
 
-<AdPlacement placementName="monster3" placementType="monster" />
+<AdPlacement placementName="monster1" placementType="monster" />

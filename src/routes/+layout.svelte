@@ -30,6 +30,8 @@
 <CMP cbid="1f34e1cc-0bfc-4f89-a42d-841a0ae9133d" />
 <AdInit />
 
+<AdPlacement adMark={false} placementName="topscroll" placementType="topscroll" />
+
 <div class="wrapper wrapper--outer">
   <nav><a href="/">frontpage</a><a href="/other">Other</a><a href="/other-also">Yet anOther</a></nav>
   <div class="wrapper">

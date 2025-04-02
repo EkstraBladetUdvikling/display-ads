@@ -8,27 +8,25 @@
 	import { getElementIds } from "./util";
 	import { removePlacement } from "./util/removeplacement";
 
-  let { placementName, placementType } = $props();
+  let {adMark = true, placementName, placementType } = $props();
 
   const {prefixId,targetId} = getElementIds(placementName);
 
   afterNavigate(() => {
-    console.log('MYADS AdPlacement afterNavigate: ', placementName, targetId, browser);
     if (browser) {
       addPlacement(placementName, targetId);
     }
   });
 
   onDestroy(() => {
-    console.log('MYADS AdPlacement onDestroy: ', placementName, targetId);
     if (browser) removePlacement(targetId);
   });
-
-
 </script>
 
-<div class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">
+<div  class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">
+  {#if adMark}
   <div class="text">Annonce:</div>
+  {/if}
   <div class="target {placementType} {placementName}" id={targetId}></div>
 </div>
 
@@ -37,6 +35,17 @@
     width: 300px;
     height: 250px;
     background-color: #f0f0f0;
+
+  }
+  .target:global(.topscroll),
+    .wrapper:global(.wrapper--topscroll) {
+    height: auto;
+    margin: 0 auto;
+    width: auto;
+  }
+
+  .wrapper:global(.wrapper--halfpage) {
+    margin: 0 10px;
   }
 
   .wrapper :global(.halfpage) {
@@ -57,5 +66,15 @@
 
   .wrapper--halfpage1 .text {
     text-align: right;
+  }
+
+.wrapper :global(.megaboard) {
+  height: 180px;
+  width: 930px;
+}
+
+  .wrapper :global(.monster) {
+    height: 600px;
+    width: 930px;
   }
 </style>

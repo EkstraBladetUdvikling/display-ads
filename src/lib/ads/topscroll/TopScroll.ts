@@ -98,7 +98,7 @@ export function handleTopScroll(
 	if (topscrollAllowed) {
 		const { targetId: tagId } = defineTag;
 
-		if (window.lwhb && window.lwhb.cmd) {
+		if (document.getElementById(tagId) && window.lwhb && window.lwhb.cmd) {
 			window.lwhb.cmd.push(() => {
 				const prepare: IPrepareObj = {
 					adUnitName,
