@@ -8,13 +8,8 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
-	interface Window {
+	interface Window extends IDisplayAdsWindow {
 		ebCMP: IEBCMP;
 		googletag: googletag;
-		highImpactJs: IHighImpact;
-		lwhb: ILiveWrapped;
-		pbjs: IPrebidJS;
-	}
+  }
 }
-
-export {};

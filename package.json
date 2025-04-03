@@ -14,7 +14,7 @@
 		"lint": "prettier --check . && eslint ."
 	},
 	"files": [
-		"files",
+		"src/lib",
 		"types"
 	],
 	"devDependencies": {
