@@ -1,6 +1,5 @@
 import { page } from '$app/state';
 import BannerHandler from './bannerhandler';
-import { PUBLIC_livewrappedKey } from '$env/static/public';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
 	/**
@@ -34,10 +33,9 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 }
 
 export class AdsInterface {
-	private adPlacements: string[] = [];
 	private bannerHandler: BannerHandler | null = null;
 
-	public init(consent: string | boolean, adnamiUnloadHandler?: () => void) {
+	public init(consent: string | boolean, livewrappedKey: string, adnamiUnloadHandler?: () => void) {
 		const disallowedSection = '';
 
 		if (!consent && disallowedSection) return null;
@@ -46,7 +44,7 @@ export class AdsInterface {
 
 		const firstScript = document.querySelector('script');
 		const lwScript = document.createElement('script');
-		lwScript.src = `//lwgadm.com/lw/pbjs?pid=${PUBLIC_livewrappedKey}`;
+		lwScript.src = `//lwgadm.com/lw/pbjs?pid=${livewrappedKey}`;
 		if (firstScript && firstScript.parentNode) {
 			firstScript.parentNode.insertBefore(lwScript, firstScript);
 		}

@@ -6,6 +6,7 @@
 	import { browser } from '$app/environment';
 	import AdInit from '$lib/AdInit.svelte';
 	import AdPlacement from '$lib/AdPlacement.svelte';
+	import { PUBLIC_livewrappedKey } from '$env/static/public';
 
   let { children } = $props();
 
@@ -32,7 +33,7 @@
 </svelte:head>
 
 <CMP cbid="1f34e1cc-0bfc-4f89-a42d-841a0ae9133d" />
-<AdInit {adnamiUnloadHandler} />
+<AdInit {adnamiUnloadHandler} livewrappedKey={PUBLIC_livewrappedKey} />
 
 <AdPlacement adMark={false} placementName="topscroll" placementType="topscroll" />
 

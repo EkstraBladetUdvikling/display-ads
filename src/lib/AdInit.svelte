@@ -6,7 +6,7 @@
 
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from "./init";
 
-  let {adnamiUnloadHandler = undefined} = $props();
+  let {adnamiUnloadHandler = undefined, livewrappedKey} = $props();
 
   const consentStatus = getContext('consent') as () => string | boolean;
 
@@ -15,7 +15,7 @@
   afterNavigate(() => {
     if (browser) {
       if (consentStatus() !== 'unset') {
-        adsInterface.init(consentStatus(),adnamiUnloadHandler);
+        adsInterface.init(consentStatus(),livewrappedKey,adnamiUnloadHandler);
       } else if (adsInterface) {
         adsInterface.updateContext();
       }
