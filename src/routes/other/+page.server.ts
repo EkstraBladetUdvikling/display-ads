@@ -1,4 +1,4 @@
-import { PAGETYPES } from '$lib/ads/types/admanager';
+import { PAGETYPES } from '$lib/types/admanager';
 
 export const load = async ({ parent }) => {
 	const data = await parent();

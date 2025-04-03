@@ -4,8 +4,8 @@
 	import CMPUrl from '@ekstra-bladet/eb-cmp/dist/eb-cmp.js?url';
 	import { setContext } from 'svelte';
 	import { browser } from '$app/environment';
-	import AdInit from '$lib/ads/AdInit.svelte';
-	import AdPlacement from '$lib/ads/AdPlacement.svelte';
+	import AdInit from '$lib/AdInit.svelte';
+	import AdPlacement from '$lib/AdPlacement.svelte';
 
   let { children } = $props();
 
@@ -21,6 +21,10 @@
       consentTo: 'iab',
     })
   }
+
+  function adnamiUnloadHandler() {
+    console.log('unload handler');
+  }
 </script>
 
 <svelte:head>
@@ -28,7 +32,7 @@
 </svelte:head>
 
 <CMP cbid="1f34e1cc-0bfc-4f89-a42d-841a0ae9133d" />
-<AdInit />
+<AdInit {adnamiUnloadHandler} />
 
 <AdPlacement adMark={false} placementName="topscroll" placementType="topscroll" />
 

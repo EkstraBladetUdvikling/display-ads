@@ -14,8 +14,7 @@
 		"lint": "prettier --check . && eslint ."
 	},
 	"files": [
-		"src/lib",
-		"types"
+		"src/lib"
 	],
 	"devDependencies": {
 		"@eslint/compat": "^1.2.8",

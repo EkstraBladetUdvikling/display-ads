@@ -20,6 +20,12 @@ interface IOrtb2Data {
 	};
 }
 
+export interface IADSM {
+  pageSettings: {
+    skinMaxScrollDepth: number
+  };
+}
+
 export interface IHighImpact {
 	cmd: Array<() => void>;
 	defineSlot: (inputObj: IUnknowObject) => void;
@@ -48,6 +54,7 @@ export interface IPrebidJS {
 }
 
 export interface IDisplayAdsWindow {
+  adsm: IADSM;
   highImpactJs: IHighImpact;
   lwhb: ILiveWrapped;
   pbjs: IPrebidJS;

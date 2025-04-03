@@ -2,7 +2,40 @@ import { page } from '$app/state';
 import BannerHandler from './bannerhandler';
 import { PUBLIC_livewrappedKey } from '$env/static/public';
 
-function adsInit(consent: string | boolean) {
+function handleAdnami(adnamiUnloadHandler?: () => void) {
+
+  console.log('handleAdnami', adnamiUnloadHandler);
+  /**
+  * Adnami integration
+  */
+  window.adsm = window.adsm || {};
+  window.adsm.pageSettings = window.adsm.pageSettings || {};
+  window.adsm.pageSettings.skinMaxScrollDepth = 2200;
+
+  const MACRO_UNLOAD = 'ADSM_MACRO_UNLOAD';
+  const adnmEventHandler = (() => {
+    let onMacroUnload = function (_type: string, _source: MessageEventSource | null){};
+    function handler(event: MessageEvent) {
+      if (event.data && event.data.type && event.data.type === MACRO_UNLOAD){
+        onMacroUnload(event.data.payload, event.source);
+      }
+    }
+
+    window.addEventListener('message', handler, false);
+
+    function connect(_type: string, callback: () => void) {
+      onMacroUnload = callback;
+    }
+
+    return {
+      connect: connect
+    };
+  })();
+
+  if (adnamiUnloadHandler) adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnloadHandler);
+}
+
+function adsInit(consent: string | boolean, adnamiUnloadHandler?: () => void) {
 	const disallowedSection = '';
 
 	if (!consent && disallowedSection) return null;
@@ -21,6 +54,9 @@ function adsInit(consent: string | boolean) {
 	if (firstScript && firstScript.parentNode) {
 		firstScript.parentNode.insertBefore(gptScript, firstScript);
 	}
+
+  handleAdnami(adnamiUnloadHandler);
+
 	const {
 		adPlacements,
 		anonIds,
@@ -54,8 +90,8 @@ function adsInit(consent: string | boolean) {
 export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
-	constructor(consent: string | boolean) {
-		this.bannerHandler = adsInit(consent);
+	constructor(consent: string | boolean, adnamiUnloadHandler?: () => void) {
+		this.bannerHandler = adsInit(consent, adnamiUnloadHandler);
 	}
 
 	public updateContext() {

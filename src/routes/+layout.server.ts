@@ -1,5 +1,5 @@
-import { DEVICE } from '$lib/ads/state';
-import { PAGETYPES } from '$lib/ads/types/admanager';
+import { DEVICE } from '$lib/state';
+import { PAGETYPES } from '$lib/types/admanager';
 import { adPlacements } from './adplacements';
 
 export const load = async () => {
