@@ -1,6 +1,6 @@
 <script lang="ts">
-	import AdInit from "$lib/ads/AdInit.svelte";
-	import AdPlacement from "$lib/ads/AdPlacement.svelte";
+
+	import AdPlacement from "$lib/AdPlacement.svelte";
 
 
 

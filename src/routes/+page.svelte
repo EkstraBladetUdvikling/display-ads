@@ -1,7 +1,5 @@
 <script>
-
-	import AdPlacement from "$lib/ads/AdPlacement.svelte";
-
+	import AdPlacement from "$lib/AdPlacement.svelte";
 </script>
 
 <AdPlacement placementName="megaboard_top" placementType="megaboard" />

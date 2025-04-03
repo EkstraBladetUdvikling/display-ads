@@ -1,3 +1,4 @@
+import { adsInterface } from '../init';
 import { BANNERSTATE } from '../state';
 import type { ICustomPlacement, IDefineTag, ILoadAdData } from '../types';
 
@@ -45,6 +46,10 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 }
 
 export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
+	if (!adsInterface.placementExists(placement)) {
+		return false;
+	}
+
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
@@ -52,7 +57,6 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
 
-		console.log('addPlacement', tagId);
 		const adPlaceholder = document.getElementById(tagId);
 
 		if (!adPlaceholder) throw new Error('adPlacement not found');
@@ -89,4 +93,5 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 			});
 		}
 	});
+	return true;
 }

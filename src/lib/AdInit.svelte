@@ -4,17 +4,18 @@
   import { browser } from "$app/environment";
 	import { afterNavigate } from "$app/navigation";
 
-	import { AdsInterface } from "./init";
+	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from "./init";
+
+  let {adnamiUnloadHandler = undefined, livewrappedKey} = $props();
 
   const consentStatus = getContext('consent') as () => string | boolean;
 
-  let adsInterface: AdsInterface;
+  let adsInterface: AdsInterface = adsInterfaceFromFile;
 
   afterNavigate(() => {
     if (browser) {
-      if (consentStatus() !== 'unset' && !adsInterface) {
-        adsInterface = new AdsInterface(consentStatus()) as AdsInterface;
-        console.log('adsInterface', adsInterface);
+      if (consentStatus() !== 'unset') {
+        adsInterface.init(consentStatus(),livewrappedKey,adnamiUnloadHandler);
       } else if (adsInterface) {
         adsInterface.updateContext();
       }

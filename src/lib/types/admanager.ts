@@ -45,5 +45,5 @@ export interface IBANNERSTATEBANNER extends IAdmanagerBanners {
 	gamSizes?: (number[] | 'fluid'[])[]; // googletag.GeneralSize;
 	lwName: string;
 	prefixId?: string;
-	targetId?: IDefineTag['targetId'];
+	targetId: IDefineTag['targetId'];
 }
