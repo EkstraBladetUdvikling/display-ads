@@ -1,6 +1,6 @@
 <script>
 
-	import AdPlacement from "$lib/ads/AdPlacement.svelte";
+	import AdPlacement from "@ekstra-bladet/display-ads/AdPlacement.svelte";
 
 </script>
 

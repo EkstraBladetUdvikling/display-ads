@@ -2,7 +2,7 @@ import { page } from '$app/state';
 import BannerHandler from './bannerhandler';
 import { PUBLIC_livewrappedKey } from '$env/static/public';
 
-export function adsInit(consent: string | boolean) {
+function adsInit(consent: string | boolean) {
 	const disallowedSection = '';
 
 	if (!consent && disallowedSection) return null;
