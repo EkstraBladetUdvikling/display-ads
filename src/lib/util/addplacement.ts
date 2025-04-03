@@ -52,7 +52,6 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
 
-		console.log('addPlacement', tagId);
 		const adPlaceholder = document.getElementById(tagId);
 
 		if (!adPlaceholder) throw new Error('adPlacement not found');

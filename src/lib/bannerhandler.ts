@@ -248,7 +248,7 @@ class BannerHandler {
 		banners.forEach((banner) => {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
-				console.log('siteName', siteName);
+
 				banner.cleanName = name.replace(`${siteName}_`, '');
 				banner.lwName = lwReplaceValues
 					? name.replace(lwReplaceValues[0], lwReplaceValues[1])
@@ -365,7 +365,7 @@ class BannerHandler {
 				});
 			}
 		});
-		console.log('adUnits', adUnits);
+
 		BANNERSTATE.init({
 			adUnits,
 			context: pageContext,

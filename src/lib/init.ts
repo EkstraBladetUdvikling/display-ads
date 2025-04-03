@@ -3,36 +3,34 @@ import BannerHandler from './bannerhandler';
 import { PUBLIC_livewrappedKey } from '$env/static/public';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
+	/**
+	 * Adnami integration
+	 */
+	window.adsm = window.adsm || {};
+	window.adsm.pageSettings = window.adsm.pageSettings || {};
+	window.adsm.pageSettings.skinMaxScrollDepth = 2200;
 
-  console.log('handleAdnami', adnamiUnloadHandler);
-  /**
-  * Adnami integration
-  */
-  window.adsm = window.adsm || {};
-  window.adsm.pageSettings = window.adsm.pageSettings || {};
-  window.adsm.pageSettings.skinMaxScrollDepth = 2200;
+	const MACRO_UNLOAD = 'ADSM_MACRO_UNLOAD';
+	const adnmEventHandler = (() => {
+		let onMacroUnload = function (_type: string, _source: MessageEventSource | null) {};
+		function handler(event: MessageEvent) {
+			if (event.data && event.data.type && event.data.type === MACRO_UNLOAD) {
+				onMacroUnload(event.data.payload, event.source);
+			}
+		}
 
-  const MACRO_UNLOAD = 'ADSM_MACRO_UNLOAD';
-  const adnmEventHandler = (() => {
-    let onMacroUnload = function (_type: string, _source: MessageEventSource | null){};
-    function handler(event: MessageEvent) {
-      if (event.data && event.data.type && event.data.type === MACRO_UNLOAD){
-        onMacroUnload(event.data.payload, event.source);
-      }
-    }
+		window.addEventListener('message', handler, false);
 
-    window.addEventListener('message', handler, false);
+		function connect(_type: string, callback: () => void) {
+			onMacroUnload = callback;
+		}
 
-    function connect(_type: string, callback: () => void) {
-      onMacroUnload = callback;
-    }
+		return {
+			connect: connect
+		};
+	})();
 
-    return {
-      connect: connect
-    };
-  })();
-
-  if (adnamiUnloadHandler) adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnloadHandler);
+	if (adnamiUnloadHandler) adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnloadHandler);
 }
 
 function adsInit(consent: string | boolean, adnamiUnloadHandler?: () => void) {
@@ -55,7 +53,7 @@ function adsInit(consent: string | boolean, adnamiUnloadHandler?: () => void) {
 		firstScript.parentNode.insertBefore(gptScript, firstScript);
 	}
 
-  handleAdnami(adnamiUnloadHandler);
+	handleAdnami(adnamiUnloadHandler);
 
 	const {
 		adPlacements,

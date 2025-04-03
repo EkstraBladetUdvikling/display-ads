@@ -16,7 +16,7 @@
     if (browser) {
       if (consentStatus() !== 'unset' && !adsInterface) {
         adsInterface = new AdsInterface(consentStatus(),adnamiUnloadHandler) as AdsInterface;
-        console.log('adsInterface', adsInterface);
+
       } else if (adsInterface) {
         adsInterface.updateContext();
       }
