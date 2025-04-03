@@ -55,38 +55,13 @@ export class AdsInterface {
 			firstScript.parentNode.insertBefore(gptScript, firstScript);
 		}
 
-		handleAdnami(adnamiUnloadHandler);
+		const { adNamiEnabled } = page.data.displayAds;
 
-		const {
-			adPlacements,
-			anonIds,
-			articleId,
-			device,
-			ebSegments,
-			highImpactEnabled,
-			pageContext,
-			premium,
-			keywords
-		} = page.data;
+		const extractedData = this.extractHandlerData();
 
-		this.adPlacements = adPlacements;
+		if (adNamiEnabled) handleAdnami(adnamiUnloadHandler);
 
-		this.bannerHandler = new BannerHandler({
-			adPlacements,
-			anonIds,
-			articleId,
-			device,
-			ebSegments,
-			highImpactEnabled,
-			pageContext,
-			keywords,
-			prebidEidsAllowed: true,
-			premium,
-			relativePath: page.url.pathname,
-			reloadOnBack: true,
-			topscroll: true,
-			topscrollWeekCount: 7
-		});
+		this.bannerHandler = new BannerHandler(extractedData);
 	}
 
 	public placementExists(placement: string) {
@@ -96,31 +71,47 @@ export class AdsInterface {
 	}
 
 	public updateContext() {
+		const extractedData = this.extractHandlerData();
+
+		this.bannerHandler?.updateContext(extractedData);
+	}
+
+	private extractHandlerData() {
 		const {
 			adPlacements,
 			anonIds,
 			articleId,
 			device,
-			ebSegments,
+			segments,
 			highImpactEnabled,
 			pageContext,
 			premium,
-			keywords
-		} = page.data;
+			keywords,
+			prebidEidsAllowed,
+			relativePath,
+			reloadOnBack,
+			topscroll,
+			topscrollWeekCount,
+			userType
+		} = page.data.displayAds;
 
-		this.adPlacements = adPlacements;
-
-		this.bannerHandler?.updateContext({
+		return {
 			adPlacements,
 			anonIds,
 			articleId,
 			device,
-			ebSegments,
+			segments,
 			highImpactEnabled,
 			pageContext,
 			premium,
-			keywords
-		});
+			keywords,
+			prebidEidsAllowed,
+			relativePath,
+			reloadOnBack,
+			topscroll,
+			topscrollWeekCount,
+			userType
+		};
 	}
 }
 

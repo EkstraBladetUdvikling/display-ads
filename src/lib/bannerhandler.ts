@@ -5,14 +5,13 @@ export {
 	getElementIds,
 	getKeyValues,
 	getLiveBlogBanners,
-	getUserType,
 	handleHalfPage,
 	updateORTBData
 } from './util';
 
 import { handleTopScroll } from './topscroll/TopScroll';
 import { addHighImpact, highimpactInit } from './highimpact';
-import { getElementIds, getSizeValues, getUserType, onPersisted, updateORTBData } from './util';
+import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
 
@@ -142,7 +141,7 @@ class BannerHandler {
 		window.googletag = window.googletag || { cmd: [] };
 		// pubads setup
 		window.googletag.cmd.push(() => {
-			window.googletag.pubads().setPublisherProvidedId(anonIds.base);
+			if (anonIds && anonIds.base) window.googletag.pubads().setPublisherProvidedId(anonIds.base);
 			// window.googletag.pubads().setTargeting('test', true);
 			window.googletag.pubads().enableSingleRequest();
 			window.googletag.pubads().collapseEmptyDivs();
@@ -195,7 +194,7 @@ class BannerHandler {
 			/**
 			 * Adding userid to livewrapped
 			 */
-			const eids = prebidEidsAllowed ? anonIds.adform : undefined;
+			const eids = prebidEidsAllowed && anonIds && anonIds.adform ? anonIds.adform : undefined;
 			if (eids) window.lwhb.csKeyValues({ eb_anon_uuid_adform: eids });
 		});
 	}
@@ -208,18 +207,17 @@ class BannerHandler {
 		const {
 			articleId,
 			adPlacements,
-			ebSegments,
 			highImpactEnabled,
 			pageContext,
 			keywords: escKeywords,
 			lwReplaceValues,
 			premium,
 			reloadOnBack,
+			segments = [],
 			topscroll: topscrollAllowed,
-			topscrollWeekCount
+			topscrollWeekCount,
+			userType
 		} = this.initOptions;
-
-		const userType = getUserType(ebSegments);
 
 		const defaultKeywords = {
 			article: articleId,
@@ -227,11 +225,11 @@ class BannerHandler {
 			userType
 		};
 
-		const pp_audiences = escKeywords.Relevance_Audiences;
+		const pp_audiences = escKeywords ? escKeywords.Relevance_Audiences : [];
 
 		const split = String(Math.floor(Math.random() * 20) + 1);
 
-		const keywords = { ...defaultKeywords, ...escKeywords, pp_audiences, split };
+		const keywords = { ...defaultKeywords, ...escKeywords, pp_audiences, segments, split };
 		// const keyValues = getKeyValues(relativePath, articleId);
 
 		/**
@@ -349,7 +347,8 @@ class BannerHandler {
 				}
 
 				if (banner.cleanName.indexOf('topscroll') !== -1) {
-					if (topscrollAllowed) handleTopScroll(topscrollWeekCount, banner.lwName, defineTag);
+					if (topscrollAllowed && topscrollWeekCount)
+						handleTopScroll(topscrollWeekCount, banner.lwName, defineTag);
 				} else {
 					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 				}

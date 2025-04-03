@@ -7,15 +7,17 @@ export const load = async () => {
 	const anonId_adform = crypto.randomUUID();
 
 	return {
-		adPlacements,
-		anonIds: {
-			base: anonId,
-			adform: anonId_adform
-		},
-		device: DEVICE.desktop,
-		ebSegments: ['a', 'b'],
-		highImpactEnabled: true,
-		pageContext: PAGETYPES.FRONTPAGE,
-		keywords: ['a', 'b']
+		displayAds: {
+			adPlacements,
+			anonIds: {
+				base: anonId,
+				adform: anonId_adform
+			},
+			device: DEVICE.desktop,
+			highImpactEnabled: true,
+			keywords: ['a', 'b'],
+			pageContext: PAGETYPES.FRONTPAGE,
+			user: 'anonymous'
+		}
 	};
 };

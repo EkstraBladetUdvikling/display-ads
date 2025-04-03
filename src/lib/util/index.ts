@@ -2,7 +2,6 @@ export { getElementIds } from './getelementids';
 export { getKeyValues } from './getkeyvalues';
 export { getLiveBlogBanners } from './getliveblogbanners';
 export { getSizeValues } from './getsizesvalues';
-export { getUserType } from './getusertype';
 export { handleHalfPage } from './handlehalfpage';
 export { onPersisted } from './onpersisted';
 export { prebidKeywords } from './prebidkeywords';

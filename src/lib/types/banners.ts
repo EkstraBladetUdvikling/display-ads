@@ -4,40 +4,36 @@ import type { IAdmanagerBanners, PAGETYPES } from './admanager';
 
 import type { ILoadAdData } from './livewrapped';
 
-import type { getElementIds, getKeyValues, getLiveBlogBanners, getUserType } from '../util';
+import type { getElementIds, getKeyValues, getLiveBlogBanners } from '../util';
 
 import type { updateORTBData } from '../util/updateortbdata';
 
 export interface IKeywords {
 	[id: string]: string | string[];
-	ekstra_bladet: string[];
-	ekstra_bladet_tags: string[];
-	pt1: string;
-	pt2: string;
-	Relevance_Audiences: string[];
-	Relevance_Context: string[];
 }
 
 export interface IBannerInit {
-	anonIds: {
+	adNamiEnabled?: boolean;
+	anonIds?: {
 		base: string;
 		adform: string;
 	};
-	articleId: string;
+	articleId?: string;
 	adPlacements: IAdmanagerBanners[];
 	device: DEVICE;
-	ebSegments: string[];
-	highImpactEnabled: boolean;
-	keywords: IKeywords;
+	highImpactEnabled?: boolean;
+	keywords?: IKeywords;
 	lwReplaceValues?: string[];
 	pageContext: PAGETYPES;
-	prebidEidsAllowed: boolean;
-	premium: boolean;
+	prebidEidsAllowed?: boolean;
+	premium?: boolean;
 	relativePath: string;
-	reloadOnBack: boolean;
+	reloadOnBack?: boolean;
+	segments?: string[];
 	test?: boolean;
-	topscroll: boolean;
-	topscrollWeekCount: number;
+	topscroll?: boolean;
+	topscrollWeekCount?: number;
+	userType?: string;
 }
 
 export interface ICustomPlacement extends Partial<ILoadAdData> {
@@ -53,6 +49,5 @@ export interface ISiteBanners {
 	getElementIds: typeof getElementIds;
 	getKeyValues: typeof getKeyValues;
 	getLiveBlogBanners: Awaited<typeof getLiveBlogBanners>;
-	getUserType: typeof getUserType;
 	updateORTBData: typeof updateORTBData;
 }
