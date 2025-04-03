@@ -22,6 +22,8 @@ import type { IBannerInit, IDefineTag } from './types';
 import { getDeviceInfo } from './util/isipados';
 
 class BannerHandler {
+	public adUnits: IBANNERSTATEBANNER[] = [];
+
 	private device: DEVICE;
 	private livewrappedTimeout = 2500;
 	private renderedBanners: string[] = [];
@@ -54,6 +56,9 @@ class BannerHandler {
 		}
 	}
 
+	/**
+	 * replaceAds
+	 */
 	public replaceAds() {
 		if (window.lwhb) {
 			// refresh all banneres that was renderen before
@@ -63,6 +68,10 @@ class BannerHandler {
 		}
 	}
 
+	/**
+	 * updateContext
+	 * @param initOptions
+	 */
 	public updateContext(initOptions: Partial<IBannerInit>) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
 
@@ -72,6 +81,9 @@ class BannerHandler {
 		this.complete();
 	}
 
+	/**
+	 * complete
+	 */
 	private complete() {
 		if (!BANNERSTATE.completeCalled) {
 			BANNERSTATE.completeCalled = true;
@@ -95,6 +107,9 @@ class BannerHandler {
 		}
 	}
 
+	/**
+	 * fallbackQueue
+	 */
 	private fallbackQueue() {
 		window.googletag.cmd.push(() => {
 			BANNERSTATE.placements.forEach((placement) => {
@@ -193,7 +208,6 @@ class BannerHandler {
 		const {
 			articleId,
 			adPlacements,
-
 			ebSegments,
 			highImpactEnabled,
 			pageContext,
@@ -365,6 +379,8 @@ class BannerHandler {
 				});
 			}
 		});
+
+		this.adUnits = adUnits;
 
 		BANNERSTATE.init({
 			adUnits,

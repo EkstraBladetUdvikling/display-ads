@@ -1,3 +1,4 @@
+import { adsInterface } from '$lib/init';
 import { BANNERSTATE } from '../state';
 import type { ICustomPlacement, IDefineTag, ILoadAdData } from '../types';
 
@@ -45,6 +46,11 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 }
 
 export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
+	if (!adsInterface.placementExists(placement)) {
+		console.log('adPlacements  .. . Placement doen`t exists');
+		return false;
+	}
+
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
@@ -88,4 +94,5 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 			});
 		}
 	});
+	return true;
 }

@@ -10,11 +10,14 @@
 
   let { adMark = true, placementName, placementType, wallpaperContainer = false } = $props();
 
-  const {prefixId,targetId} = getElementIds(placementName);
+  const { prefixId, targetId } = getElementIds(placementName);
+
+  let showContainer = $state(true);
 
   afterNavigate(() => {
     if (browser) {
-      addPlacement(placementName, targetId);
+      showContainer = addPlacement(placementName, targetId);
+      console.log('adPlacements showContainer', showContainer);
     }
   });
 
@@ -27,7 +30,7 @@
   <div id="wallpaperBackground"></div>
 {/if}
 
-<div  class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">
+<div hidden={!showContainer} class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">
   {#if adMark}
   <div class="text">Annonce:</div>
   {/if}

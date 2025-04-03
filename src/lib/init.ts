@@ -33,63 +33,72 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 	if (adnamiUnloadHandler) adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnloadHandler);
 }
 
-function adsInit(consent: string | boolean, adnamiUnloadHandler?: () => void) {
-	const disallowedSection = '';
-
-	if (!consent && disallowedSection) return null;
-
-	window.lwhb = window.lwhb || { cmd: [], disableAdServerScriptLoad: true };
-
-	const firstScript = document.querySelector('script');
-	const lwScript = document.createElement('script');
-	lwScript.src = `//lwgadm.com/lw/pbjs?pid=${PUBLIC_livewrappedKey}`;
-	if (firstScript && firstScript.parentNode) {
-		firstScript.parentNode.insertBefore(lwScript, firstScript);
-	}
-
-	const gptScript = document.createElement('script');
-	gptScript.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-	if (firstScript && firstScript.parentNode) {
-		firstScript.parentNode.insertBefore(gptScript, firstScript);
-	}
-
-	handleAdnami(adnamiUnloadHandler);
-
-	const {
-		adPlacements,
-		anonIds,
-		articleId,
-		device,
-		ebSegments,
-		highImpactEnabled,
-		pageContext,
-		premium,
-		keywords
-	} = page.data;
-
-	return new BannerHandler({
-		adPlacements,
-		anonIds,
-		articleId,
-		device,
-		ebSegments,
-		highImpactEnabled,
-		pageContext,
-		keywords,
-		prebidEidsAllowed: true,
-		premium,
-		relativePath: page.url.pathname,
-		reloadOnBack: true,
-		topscroll: true,
-		topscrollWeekCount: 7
-	});
-}
-
 export class AdsInterface {
+	private adPlacements: string[] = [];
 	private bannerHandler: BannerHandler | null = null;
 
-	constructor(consent: string | boolean, adnamiUnloadHandler?: () => void) {
-		this.bannerHandler = adsInit(consent, adnamiUnloadHandler);
+	public init(consent: string | boolean, adnamiUnloadHandler?: () => void) {
+		const disallowedSection = '';
+
+		if (!consent && disallowedSection) return null;
+
+		window.lwhb = window.lwhb || { cmd: [], disableAdServerScriptLoad: true };
+
+		const firstScript = document.querySelector('script');
+		const lwScript = document.createElement('script');
+		lwScript.src = `//lwgadm.com/lw/pbjs?pid=${PUBLIC_livewrappedKey}`;
+		if (firstScript && firstScript.parentNode) {
+			firstScript.parentNode.insertBefore(lwScript, firstScript);
+		}
+
+		const gptScript = document.createElement('script');
+		gptScript.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+		if (firstScript && firstScript.parentNode) {
+			firstScript.parentNode.insertBefore(gptScript, firstScript);
+		}
+
+		handleAdnami(adnamiUnloadHandler);
+
+		const {
+			adPlacements,
+			anonIds,
+			articleId,
+			device,
+			ebSegments,
+			highImpactEnabled,
+			pageContext,
+			premium,
+			keywords
+		} = page.data;
+
+		this.adPlacements = adPlacements;
+		console.log('this.adPlacements', this.adPlacements);
+
+		this.bannerHandler = new BannerHandler({
+			adPlacements,
+			anonIds,
+			articleId,
+			device,
+			ebSegments,
+			highImpactEnabled,
+			pageContext,
+			keywords,
+			prebidEidsAllowed: true,
+			premium,
+			relativePath: page.url.pathname,
+			reloadOnBack: true,
+			topscroll: true,
+			topscrollWeekCount: 7
+		});
+	}
+
+	public placementExists(placement: string) {
+		console.log('this.adPlacements', this.adPlacements, placement);
+		console.log('this.adPlacements . this.bannerHandler', this.bannerHandler?.adUnits);
+
+		return this.bannerHandler?.adUnits.find((adUnit) => {
+			return adUnit.cleanName?.toLowerCase() === placement;
+		});
 	}
 
 	public updateContext() {
@@ -105,6 +114,9 @@ export class AdsInterface {
 			keywords
 		} = page.data;
 
+		this.adPlacements = adPlacements;
+		console.log('this.adPlacements', this.adPlacements);
+
 		this.bannerHandler?.updateContext({
 			adPlacements,
 			anonIds,
@@ -118,3 +130,5 @@ export class AdsInterface {
 		});
 	}
 }
+
+export const adsInterface = new AdsInterface();
