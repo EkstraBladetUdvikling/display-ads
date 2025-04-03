@@ -8,7 +8,7 @@
 	import { getElementIds } from "./util";
 	import { removePlacement } from "./util/removeplacement";
 
-  let {adMark = true, placementName, placementType } = $props();
+  let { adMark = true, placementName, placementType, wallpaperContainer = false } = $props();
 
   const {prefixId,targetId} = getElementIds(placementName);
 
@@ -23,6 +23,10 @@
   });
 </script>
 
+{#if wallpaperContainer}
+  <div id="wallpaperBackground"></div>
+{/if}
+
 <div  class="wrapper wrapper--{placementName} wrapper--{placementType}" id="{prefixId}">
   {#if adMark}
   <div class="text">Annonce:</div>
@@ -35,17 +39,14 @@
     width: 300px;
     height: 250px;
     background-color: #f0f0f0;
-
+    margin: auto;
   }
+
   .target:global(.topscroll),
-    .wrapper:global(.wrapper--topscroll) {
+  .wrapper:global(.wrapper--topscroll) {
     height: auto;
     margin: 0 auto;
     width: auto;
-  }
-
-  .wrapper:global(.wrapper--halfpage) {
-    margin: 0 10px;
   }
 
   .wrapper :global(.halfpage) {
