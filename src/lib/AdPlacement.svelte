@@ -17,7 +17,6 @@
   afterNavigate(() => {
     if (browser) {
       showContainer = addPlacement(placementName, targetId);
-      console.log('adPlacements showContainer', showContainer);
     }
   });
 

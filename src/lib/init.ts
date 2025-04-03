@@ -72,7 +72,6 @@ export class AdsInterface {
 		} = page.data;
 
 		this.adPlacements = adPlacements;
-		console.log('this.adPlacements', this.adPlacements);
 
 		this.bannerHandler = new BannerHandler({
 			adPlacements,
@@ -93,9 +92,6 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string) {
-		console.log('this.adPlacements', this.adPlacements, placement);
-		console.log('this.adPlacements . this.bannerHandler', this.bannerHandler?.adUnits);
-
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
@@ -115,7 +111,6 @@ export class AdsInterface {
 		} = page.data;
 
 		this.adPlacements = adPlacements;
-		console.log('this.adPlacements', this.adPlacements);
 
 		this.bannerHandler?.updateContext({
 			adPlacements,

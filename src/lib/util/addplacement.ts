@@ -1,4 +1,4 @@
-import { adsInterface } from '$lib/init';
+import { adsInterface } from '../init';
 import { BANNERSTATE } from '../state';
 import type { ICustomPlacement, IDefineTag, ILoadAdData } from '../types';
 
@@ -47,7 +47,6 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 
 export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
 	if (!adsInterface.placementExists(placement)) {
-		console.log('adPlacements  .. . Placement doen`t exists');
 		return false;
 	}
 
