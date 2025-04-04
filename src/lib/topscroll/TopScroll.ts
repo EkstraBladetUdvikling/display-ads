@@ -89,7 +89,7 @@ interface IPrepareObj {
 }
 
 export function handleTopScroll(
-	topscrollWeekCount: number,
+	topscrollWeekCount: number = 7,
 	adUnitName: string,
 	defineTag: IDefineTag,
 	callbackMethod?: () => void
