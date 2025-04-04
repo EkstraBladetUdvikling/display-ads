@@ -230,7 +230,6 @@ class BannerHandler {
 		const split = String(Math.floor(Math.random() * 20) + 1);
 
 		const keywords = { ...defaultKeywords, ...escKeywords, pp_audiences, segments, split };
-		// const keyValues = getKeyValues(relativePath, articleId);
 
 		/**
 		 * Adding keywords to GPT

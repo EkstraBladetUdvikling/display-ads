@@ -27,7 +27,6 @@ export interface IBannerInit {
 	pageContext: PAGETYPES;
 	prebidEidsAllowed?: boolean;
 	premium?: boolean;
-	relativePath: string;
 	reloadOnBack?: boolean;
 	segments?: string[];
 	test?: boolean;

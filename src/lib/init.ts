@@ -36,6 +36,8 @@ export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(consent: string | boolean, livewrappedKey: string, adnamiUnloadHandler?: () => void) {
+		if (!page.data.displayAds) return;
+
 		const disallowedSection = '';
 
 		if (!consent && disallowedSection) return null;
@@ -55,16 +57,15 @@ export class AdsInterface {
 			firstScript.parentNode.insertBefore(gptScript, firstScript);
 		}
 
-		const { adNamiEnabled } = page.data.displayAds;
-
 		const extractedData = this.extractHandlerData();
 
-		if (adNamiEnabled) handleAdnami(adnamiUnloadHandler);
+		if (extractedData.adNamiEnabled) handleAdnami(adnamiUnloadHandler);
 
 		this.bannerHandler = new BannerHandler(extractedData);
 	}
 
 	public placementExists(placement: string) {
+		if (!this.bannerHandler) return false;
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
@@ -78,6 +79,7 @@ export class AdsInterface {
 
 	private extractHandlerData() {
 		const {
+			adNamiEnabled,
 			adPlacements,
 			anonIds,
 			articleId,
@@ -88,7 +90,6 @@ export class AdsInterface {
 			premium,
 			keywords,
 			prebidEidsAllowed,
-			relativePath,
 			reloadOnBack,
 			topscroll,
 			topscrollWeekCount,
@@ -96,6 +97,7 @@ export class AdsInterface {
 		} = page.data.displayAds;
 
 		return {
+			adNamiEnabled,
 			adPlacements,
 			anonIds,
 			articleId,
@@ -106,7 +108,6 @@ export class AdsInterface {
 			premium,
 			keywords,
 			prebidEidsAllowed,
-			relativePath,
 			reloadOnBack,
 			topscroll,
 			topscrollWeekCount,
