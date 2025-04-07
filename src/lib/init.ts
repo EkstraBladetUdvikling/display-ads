@@ -1,5 +1,6 @@
 import { page } from '$app/state';
-import BannerHandler from './bannerhandler';
+import BannerHandler, { handleHalfPage } from './bannerhandler';
+import { PAGETYPES } from './types/admanager';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
 	/**
@@ -29,7 +30,14 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 		};
 	})();
 
-	if (adnamiUnloadHandler) adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnloadHandler);
+	const adnamiUnload = () => {
+		if (adnamiUnloadHandler) {
+			adnamiUnloadHandler();
+		}
+		window.jppolWallpaper();
+	};
+
+	adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnload);
 }
 
 export class AdsInterface {
@@ -41,6 +49,44 @@ export class AdsInterface {
 		const disallowedSection = '';
 
 		if (!consent && disallowedSection) return null;
+
+		const extractedData = this.extractHandlerData();
+
+		/**
+		 * Handling wallpapers from other sources
+		 */
+		window.jppolWallpaper = (callFunx?: string) => {
+			const wallpaper = document.getElementById('wallpaperBackground');
+			if (!wallpaper) return;
+			wallpaper.dataset.wallpaper = String(true);
+			if (window.jppolApn.endStickyMegaboard) window.jppolApn.endStickyMegaboard();
+			handleHalfPage(true, callFunx, extractedData.pageContext === PAGETYPES.FRONTPAGE);
+		};
+
+		window.jppolApn = {
+			endStickyMegaboard: () => {
+				console.log('endStickyMegaboard');
+				// const wrapperEl = document.getElementById('${wrapperId}');
+				// const megaboardContainer = document.getElementById('megaboardContainer');
+				// megaboardContainer.classList.remove('megaboard-follow');
+				// megaboardContainer.classList.remove('megaboard-following');
+				// if (wrapperEl) {
+				// 	wrapperEl.classList.remove('stickywrapper');
+				// }
+				// const bannerEl = document.getElementById('${targetId}');
+				// if (bannerEl) {
+				// 	bannerEl.classList.remove('stickybanner');
+				// }
+			},
+			ebSkyskraper: {
+				topscroll: function () {
+					// only exists for external purposes
+				},
+				wallpaper: function () {
+					window.jppolWallpaper();
+				}
+			}
+		};
 
 		window.lwhb = window.lwhb || { cmd: [], disableAdServerScriptLoad: true };
 
@@ -56,8 +102,6 @@ export class AdsInterface {
 		if (firstScript && firstScript.parentNode) {
 			firstScript.parentNode.insertBefore(gptScript, firstScript);
 		}
-
-		const extractedData = this.extractHandlerData();
 
 		if (extractedData.adNamiEnabled) handleAdnami(adnamiUnloadHandler);
 

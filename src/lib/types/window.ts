@@ -21,9 +21,9 @@ interface IOrtb2Data {
 }
 
 export interface IADSM {
-  pageSettings: {
-    skinMaxScrollDepth: number
-  };
+	pageSettings: {
+		skinMaxScrollDepth: number;
+	};
 }
 
 export interface IHighImpact {
@@ -54,8 +54,16 @@ export interface IPrebidJS {
 }
 
 export interface IDisplayAdsWindow {
-  adsm: IADSM;
-  highImpactJs: IHighImpact;
-  lwhb: ILiveWrapped;
-  pbjs: IPrebidJS;
+	adsm: IADSM;
+	highImpactJs: IHighImpact;
+	jppolWallpaper: (callerName?: string) => void;
+	jppolApn: {
+		ebSkyskraper: {
+			topscroll: () => void;
+			wallpaper: () => void;
+		};
+		endStickyMegaboard: () => void;
+	};
+	lwhb: ILiveWrapped;
+	pbjs: IPrebidJS;
 }
