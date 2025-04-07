@@ -239,6 +239,11 @@
 /**
 * Sidebanners
 **/
+.sidebanners-container {
+	margin: auto;
+	width: var(--content-width, 930px);
+}
+
 .sidebanners {
 	margin-left: -320px;
 	width: calc(var(--content-width, 930px) + 640);
@@ -328,7 +333,7 @@
 }
 
 .pushdownelement {
-	height: 180px;
+	height: var(--wallpaper-pushdown-initial, 0);
 }
 
 .wallpaper[data-wallpaper='true'] ~ .sitecontent--desktop .pushdownelement {
