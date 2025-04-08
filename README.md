@@ -1,38 +1,135 @@
-# sv
+# Display Ads (sveltekit)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Giver mulighed for at håndtere annoncer i Ekstra Bladet familien
 
-## Creating a project
+Dette er afhængig af @ekstra-bladet/eb-cmp
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Getting started
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```
+yarn add @ekstra-bladet/display-ads
 ```
 
-## Developing
+### Indsæt AdInit.svelte
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```
+<script lang="ts">
+  import AdInit from '$lib/AdInit.svelte';
+</script>
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<AdInit />
 ```
 
-## Building
+AdInit forudsætter at der på _page.data_ objektet findes et _displayAds_ objekt med følgende interface
 
-To create a production version of your app:
-
-```bash
-npm run build
+```
+{
+  adNamiEnabled?: boolean;
+  anonIds?: {
+    base: string;
+    adform: string;
+    google: string;
+  };
+  articleId?: string;
+  adPlacements: IAdmanagerBanners[];
+  device: DEVICE;
+  highImpactEnabled?: boolean;
+  keywords?: IKeywords;
+  livewrappedKey: string;
+  lwReplaceValues?: string[];
+  pageContext: PAGETYPES;
+  prebidEidsAllowed?: boolean;
+  premium?: boolean;
+  reloadOnBack?: boolean;
+  segments?: string[];
+  test?: boolean;
+  topscroll?: boolean;
+  topscrollWeekCount?: number;
+  userType?: string;
+}
 ```
 
-You can preview the production build with `npm run preview`.
+#### adNamiEnabled (optionel)
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+For at denne skal kunne starte og køre skal strukturen fra `static/adnami/adnm.html` kopieres til sveltekit projektet.
+Det vil få adnami annoncer til at kunne køre på sitet.
+
+#### anonIds
+
+Annonymiserede ID'er til brug i annonce netværket. For at adform og google versionen af ID'erne skal have den rigtige værdi skal de igennem _createAnonIds_
+
+```
+import { createAnonIds } from '@ekstra-bladet/display-ads';
+
+createAnonIds(eksisterendeId: string, receiver: 'adform' | 'google' | string);
+```
+
+#### articleId (optionel)
+
+Artiklens id, såfremt man er på en artikel
+
+#### adPlacements: IAdmanagerBanners[];
+
+Annonce placeringer, struktureret som de er fra Admanager. Det anbefales at hente dem vha Admanager api'et
+
+#### device: DEVICE;
+
+desktop | tablet | smartphone
+
+Bruges til at beslutte hvilke bannere der skal renderes
+
+#### highImpactEnabled?: boolean;
+
+Indsætter High Impacts script og muliggør mere eksklusive annonceformater gennem deres setup.
+
+#### keywords?: [keywordKategori: string]: keyword(s);
+
+Objekt der bruges til at sende kontekst til annoncenetværket, kunne eksempelvis være artikel tags.
+
+#### livewrappedKey: string;
+
+Konto ID hos livewrapped
+
+#### lwReplaceValues?: [toBeReplaced, toBeReplacedWith];
+
+Håndterer at replace dele af GAM navnet, så det kommer til at passe med hvad LiveWrapped forventer
+
+#### pageContext: PAGETYPES;
+
+ARTICLE | FRONTPAGE | SECTION
+
+Bruges til at beslutte hvilke bannere der skal renderes
+
+#### prebidEidsAllowed?: boolean;
+
+Må der sendes bruger id'er til livewrapped/prebid annoncører - her sendes _anonIds.adform_
+
+#### premium?: boolean;
+
+Er den givne side betalt. Eksempelvis en plus artikel
+
+#### reloadOnBack?: boolean;
+
+Skulle man blive ramt af Back/Forward Cache, så refreshes annoncerne
+
+#### segments?: string[];
+
+Segmenter
+
+#### test?: boolean;
+
+Er vi på test miljø
+
+#### topscroll?: boolean;
+
+Er Topscroll annonceformatet tilladt.
+
+#### topscrollWeekCount?: number;
+
+Sættes som standard til 7 - hvilket betyder hver dag.
+
+#### userType?: string;
+
+anonymous | registered | customer
+
+Sendes som key/value til annonce netværket

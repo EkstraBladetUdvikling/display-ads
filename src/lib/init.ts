@@ -43,7 +43,7 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
-	public init(consent: string | boolean, livewrappedKey: string, adnamiUnloadHandler?: () => void) {
+	public init(consent: string | boolean, adnamiUnloadHandler?: () => void) {
 		if (!page.data.displayAds) return;
 
 		const disallowedSection = '';
@@ -92,7 +92,7 @@ export class AdsInterface {
 
 		const firstScript = document.querySelector('script');
 		const lwScript = document.createElement('script');
-		lwScript.src = `//lwgadm.com/lw/pbjs?pid=${livewrappedKey}`;
+		lwScript.src = `//lwgadm.com/lw/pbjs?pid=${extractedData.livewrappedKey}`;
 		if (firstScript && firstScript.parentNode) {
 			firstScript.parentNode.insertBefore(lwScript, firstScript);
 		}
@@ -101,6 +101,14 @@ export class AdsInterface {
 		gptScript.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
 		if (firstScript && firstScript.parentNode) {
 			firstScript.parentNode.insertBefore(gptScript, firstScript);
+		}
+
+		if (extractedData.highImpactEnabled) {
+			const hiScript = document.createElement('script');
+			hiScript.src = '/highimpact/highimpact.min.js';
+			if (firstScript && firstScript.parentNode) {
+				firstScript.parentNode.insertBefore(hiScript, firstScript);
+			}
 		}
 
 		if (extractedData.adNamiEnabled) handleAdnami(adnamiUnloadHandler);
@@ -130,6 +138,7 @@ export class AdsInterface {
 			device,
 			segments,
 			highImpactEnabled,
+			livewrappedKey,
 			pageContext,
 			premium,
 			keywords,
@@ -148,6 +157,7 @@ export class AdsInterface {
 			device,
 			segments,
 			highImpactEnabled,
+			livewrappedKey,
 			pageContext,
 			premium,
 			keywords,
