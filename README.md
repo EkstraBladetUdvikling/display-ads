@@ -17,7 +17,7 @@ yarn add @ekstra-bladet/display-ads
   import AdInit from '$lib/AdInit.svelte';
 </script>
 
-<AdInit {livewrappedKey} />
+<AdInit />
 ```
 
 AdInit forudsætter at der på _page.data_ objektet findes et _displayAds_ objekt med følgende interface
