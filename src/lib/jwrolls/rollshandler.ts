@@ -2,7 +2,7 @@ import { getAdschedule } from './adschedulehandler';
 import { createRollUrl } from './createrollurl';
 import { getPrebidTag } from './prebidtag';
 
-import { getCustParamUrl, getKeysAndValues } from './queryParamUrl';
+import { getKeysAndValues } from './queryParamUrl';
 import type { TRollsHandler } from './types';
 
 function createSchedule(
@@ -40,24 +40,14 @@ export async function rollsHandler(
 ): Promise<Partial<jwplayer.AdvertisingConfig> | null> {
 	try {
 		const {
-			// actAsPlay,
 			adscheduleId,
 			adschedulePath,
-			articleId,
-			articleTypeName,
-			autoplayAllowed,
 			cookieless,
 			creativeTimeout,
+			custParams,
 			disableRolls,
-			inline,
-			// isCtp,
-			// isDiscovery,
-			// isSmartphone,
-			playerParent,
 			requestTimeout,
-			sectionPath,
-			type,
-			videoType
+			sectionPath
 		} = rollsHandlerObject;
 
 		if (disableRolls) {
@@ -79,16 +69,16 @@ export async function rollsHandler(
 			? { ...defaultAdvertising, ...adscheduleFromJW, creativeTimeout, requestTimeout }
 			: null;
 
-		const custParams = await getCustParamUrl({
-			articleId,
-			articleTypeName,
-			autoplayAllowed,
-			inline,
-			playerParent,
-			sectionPath,
-			type,
-			videoType
-		});
+		//  await getCustParamUrl({
+		// 	articleId,
+		// 	articleTypeName,
+		// 	autoplayAllowed,
+		// 	inline,
+		// 	playerParent,
+		// 	sectionPath,
+		// 	type,
+		// 	videoType
+		// });
 
 		const keyValues = await getKeysAndValues();
 

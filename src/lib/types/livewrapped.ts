@@ -32,11 +32,28 @@ export interface ICbData {
 	width: number;
 }
 
+interface IParamsReturn {
+	adUnit: string;
+	params: {
+		iu: string;
+		output: 'vast';
+	};
+}
+
 export interface ILoadAdData {
 	adUnitName: string;
 	allowedMediaTypes?: ('banner' | 'native' | 'video')[];
 	callbackMethod?: (cbData: ICbData) => void;
 	gamSizes?: IBANNERSTATEBANNER['gamSizes'];
 	sizes?: number[][];
+	video?: {
+		// The video url created by pbjs.adServers.dfp.buildVideoUrl will be passed
+		// to resolve below
+		callback: () => void;
+		// Optionally create the params that will be passed to pbjs.adServers.dfp.buildVideoUrl.
+		// Parameters that Prebid needs are passed as parameters.
+		// gamAdUnit is taken from the placement defined in the Livewrapped console.
+		paramsFn: (prebidAdUnit: string, gamAdUnit: string) => IParamsReturn;
+	};
 	tagId: string;
 }

@@ -1,4 +1,5 @@
-import { createRollUrl } from './rollshandler';
+import { createRollUrl } from './createrollurl';
+import type { IUrlFragments } from './types';
 
 const performAsyncBidding = async (adUnitName: string, tagId: string) => {
 	return new Promise((resolve) => {
@@ -33,7 +34,11 @@ const performAsyncBidding = async (adUnitName: string, tagId: string) => {
 // Timeout in case Livewrapped doesn't load.
 const FAILSAFE_TIMEOUT = 3000;
 
-export async function getPrebidTag(tag: string, playerElementId: string, urlFragments) {
+export async function getPrebidTag(
+	tag: string,
+	playerElementId: string,
+	urlFragments: IUrlFragments
+) {
 	const extractedAdUnitName = tag.match(/iu=\/\d+\/ekstra_bladet\/(.*?)\/(.*?)&/);
 	const adUnitName =
 		extractedAdUnitName && extractedAdUnitName[2]
@@ -56,10 +61,14 @@ export async function getPrebidTag(tag: string, playerElementId: string, urlFrag
 
 			const hbParams = hbData && hbData[2] ? decodeURIComponent(hbData[2]) : '';
 
-			if (advertisingOptions && advertisingOptions.urlFragments) {
-				const { custParams, keyValues, url } = advertisingOptions.urlFragments;
+			if (urlFragments) {
+				const { custParams, keyValues, url } = urlFragments;
 
-				const rollTag = createRollUrl(url, keyValues, `${custParams}&${hbParams}`);
+				const rollTag = createRollUrl({
+					scheduleUrl: url,
+					keyValues,
+					custParams: `${custParams}&${hbParams}`
+				});
 
 				return rollTag;
 			}

@@ -1,24 +1,26 @@
-import type { IInitJWOptions, IRollOptions } from '../types';
-
 export interface IAdvertisingUrlFragments {
 	custParams: string;
 	keyValues: string;
 	url: string;
 }
 
-export type TAdScheduleOptions = Pick<IRollOptions, 'adscheduleId' | 'adschedulePath'>;
+export type TAdScheduleOptions = Pick<TRollsHandler, 'adscheduleId' | 'adschedulePath'>;
 
-export type TRollsHandler = IRollOptions &
-	Pick<
-		IInitJWOptions,
-		'articleId' | 'cookieless' | 'inline' | 'isDiscovery' | 'isSmartphone' | 'playerParent'
-	> & {
-		autoplayAllowed: boolean;
-		isCtp: boolean;
-	};
+export type TRollsHandler = {
+	adscheduleId: string;
+	adschedulePath: string;
+	autoplayAllowed: boolean;
+	cookieless: string;
+	creativeTimeout: number;
+	custParams: string;
+	disableRolls: boolean;
+	isCtp: boolean;
+	requestTimeout: number;
+	sectionPath: string;
+};
 
-export type TCustomParamInfo = Pick<IInitJWOptions, 'articleId' | 'inline' | 'playerParent'> &
-	Pick<IRollOptions, 'articleTypeName' | 'sectionPath' | 'type' | 'videoType'> & {
-		autoplayAllowed: boolean;
-		userType?: string;
-	};
+export interface IUrlFragments {
+	custParams: string;
+	keyValues: string;
+	url: string;
+}

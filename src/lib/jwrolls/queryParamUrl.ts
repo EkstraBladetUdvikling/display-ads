@@ -1,6 +1,7 @@
 import { getKeyValues } from '@ekstra-bladet/display-ads/src/lib/util/getkeyvalues';
 
 import type { TCustomParamInfo } from './types';
+import { updateORTBData } from '$lib/util';
 
 export async function getCustParamUrl(customParamInfo: TCustomParamInfo): Promise<string> {
 	try {
@@ -61,6 +62,6 @@ export const getKeysAndValues = async () => {
 };
 
 export const changeVPAValue = (cust_params: string, vpa = 'click') => {
-	window.ebComponents.ebBanners.updateORTBData({ vpa });
+	updateORTBData({ vpa });
 	return cust_params.replace(/vpa=[^&]+/, `vpa=${vpa}`);
 };
