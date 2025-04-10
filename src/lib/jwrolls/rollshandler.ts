@@ -35,8 +35,7 @@ function createSchedule(
 
 export async function rollsHandler(
 	rollsHandlerObject: TRollsHandler,
-	jwPlayerInstance: jwplayer.JWPlayer,
-	playerElementId: string
+	jwPlayerInstance: jwplayer.JWPlayer
 ): Promise<Partial<jwplayer.AdvertisingConfig> | null> {
 	try {
 		const {
@@ -46,6 +45,7 @@ export async function rollsHandler(
 			creativeTimeout,
 			custParams,
 			disableRolls,
+			playerElementId,
 			requestTimeout,
 			sectionPath
 		} = rollsHandlerObject;

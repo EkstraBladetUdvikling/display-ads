@@ -15,6 +15,7 @@ export type TRollsHandler = {
 	custParams: string;
 	disableRolls: boolean;
 	isCtp: boolean;
+	playerElementId: string;
 	requestTimeout: number;
 	sectionPath: string;
 };
