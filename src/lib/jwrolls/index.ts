@@ -12,10 +12,11 @@ export class JWRolls {
 
 	public createAdvertisingObject(
 		jwPlayerInstance: jwplayer.JWPlayer,
-		jwRollsOptions: Partial<TRollsHandler>
+		playerElementId: string,
+		jwRollsOptions?: Partial<TRollsHandler>
 	) {
-		this.updateRollsOptions(jwRollsOptions);
-		rollsHandler(this.rollsOptions, jwPlayerInstance);
+		if (jwRollsOptions) this.updateRollsOptions(jwRollsOptions);
+		rollsHandler(this.rollsOptions, jwPlayerInstance, playerElementId);
 	}
 
 	public updateRollsOptions(jwRollsOptions: Partial<TRollsHandler>) {
