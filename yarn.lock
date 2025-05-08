@@ -472,6 +472,11 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
+"@types/jwplayer@^8.31.3":
+  version "8.31.3"
+  resolved "https://registry.yarnpkg.com/@types/jwplayer/-/jwplayer-8.31.3.tgz#74d3ab7f33f0341a9af2f5d92384f2f96c960a25"
+  integrity sha512-4QZ9k47QvQONqKuzMDlhrtBSc+v5kijtzjF+owqC3bAzktQP7pLcMhLB/Lp9T0DCao1FYvdoc4g3RUzSqIJIXg==
+
 "@typescript-eslint/eslint-plugin@8.29.0":
   version "8.29.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.29.0.tgz#151c4878700a5ad229ce6713d2674d58b626b3d9"

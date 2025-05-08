@@ -36,7 +36,8 @@
 	},
 	"dependencies": {
 		"@ekstra-bladet/eb-cmp": "^3.0.1",
-		"@types/googletag": "^3.3.0"
+		"@types/googletag": "^3.3.0",
+		"@types/jwplayer": "^8.31.3"
 	},
 	"peerDependencies": {
 		"@ekstra-bladet/eb-cmp": "^3.0.1",
