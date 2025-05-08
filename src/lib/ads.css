@@ -293,7 +293,7 @@
 
 .sidebanner {
 	position: sticky;
-	top: 65px;
+	top: var(--topmenu-height, 65px);
 	z-index: 1000000;
 
 	display: flex;
