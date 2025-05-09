@@ -12,7 +12,7 @@
 
 	const { prefixId, targetId } = getElementIds(placementName);
 
-	let showContainer = $state(true);
+	let showContainer = $state(false);
 
 	afterNavigate(() => {
 		if (browser) {
