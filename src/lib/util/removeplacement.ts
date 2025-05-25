@@ -1,3 +1,3 @@
 export function removePlacement(tagId: string) {
-	window.lwhb.removeAdUnit(tagId);
+	if (window.lwhb) window.lwhb.removeAdUnit(tagId);
 }
