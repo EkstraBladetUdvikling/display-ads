@@ -21,6 +21,7 @@ export interface IBannerInit {
 	articleId?: string;
 	adPlacements: IAdmanagerBanners[];
 	device: DEVICE;
+	dynamicSeparately?: boolean;
 	highImpactEnabled?: boolean;
 	keywords?: IKeywords;
 	lwReplaceValues?: string[];

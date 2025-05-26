@@ -207,6 +207,7 @@ class BannerHandler {
 		const {
 			articleId,
 			adPlacements,
+			dynamicSeparately = true,
 			highImpactEnabled,
 			pageContext,
 			keywords: escKeywords,
@@ -366,7 +367,7 @@ class BannerHandler {
 				/**
 				 * Handle special cases
 				 */
-				if (banner.cleanName.indexOf('dynamisk') !== -1) {
+				if (banner.cleanName.indexOf('dynamisk') !== -1 && dynamicSeparately) {
 					dynamicPlacements.push({ ...banner, gamSizes, prefixId, targetId });
 					return;
 				} else if (banner.cleanName.indexOf('scribble') !== -1) {
