@@ -117,8 +117,13 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string) {
+		console.log(`Checking if placement "${placement}" exists.`, this.bannerHandler);
 		if (!this.bannerHandler) return false;
+
 		return this.bannerHandler?.adUnits.find((adUnit) => {
+			console.log(
+				`Checking adUnit: ${adUnit.cleanName?.toLowerCase()} against placement: ${placement}`
+			);
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
 	}
