@@ -17,6 +17,7 @@ export interface IBannerInit {
 	anonIds?: {
 		base: string;
 		adform: string;
+		google: string;
 	};
 	articleId?: string;
 	adPlacements: IAdmanagerBanners[];
