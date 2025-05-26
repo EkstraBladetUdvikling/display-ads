@@ -26,6 +26,7 @@ export interface IBannerInit {
 	highImpactEnabled?: boolean;
 	keywords?: IKeywords;
 	lwReplaceValues?: string[];
+	livewrappedKey?: string;
 	pageContext: PAGETYPES;
 	prebidEidsAllowed?: boolean;
 	premium?: boolean;
