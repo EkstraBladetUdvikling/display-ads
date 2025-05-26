@@ -268,13 +268,13 @@ class BannerHandler {
 				/**
 				 * Device filter
 				 */
-				if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
-					console.log('display-ads . Skipping non-swedish banner on smartphone:', banner.name);
-					return;
-				} else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
-					console.log('display-ads . Skipping swedish banner on non-smartphone:', banner.name);
-					return;
-				}
+				// if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
+				// 	// console.log('display-ads . Skipping non-swedish banner on smartphone:', banner.name);
+				// 	return;
+				// } else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
+				// 	// console.log('display-ads . Skipping swedish banner on non-smartphone:', banner.name);
+				// 	return;
+				// }
 
 				/**
 				 * insufficient info
