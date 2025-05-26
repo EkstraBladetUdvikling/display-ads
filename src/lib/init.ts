@@ -118,6 +118,7 @@ export class AdsInterface {
 
 	public placementExists(placement: string) {
 		if (!this.bannerHandler) return false;
+
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
@@ -136,6 +137,7 @@ export class AdsInterface {
 			anonIds,
 			articleId,
 			device,
+			dynamicSeparately,
 			segments,
 			highImpactEnabled,
 			livewrappedKey,
@@ -155,6 +157,7 @@ export class AdsInterface {
 			anonIds,
 			articleId,
 			device,
+			dynamicSeparately,
 			segments,
 			highImpactEnabled,
 			livewrappedKey,

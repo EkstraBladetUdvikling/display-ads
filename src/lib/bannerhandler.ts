@@ -207,6 +207,7 @@ class BannerHandler {
 		const {
 			articleId,
 			adPlacements,
+			dynamicSeparately = true,
 			highImpactEnabled,
 			pageContext,
 			keywords: escKeywords,
@@ -277,17 +278,24 @@ class BannerHandler {
 				/**
 				 * insufficient info
 				 */
-				if (!sizes || !pageTypes) return;
+
+				if (!sizes || !pageTypes) {
+					return;
+				}
 
 				/**
 				 * not allowed in pageContext
 				 */
-				if (pageTypes.indexOf(pageContext) === -1) return;
+				if (pageTypes.indexOf(pageContext) === -1) {
+					return;
+				}
 
 				/**
 				 * not allowed in plus pageContext
 				 */
-				if (premium && !allowedOnPlus) return;
+				if (premium && !allowedOnPlus) {
+					return;
+				}
 
 				/**
 				 * NoConsent filter
@@ -322,7 +330,9 @@ class BannerHandler {
 
 					defineTag.sizes = keptSizes.length ? keptSizes : sizes;
 				}
-				if (!defineTag.sizes) return;
+				if (!defineTag.sizes) {
+					return;
+				}
 
 				// Livewrapped needs us to send gamSizes for GPT
 				const gamSizes: IBANNERSTATEBANNER['gamSizes'] = defineTag.sizes.slice();
@@ -338,7 +348,7 @@ class BannerHandler {
 				/**
 				 * Handle special cases
 				 */
-				if (banner.cleanName.indexOf('dynamisk') !== -1) {
+				if (banner.cleanName.indexOf('dynamisk') !== -1 && dynamicSeparately) {
 					dynamicPlacements.push({ ...banner, gamSizes, prefixId, targetId });
 					return;
 				} else if (banner.cleanName.indexOf('scribble') !== -1) {
