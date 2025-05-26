@@ -118,7 +118,7 @@ export class AdsInterface {
 
 	public placementExists(placement: string) {
 		if (!this.bannerHandler) return false;
-		console.log('display-ads placementExists? adPlacements', placement);
+
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
@@ -150,7 +150,7 @@ export class AdsInterface {
 			topscrollWeekCount,
 			userType
 		} = page.data.displayAds;
-		console.log('display-ads adPlacements', adPlacements);
+
 		return {
 			adNamiEnabled,
 			adPlacements,

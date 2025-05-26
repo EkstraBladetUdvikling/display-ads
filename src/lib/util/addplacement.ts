@@ -47,7 +47,7 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 
 export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
 	if (!adsInterface.placementExists(placement)) {
-		console.log(`Placement "${placement}" does not exist.`);
+		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
 	}
 

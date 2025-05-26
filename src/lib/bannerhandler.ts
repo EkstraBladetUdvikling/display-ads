@@ -269,27 +269,17 @@ class BannerHandler {
 				/**
 				 * Device filter
 				 */
-				// if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
-				// 	// console.log('display-ads . Skipping non-swedish banner on smartphone:', banner.name);
-				// 	return;
-				// } else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
-				// 	// console.log('display-ads . Skipping swedish banner on non-smartphone:', banner.name);
-				// 	return;
-				// }
+				if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
+					return;
+				} else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
+					return;
+				}
 
 				/**
 				 * insufficient info
 				 */
 
 				if (!sizes || !pageTypes) {
-					console.log(
-						'display-ads insufficient info',
-						banner.name,
-						' - sizes',
-						sizes,
-						'pageTypes',
-						pageTypes
-					);
 					return;
 				}
 
@@ -297,7 +287,6 @@ class BannerHandler {
 				 * not allowed in pageContext
 				 */
 				if (pageTypes.indexOf(pageContext) === -1) {
-					console.log('display-ads . not allowed in pageContext', banner.name);
 					return;
 				}
 
@@ -305,12 +294,6 @@ class BannerHandler {
 				 * not allowed in plus pageContext
 				 */
 				if (premium && !allowedOnPlus) {
-					console.log(
-						'display-ads . not allowed in plus pageContext',
-						premium,
-						allowedOnPlus,
-						banner.name
-					);
 					return;
 				}
 
@@ -321,7 +304,6 @@ class BannerHandler {
 					(useNoConsent && siteName.indexOf('noconsent') === -1) ||
 					(!useNoConsent && siteName.indexOf('noconsent') !== -1)
 				) {
-					console.log('display-ads . NoConsent filter', banner.name, useNoConsent, siteName);
 					return;
 				}
 
@@ -349,7 +331,6 @@ class BannerHandler {
 					defineTag.sizes = keptSizes.length ? keptSizes : sizes;
 				}
 				if (!defineTag.sizes) {
-					console.log('display-ads . No sizes defined for banner', banner.cleanName);
 					return;
 				}
 
