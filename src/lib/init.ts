@@ -117,12 +117,12 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string) {
-		console.log(`Checking if placement "${placement}" exists.`, this.bannerHandler);
+		console.log(`display-ads Checking if placement "${placement}" exists.`, this.bannerHandler);
 		if (!this.bannerHandler) return false;
 
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			console.log(
-				`Checking adUnit: ${adUnit.cleanName?.toLowerCase()} against placement: ${placement}`
+				`display-ads Checking adUnit: ${adUnit.cleanName?.toLowerCase()} against placement: ${placement}`
 			);
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
@@ -153,7 +153,7 @@ export class AdsInterface {
 			topscrollWeekCount,
 			userType
 		} = page.data.displayAds;
-
+		console.log('display-ads adPlacements', adPlacements);
 		return {
 			adNamiEnabled,
 			adPlacements,
