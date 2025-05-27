@@ -29,8 +29,10 @@
 	});
 
 	$effect(() => {
-		console.log('display-ads AdPlacement: effect . consentStatus', consentStatus());
-		showContainer = addPlacement(placementName, targetId);
+		if (browser) {
+			console.log('display-ads AdPlacement: effect . consentStatus', consentStatus());
+			showContainer = addPlacement(placementName, targetId);
+		}
 	});
 </script>
 
