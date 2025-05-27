@@ -150,7 +150,7 @@ export class AdsInterface {
 			topscrollWeekCount,
 			userType
 		} = page.data.displayAds;
-		console.log('Extracting handler data from page state . pageContext', pageContext);
+		console.log('display-ads Extracting handler data from page state . pageContext', pageContext);
 		return {
 			adNamiEnabled,
 			adPlacements,

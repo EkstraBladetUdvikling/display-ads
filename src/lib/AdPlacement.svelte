@@ -16,11 +16,13 @@
 
 	afterNavigate(() => {
 		if (browser) {
+			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
 			showContainer = addPlacement(placementName, targetId);
 		}
 	});
 
 	onDestroy(() => {
+		console.log(`display-ads AdPlacement: Destroying placement ${placementName}`);
 		if (browser) removePlacement(targetId);
 	});
 </script>
