@@ -30,7 +30,7 @@
 
 	$effect(() => {
 		if (browser) {
-			console.log('display-ads AdPlacement: effect . consentStatus', consentStatus());
+			console.log('display-ads AdPlacement: effect . consentStatus');
 			showContainer = addPlacement(placementName, targetId);
 		}
 	});
