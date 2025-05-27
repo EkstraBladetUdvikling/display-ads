@@ -50,7 +50,10 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
 	}
-
+	console.log(
+		`display-ads Adding placement: ${placement} with tagId: ${tagId}`,
+		BANNERSTATE.placements
+	);
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {

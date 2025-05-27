@@ -126,7 +126,7 @@ export class AdsInterface {
 
 	public updateContext() {
 		const extractedData = this.extractHandlerData();
-
+		console.log('display-ads Updating context with extracted data:', extractedData);
 		this.bannerHandler?.updateContext(extractedData);
 	}
 
