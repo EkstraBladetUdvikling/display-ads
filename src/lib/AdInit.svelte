@@ -23,7 +23,6 @@
 	});
 
 	$effect(() => {
-		console.log('display-ads AdInit: effect . consentStatus', consentStatus());
 		adsInterface.updateContext();
 	});
 </script>

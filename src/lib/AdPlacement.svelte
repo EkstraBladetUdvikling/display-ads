@@ -14,8 +14,6 @@
 
 	let showContainer = $state(false);
 
-	const consentStatus = getContext('consent') as () => string | boolean;
-
 	afterNavigate(() => {
 		if (browser) {
 			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
@@ -26,13 +24,6 @@
 	onDestroy(() => {
 		console.log(`display-ads AdPlacement: Destroying placement ${placementName}`);
 		if (browser) removePlacement(targetId);
-	});
-
-	$effect(() => {
-		if (browser) {
-			console.log('display-ads AdPlacement: effect . consentStatus');
-			showContainer = addPlacement(placementName, targetId);
-		}
 	});
 </script>
 
