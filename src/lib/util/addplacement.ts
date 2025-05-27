@@ -69,6 +69,8 @@ export function addPlacement(placement: string, tagId: string, loadCallback?: ()
 			adPlaceholder.firstChild.remove();
 		}
 
+		console.log(`display-ads Adding placement: ${placement} with tagId: ${tagId}`, bannerData);
+
 		if (bannerData) {
 			const { allowedFormats: allowedMediaTypes, lwName: adUnitName, gamSizes, sizes } = bannerData;
 
