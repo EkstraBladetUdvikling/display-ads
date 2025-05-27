@@ -257,6 +257,7 @@ class BannerHandler {
 		const dynamicPlacements: IBANNERSTATEBANNER[] = [];
 		const liveBlogPlacements: IBANNERSTATEBANNER[] = [];
 		const useNoConsent = window.ebCMP.noConsentGroup();
+		console.log('useNoConsent', useNoConsent);
 		banners.forEach((banner) => {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
