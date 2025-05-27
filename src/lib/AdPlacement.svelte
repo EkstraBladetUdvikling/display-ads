@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -14,6 +14,8 @@
 
 	let showContainer = $state(false);
 
+	const consentStatus = getContext('consent') as () => string | boolean;
+
 	afterNavigate(() => {
 		if (browser) {
 			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
@@ -24,6 +26,11 @@
 	onDestroy(() => {
 		console.log(`display-ads AdPlacement: Destroying placement ${placementName}`);
 		if (browser) removePlacement(targetId);
+	});
+
+	$effect(() => {
+		console.log('display-ads AdPlacement: effect . consentStatus', consentStatus());
+		showContainer = addPlacement(placementName, targetId);
 	});
 </script>
 
