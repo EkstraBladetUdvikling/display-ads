@@ -352,16 +352,15 @@ class BannerHandler {
 				if (banner.cleanName.indexOf('dynamisk') !== -1 && dynamicSeparately) {
 					dynamicPlacements.push({ ...banner, gamSizes, prefixId, targetId });
 					return;
-				} else if (banner.cleanName.indexOf('scribble') !== -1) {
+				} else if (
+					banner.cleanName.indexOf('scribble') !== -1 ||
+					banner.cleanName.indexOf('live') !== -1
+				) {
 					liveBlogPlacements.push({ ...banner, gamSizes, prefixId, targetId });
+					return;
 				}
 
-				if (banner.cleanName.indexOf('topscroll') !== -1) {
-					if (topscrollAllowed && topscrollWeekCount)
-						handleTopScroll(topscrollWeekCount, banner.lwName, defineTag);
-				} else {
-					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
-				}
+				adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 
 				if (highImpactEnabled) addHighImpact(banner, targetId);
 
