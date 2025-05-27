@@ -21,4 +21,8 @@
 			}
 		}
 	});
+
+	$effect(() => {
+		console.log('display-ads AdInit: effect . consentStatus', consentStatus());
+	});
 </script>
