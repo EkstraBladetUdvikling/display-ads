@@ -299,10 +299,12 @@ class BannerHandler {
 				/**
 				 * NoConsent filter
 				 */
+				console.log('display-ads consentStatus siteName ', siteName);
 				if (
 					(useNoConsent && siteName.indexOf('noconsent') === -1) ||
 					(!useNoConsent && siteName.indexOf('noconsent') !== -1)
 				) {
+					console.log('display-ads consentStatus throwing ', banner.cleanName);
 					return;
 				}
 
@@ -382,7 +384,7 @@ class BannerHandler {
 				});
 			}
 		});
-
+		console.log('display-ads adUnits (consentStatus)', adUnits);
 		this.adUnits = adUnits;
 
 		BANNERSTATE.init({
