@@ -31,6 +31,7 @@
 		const displayAds = page.data?.displayAds;
 		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 		displayAds.device = device;
+		console.log('hekko? displayAds.device', displayAds);
 		adsInterface.updateContext(displayAds);
 		console.log('hekko? consentStatus()', consentStatus());
 	});
