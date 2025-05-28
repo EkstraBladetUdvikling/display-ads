@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onDestroy } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -7,6 +7,7 @@
 	import { addPlacement } from './util/addplacement';
 	import { getElementIds } from './util';
 	import { removePlacement } from './util/removeplacement';
+	import { on } from 'svelte/events';
 
 	let { adMark = true, placementName, placementType, wallpaperContainer = false } = $props();
 
@@ -19,6 +20,11 @@
 			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
 			showContainer = addPlacement(placementName, targetId);
 		}
+	});
+
+	onMount(() => {
+		console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
+		showContainer = addPlacement(placementName, targetId);
 	});
 
 	onDestroy(() => {
