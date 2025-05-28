@@ -9,7 +9,6 @@ export {
 	updateORTBData
 } from './util';
 
-import { handleTopScroll } from './topscroll/TopScroll';
 import { addHighImpact, highimpactInit } from './highimpact';
 import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
@@ -215,8 +214,7 @@ class BannerHandler {
 			premium,
 			reloadOnBack,
 			segments = [],
-			topscroll: topscrollAllowed,
-			topscrollWeekCount,
+
 			userType
 		} = this.initOptions;
 
@@ -257,6 +255,7 @@ class BannerHandler {
 		const dynamicPlacements: IBANNERSTATEBANNER[] = [];
 		const liveBlogPlacements: IBANNERSTATEBANNER[] = [];
 		const useNoConsent = window.ebCMP.noConsentGroup();
+		console.log('display-ads consentStatus useNoConsent ', useNoConsent);
 		banners.forEach((banner) => {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
@@ -300,10 +299,12 @@ class BannerHandler {
 				/**
 				 * NoConsent filter
 				 */
+				console.log('display-ads consentStatus siteName ', siteName);
 				if (
 					(useNoConsent && siteName.indexOf('noconsent') === -1) ||
 					(!useNoConsent && siteName.indexOf('noconsent') !== -1)
 				) {
+					console.log('display-ads consentStatus throwing ', banner.cleanName);
 					return;
 				}
 
@@ -348,19 +349,15 @@ class BannerHandler {
 				/**
 				 * Handle special cases
 				 */
-				if (banner.cleanName.indexOf('dynamisk') !== -1 && dynamicSeparately) {
-					dynamicPlacements.push({ ...banner, gamSizes, prefixId, targetId });
-					return;
-				} else if (banner.cleanName.indexOf('scribble') !== -1) {
+				if (
+					banner.cleanName.indexOf('scribble') !== -1 ||
+					banner.cleanName.indexOf('live') !== -1
+				) {
 					liveBlogPlacements.push({ ...banner, gamSizes, prefixId, targetId });
+					return;
 				}
 
-				if (banner.cleanName.indexOf('topscroll') !== -1) {
-					if (topscrollAllowed && topscrollWeekCount)
-						handleTopScroll(topscrollWeekCount, banner.lwName, defineTag);
-				} else {
-					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
-				}
+				adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 
 				if (highImpactEnabled) addHighImpact(banner, targetId);
 
@@ -387,7 +384,7 @@ class BannerHandler {
 				});
 			}
 		});
-
+		console.log('display-ads adUnits (consentStatus)', adUnits);
 		this.adUnits = adUnits;
 
 		BANNERSTATE.init({

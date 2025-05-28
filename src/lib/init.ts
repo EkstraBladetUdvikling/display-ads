@@ -1,4 +1,3 @@
-import { page } from '$app/state';
 import BannerHandler, { handleHalfPage } from './bannerhandler';
 import { PAGETYPES } from './types/admanager';
 
@@ -43,14 +42,14 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
-	public init(consent: string | boolean, adnamiUnloadHandler?: () => void) {
-		if (!page.data.displayAds) return;
-
+	public init(displayAdsData: any, consent: string | boolean, adnamiUnloadHandler?: () => void) {
+		if (!displayAdsData) return;
+		console.log('display-ads', displayAdsData);
 		const disallowedSection = '';
 
 		if (!consent && disallowedSection) return null;
 
-		const extractedData = this.extractHandlerData();
+		const extractedData = this.extractHandlerData(displayAdsData);
 
 		/**
 		 * Handling wallpapers from other sources
@@ -117,27 +116,32 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string) {
+		console.log('display-ads Checking if placement exists:', placement, this.bannerHandler);
 		if (!this.bannerHandler) return false;
+
+		console.log(
+			'display-ads Checking if placement exists bannerhandler exists:',
+			this.bannerHandler.adUnits
+		);
 
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
 	}
 
-	public updateContext() {
-		const extractedData = this.extractHandlerData();
-
+	public updateContext(displayAdsData) {
+		const extractedData = this.extractHandlerData(displayAdsData);
+		console.log('display-ads Updating context with extracted data:', extractedData);
 		this.bannerHandler?.updateContext(extractedData);
 	}
 
-	private extractHandlerData() {
+	private extractHandlerData(displayAds) {
 		const {
 			adNamiEnabled,
 			adPlacements,
 			anonIds,
 			articleId,
 			device,
-			dynamicSeparately,
 			segments,
 			highImpactEnabled,
 			livewrappedKey,
@@ -146,18 +150,15 @@ export class AdsInterface {
 			keywords,
 			prebidEidsAllowed,
 			reloadOnBack,
-			topscroll,
-			topscrollWeekCount,
 			userType
-		} = page.data.displayAds;
-
+		} = displayAds;
+		console.log('display-ads Extracting handler data from page state . pageContext', pageContext);
 		return {
 			adNamiEnabled,
 			adPlacements,
 			anonIds,
 			articleId,
 			device,
-			dynamicSeparately,
 			segments,
 			highImpactEnabled,
 			livewrappedKey,
@@ -166,8 +167,6 @@ export class AdsInterface {
 			keywords,
 			prebidEidsAllowed,
 			reloadOnBack,
-			topscroll,
-			topscrollWeekCount,
 			userType
 		};
 	}

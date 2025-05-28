@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -16,11 +16,18 @@
 
 	afterNavigate(() => {
 		if (browser) {
+			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
 			showContainer = addPlacement(placementName, targetId);
 		}
 	});
 
+	onMount(() => {
+		console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
+		showContainer = addPlacement(placementName, targetId);
+	});
+
 	onDestroy(() => {
+		console.log(`display-ads AdPlacement: Destroying placement ${placementName}`);
 		if (browser) removePlacement(targetId);
 	});
 </script>
@@ -31,54 +38,14 @@
 
 <div
 	hidden={!showContainer}
-	class="wrapper wrapper--{placementName} wrapper--{placementType}"
+	class="placement-wrapper placement-wrapper--{placementName} placement-wrapper--{placementType}"
 	id={prefixId}
 >
 	{#if adMark}
-		<div class="text">Annonce:</div>
+		<div class="placement-text">Annonce:</div>
 	{/if}
-	<div class="target target--{placementType} target--{placementName}" id={targetId}></div>
+	<div
+		class="placement-target placement-target--{placementType} placement-target--{placementName}"
+		id={targetId}
+	></div>
 </div>
-
-<style>
-	.target {
-		margin: auto;
-	}
-
-	.target:global(.target--topscroll),
-	.wrapper:global(.wrapper--topscroll) {
-		height: auto;
-		margin: 0 auto;
-		width: auto;
-	}
-
-	.wrapper :global(.target--halfpage) {
-		height: 600px;
-	}
-
-	.wrapper :global(.target--halfpage1) {
-		height: 600px;
-		display: flex;
-		justify-content: flex-end;
-	}
-
-	.text {
-		font-size: 0.8rem;
-		font-family: sans-serif;
-		margin-bottom: 5px;
-	}
-
-	.wrapper--halfpage1 .text {
-		text-align: right;
-	}
-
-	.wrapper :global(.target--megaboard) {
-		height: 180px;
-		width: 930px;
-	}
-
-	.wrapper :global(.target--monster) {
-		height: 600px;
-		width: 930px;
-	}
-</style>
