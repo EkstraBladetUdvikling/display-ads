@@ -421,6 +421,10 @@
 	height: 600px;
 }
 
+.sidebanner .placement-wrapper {
+	width: 100%;
+}
+
 .sidebanner--left .placement-target--halfpage {
 	height: 600px;
 	display: flex;
