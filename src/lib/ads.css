@@ -1,6 +1,8 @@
 :root {
-	--sidebanner-z-index: 1000000;
-	--monster-z-index: 1000001;
+	--display-ads-halfpage-top-pos: 65px;
+	--display-ads-halfpage-z-index: 1000000;
+	--display-ads-monster-top-pos: 53px;
+	--display-ads-monster-z-index: 1000001;
 }
 
 .target {
@@ -10,13 +12,13 @@
 
 .wrapper--monster {
 	position: relative;
-	z-index: var(--monster-z-index);
+	z-index: var(--display-ads-monster-z-index);
 }
 
 .wrapper--monster .target div:not([class*='adnm-']) {
 	position: sticky;
-	top: 53px;
-	z-index: var(--monster-z-index);
+	top: var(--display-ads-monster-top-pos);
+	z-index: var(--display-ads-monster-z-index);
 }
 
 .wrapper--intext .target,
@@ -303,8 +305,8 @@
 
 .sidebanner {
 	position: sticky;
-	top: var(--topmenu-height, 65px);
-	z-index: var(--sidebanner-z-index);
+	top: var(--display-ads-halfpage-top-pos, 65px);
+	z-index: var(--display-ads-halfpage-z-index);
 
 	display: flex;
 	padding: 0 10px;
