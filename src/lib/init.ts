@@ -116,7 +116,13 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string) {
+		console.log('display-ads Checking if placement exists:', placement);
 		if (!this.bannerHandler) return false;
+
+		console.log(
+			'display-ads Checking if placement exists bannerhandler exists:',
+			this.bannerHandler.adUnits
+		);
 
 		return this.bannerHandler?.adUnits.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
