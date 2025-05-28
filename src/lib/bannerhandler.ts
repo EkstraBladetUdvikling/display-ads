@@ -9,7 +9,6 @@ export {
 	updateORTBData
 } from './util';
 
-import { handleTopScroll } from './topscroll/TopScroll';
 import { addHighImpact, highimpactInit } from './highimpact';
 import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
@@ -215,8 +214,7 @@ class BannerHandler {
 			premium,
 			reloadOnBack,
 			segments = [],
-			topscroll: topscrollAllowed,
-			topscrollWeekCount,
+
 			userType
 		} = this.initOptions;
 
@@ -349,10 +347,7 @@ class BannerHandler {
 				/**
 				 * Handle special cases
 				 */
-				if (banner.cleanName.indexOf('dynamisk') !== -1 && dynamicSeparately) {
-					dynamicPlacements.push({ ...banner, gamSizes, prefixId, targetId });
-					return;
-				} else if (
+				if (
 					banner.cleanName.indexOf('scribble') !== -1 ||
 					banner.cleanName.indexOf('live') !== -1
 				) {
