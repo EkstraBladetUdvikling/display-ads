@@ -7,6 +7,7 @@
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
 	import { DEVICE } from './state';
 	import { page } from '$app/state';
+	import { createLogger } from 'vite';
 
 	let { adnamiUnloadHandler = undefined } = $props();
 
@@ -30,6 +31,10 @@
 	$effect(() => {
 		if (!browser) return;
 		const displayAds = page.data?.displayAds;
+		if (!displayAds) {
+			console.error('displayAds is not defined in page data');
+			return;
+		}
 		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 		displayAds.device = device;
 		console.log('hekko? displayAds.device', displayAds);
