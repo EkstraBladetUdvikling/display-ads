@@ -7,7 +7,6 @@
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
 	import { DEVICE } from './state';
 	import { page } from '$app/state';
-	import { createLogger } from 'vite';
 
 	let { adnamiUnloadHandler = undefined } = $props();
 
