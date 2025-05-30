@@ -349,13 +349,13 @@ class BannerHandler {
 				/**
 				 * Handle special cases
 				 */
-				if (
-					banner.cleanName.indexOf('scribble') !== -1 ||
-					banner.cleanName.indexOf('live') !== -1
-				) {
-					liveBlogPlacements.push({ ...banner, gamSizes, prefixId, targetId });
-					return;
-				}
+				// if (
+				// 	banner.cleanName.indexOf('scribble') !== -1 ||
+				// 	banner.cleanName.indexOf('live') !== -1
+				// ) {
+				// 	liveBlogPlacements.push({ ...banner, gamSizes, prefixId, targetId });
+				// 	return;
+				// }
 
 				adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 
