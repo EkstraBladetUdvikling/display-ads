@@ -28,6 +28,7 @@
 	});
 
 	$effect(() => {
+		if (!browser) return;
 		const displayAds = page.data?.displayAds;
 		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 		displayAds.device = device;
