@@ -49,7 +49,7 @@ interface IAddPlacementInput {
 	placement: string;
 	tagId: string;
 	loadCallback?: () => void;
-	consent?: string | boolean;
+	consent: string | boolean;
 	device: string;
 }
 

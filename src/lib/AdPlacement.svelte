@@ -8,7 +8,14 @@
 	import { getElementIds } from './util';
 	import { removePlacement } from './util/removeplacement';
 
-	let { adMark = true, placementName, placementType, wallpaperContainer = false } = $props();
+	let {
+		adMark = true,
+		consent,
+		device,
+		placementName,
+		placementType,
+		wallpaperContainer = false
+	} = $props();
 
 	const { prefixId, targetId } = getElementIds(placementName);
 
@@ -17,13 +24,13 @@
 	afterNavigate(() => {
 		if (browser) {
 			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
-			showContainer = addPlacement(placementName, targetId);
+			showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
 		}
 	});
 
 	onMount(() => {
 		console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
-		showContainer = addPlacement(placementName, targetId);
+		showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
 	});
 
 	onDestroy(() => {
