@@ -115,16 +115,21 @@ export class AdsInterface {
 		this.bannerHandler = new BannerHandler(extractedData);
 	}
 
-	public placementExists(placement: string) {
+	public placementExists(placement: string, consent: boolean) {
 		console.log('display-ads Checking if placement exists:', placement, this.bannerHandler);
 		if (!this.bannerHandler) return false;
 
 		console.log(
 			'display-ads Checking if placement exists bannerhandler exists:',
-			this.bannerHandler.adUnits
+			this.bannerHandler.adUnits,
+			this.bannerHandler.adUnitsNoConsent
 		);
 
-		return this.bannerHandler?.adUnits.find((adUnit) => {
+		const adUnitsToSearch = consent
+			? this.bannerHandler.adUnits
+			: this.bannerHandler.adUnitsNoConsent;
+
+		return adUnitsToSearch.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
 	}

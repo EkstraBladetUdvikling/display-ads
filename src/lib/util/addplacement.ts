@@ -49,7 +49,7 @@ interface IAddPlacementInput {
 	placement: string;
 	tagId: string;
 	loadCallback?: () => void;
-	consent: string | boolean;
+	consent: boolean;
 	device: string;
 }
 
@@ -60,7 +60,7 @@ export function addPlacement(options: IAddPlacementInput) {
 		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
 	);
 	console.log(`display-ads addPlacement options:`, options);
-	if (!adsInterface.placementExists(placement)) {
+	if (!adsInterface.placementExists(placement, consent)) {
 		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
 	}

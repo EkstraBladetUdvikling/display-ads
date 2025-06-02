@@ -6,16 +6,15 @@ export { DEVICE } from './util/device';
 
 export interface IBannerState {
 	adUnits: IBANNERSTATEBANNER[];
+	adUnitsNoConsent: IBANNERSTATEBANNER[];
 	completeCalled: boolean;
 	context: PAGETYPES;
-	dynamicPlacements: IBANNERSTATEBANNER[];
 	device: DEVICE;
 	placements: string[];
 	premium: boolean;
 	ready: boolean;
 	reloadOnBack: boolean;
 	renderCalled: boolean;
-	liveBlogPlacements: IBANNERSTATEBANNER[];
 	waiting: (() => void)[];
 	winHeight: number;
 	winWidth: number;
@@ -23,16 +22,15 @@ export interface IBannerState {
 
 export enum STATEKEY {
 	adUnits = 'adUnits',
+	adUnitsNoConsent = 'adUnitsNoConsent',
 	completeCalled = 'completeCalled',
 	context = 'context',
 	device = 'device',
-	dynamicPlacements = 'dynamicPlacements',
 	placements = 'placements',
 	premium = 'premium',
 	ready = 'ready',
 	reloadOnBack = 'reloadOnBack',
 	renderCalled = 'renderCalled',
-	liveBlogPlacements = 'liveBlogPlacements',
 	waiting = 'waiting',
 	winHeight = 'winHeight',
 	winWidth = 'winWidth'
@@ -40,11 +38,11 @@ export enum STATEKEY {
 
 const STATE: IBannerState = {
 	[STATEKEY.adUnits]: [],
+	[STATEKEY.adUnitsNoConsent]: [],
 	[STATEKEY.completeCalled]: false,
 	[STATEKEY.context]: PAGETYPES.ARTICLE,
 	[STATEKEY.device]: DEVICE.smartphone,
-	[STATEKEY.dynamicPlacements]: [],
-	[STATEKEY.liveBlogPlacements]: [],
+
 	[STATEKEY.placements]: [],
 	[STATEKEY.premium]: false,
 	[STATEKEY.ready]: false,
@@ -99,6 +97,9 @@ export const BANNERSTATE = {
 	get adUnits(): IBANNERSTATEBANNER[] {
 		return STATE.adUnits;
 	},
+	get adUnitsNoConsent(): IBANNERSTATEBANNER[] {
+		return STATE.adUnitsNoConsent;
+	},
 	get completeCalled(): boolean {
 		return STATE.completeCalled;
 	},
@@ -111,14 +112,8 @@ export const BANNERSTATE = {
 	get device(): DEVICE {
 		return STATE.device;
 	},
-	get dynamicPlacements(): IBANNERSTATEBANNER[] {
-		return STATE.dynamicPlacements;
-	},
 	init,
 	isReady,
-	get liveBlogPlacements(): IBANNERSTATEBANNER[] {
-		return STATE.liveBlogPlacements;
-	},
 	placements: STATE.placements,
 	get premium(): boolean {
 		return STATE.premium;
