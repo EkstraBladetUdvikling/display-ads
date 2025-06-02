@@ -24,6 +24,9 @@
 	afterNavigate(() => {
 		if (browser) {
 			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
+			console.log(`display-ads AdPlacement: targetId is ${targetId}`);
+			console.log(`display-ads AdPlacement: device is ${device}`);
+			console.log(`display-ads AdPlacement: consent is ${consent}`);
 			showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
 		}
 	});

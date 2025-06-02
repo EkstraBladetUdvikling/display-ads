@@ -59,6 +59,7 @@ export function addPlacement(options: IAddPlacementInput) {
 	console.log(
 		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
 	);
+	console.log(`display-ads addPlacement options:`, options);
 	if (!adsInterface.placementExists(placement)) {
 		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
