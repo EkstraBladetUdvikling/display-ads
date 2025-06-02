@@ -266,13 +266,13 @@ class BannerHandler {
 					: name;
 
 				/**
-				 * Device filter
-				 */
-				if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
-					return;
-				} else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
-					return;
-				}
+				//  * Device filter
+				//  */
+				// if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
+				// 	return;
+				// } else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
+				// 	return;
+				// }
 
 				/**
 				 * insufficient info
@@ -299,14 +299,14 @@ class BannerHandler {
 				/**
 				 * NoConsent filter
 				 */
-				console.log('display-ads consentStatus siteName ', siteName);
-				if (
-					(useNoConsent && siteName.indexOf('noconsent') === -1) ||
-					(!useNoConsent && siteName.indexOf('noconsent') !== -1)
-				) {
-					console.log('display-ads consentStatus throwing ', banner.cleanName);
-					return;
-				}
+				// console.log('display-ads consentStatus siteName ', siteName);
+				// if (
+				// 	(useNoConsent && siteName.indexOf('noconsent') === -1) ||
+				// 	(!useNoConsent && siteName.indexOf('noconsent') !== -1)
+				// ) {
+				// 	console.log('display-ads consentStatus throwing ', banner.cleanName);
+				// 	return;
+				// }
 
 				const { prefixId, targetId } = getElementIds(banner.cleanName);
 
