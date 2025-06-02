@@ -45,8 +45,22 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 	}
 }
 
-export function addPlacement(placement: string, tagId: string, loadCallback?: () => void) {
-	if (!adsInterface.placementExists(placement)) {
+interface IAddPlacementInput {
+	placement: string;
+	tagId: string;
+	loadCallback?: () => void;
+	consent: boolean;
+	device: string;
+}
+
+export function addPlacement(options: IAddPlacementInput) {
+	//placement: string, tagId: string, loadCallback?: () => void) {
+	const { placement, tagId, loadCallback, consent, device } = options;
+	console.log(
+		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
+	);
+	console.log(`display-ads addPlacement options:`, options);
+	if (!adsInterface.placementExists(placement, consent)) {
 		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
 	}

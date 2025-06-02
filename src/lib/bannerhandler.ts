@@ -21,6 +21,7 @@ import { getDeviceInfo } from './util/isipados';
 
 class BannerHandler {
 	public adUnits: IBANNERSTATEBANNER[] = [];
+	public adUnitsNoConsent: IBANNERSTATEBANNER[] = [];
 
 	private device: DEVICE;
 	private livewrappedTimeout = 2500;
@@ -206,7 +207,7 @@ class BannerHandler {
 		const {
 			articleId,
 			adPlacements,
-			dynamicSeparately = true,
+			// dynamicSeparately = true,
 			highImpactEnabled,
 			pageContext,
 			keywords: escKeywords,
@@ -252,8 +253,7 @@ class BannerHandler {
 		 */
 		const banners = adPlacements as IBANNERSTATEBANNER[];
 		const adUnits: IBANNERSTATEBANNER[] = [];
-		const dynamicPlacements: IBANNERSTATEBANNER[] = [];
-		const liveBlogPlacements: IBANNERSTATEBANNER[] = [];
+		const adUnitsNoConsent: IBANNERSTATEBANNER[] = [];
 		const useNoConsent = window.ebCMP.noConsentGroup();
 		console.log('display-ads consentStatus useNoConsent ', useNoConsent);
 		banners.forEach((banner) => {
@@ -266,13 +266,13 @@ class BannerHandler {
 					: name;
 
 				/**
-				 * Device filter
-				 */
-				if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
-					return;
-				} else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
-					return;
-				}
+				//  * Device filter
+				//  */
+				// if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
+				// 	return;
+				// } else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
+				// 	return;
+				// }
 
 				/**
 				 * insufficient info
@@ -299,14 +299,14 @@ class BannerHandler {
 				/**
 				 * NoConsent filter
 				 */
-				console.log('display-ads consentStatus siteName ', siteName);
-				if (
-					(useNoConsent && siteName.indexOf('noconsent') === -1) ||
-					(!useNoConsent && siteName.indexOf('noconsent') !== -1)
-				) {
-					console.log('display-ads consentStatus throwing ', banner.cleanName);
-					return;
-				}
+				// console.log('display-ads consentStatus siteName ', siteName);
+				// if (
+				// 	(useNoConsent && siteName.indexOf('noconsent') === -1) ||
+				// 	(!useNoConsent && siteName.indexOf('noconsent') !== -1)
+				// ) {
+				// 	console.log('display-ads consentStatus throwing ', banner.cleanName);
+				// 	return;
+				// }
 
 				const { prefixId, targetId } = getElementIds(banner.cleanName);
 
@@ -346,18 +346,17 @@ class BannerHandler {
 					gamSizes.push(['fluid']);
 				}
 
-				/**
-				 * Handle special cases
-				 */
-				// if (
-				// 	banner.cleanName.indexOf('scribble') !== -1 ||
-				// 	banner.cleanName.indexOf('live') !== -1
-				// ) {
-				// 	liveBlogPlacements.push({ ...banner, gamSizes, prefixId, targetId });
-				// 	return;
-				// }
-
-				adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
+				if (siteName.indexOf('noconsent') !== -1) {
+					adUnitsNoConsent.push({
+						...banner,
+						gamSizes,
+						prefixId,
+						sizes: defineTag.sizes,
+						targetId
+					});
+				} else {
+					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
+				}
 
 				if (highImpactEnabled) addHighImpact(banner, targetId);
 
@@ -386,13 +385,13 @@ class BannerHandler {
 		});
 		console.log('display-ads adUnits (consentStatus)', adUnits);
 		this.adUnits = adUnits;
+		this.adUnitsNoConsent = adUnitsNoConsent;
 
 		BANNERSTATE.init({
 			adUnits,
+			adUnitsNoConsent,
 			context: pageContext,
 			device: this.device,
-			dynamicPlacements,
-			liveBlogPlacements,
 			premium,
 			reloadOnBack
 		});
