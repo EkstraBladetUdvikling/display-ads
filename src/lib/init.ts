@@ -85,7 +85,7 @@ export class AdsInterface {
 
 			const extractedData = this.extractHandlerData(displayAdsData);
 
-			this.bannerHandler?.updateContext(extractedData);
+			this.bannerHandler?.updateContext(extractedData, newData);
 
 			return;
 		}
