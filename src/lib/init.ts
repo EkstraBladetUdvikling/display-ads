@@ -75,16 +75,9 @@ export class AdsInterface {
 			adnamiUnloadHandler
 		};
 		if (this.#exists) {
-			console.warn('displayads AdsInterface already initialized, skipping re-initialization.');
 			const newData = JSON.stringify(oldData.displayAdsData) !== JSON.stringify(displayAdsData);
-			console.log(
-				'display-ads AdsInterface already initialized, newData:',
-				newData,
-				displayAdsData,
-				oldData.displayAdsData
-			);
-			const newConsent = oldData.consent !== consent;
-			console.log('display-ads AdsInterface already initialized, newConsent:', newConsent);
+
+			// const newConsent = oldData.consent !== consent;
 
 			const extractedData = this.extractHandlerData(displayAdsData);
 
@@ -93,7 +86,6 @@ export class AdsInterface {
 			return;
 		}
 
-		console.log('display-ads', displayAdsData);
 		const disallowedSection = '';
 
 		if (!consent && disallowedSection) return null;
@@ -127,10 +119,10 @@ export class AdsInterface {
 				// }
 			},
 			ebSkyskraper: {
-				topscroll: function () {
+				topscroll: () => {
 					// only exists for external purposes
 				},
-				wallpaper: function () {
+				wallpaper: () => {
 					window.jppolWallpaper();
 				}
 			}
@@ -166,28 +158,12 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string, consent: boolean) {
-		console.log(
-			'display-ads placementExists Checking if placement exists:',
-			placement,
-			'consent',
-			consent
-		);
 		if (!this.bannerHandler) return false;
-
-		console.log(
-			'display-ads placementExists Checking if placement exists bannerhandler exists:',
-			this.bannerHandler.adUnits,
-			this.bannerHandler.adUnitsNoConsent
-		);
 
 		const adUnitsToSearch = consent
 			? this.bannerHandler.adUnits
 			: this.bannerHandler.adUnitsNoConsent;
 
-		console.log(
-			'display-ads placementExists Checking if placement exists bannerhandler exists: adUnitsToSearch',
-			adUnitsToSearch
-		);
 		return adUnitsToSearch.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
@@ -210,7 +186,7 @@ export class AdsInterface {
 			reloadOnBack,
 			userType
 		} = displayAds;
-		console.log('display-ads Extracting handler data from page state . pageContext', pageContext);
+
 		return {
 			adNamiEnabled,
 			adPlacements,

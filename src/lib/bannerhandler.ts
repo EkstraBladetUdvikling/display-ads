@@ -263,8 +263,7 @@ class BannerHandler {
 		const banners = adPlacements as IBANNERSTATEBANNER[];
 		const adUnits: IBANNERSTATEBANNER[] = [];
 		const adUnitsNoConsent: IBANNERSTATEBANNER[] = [];
-		const useNoConsent = window.ebCMP.noConsentGroup();
-		console.log('display-ads consentStatus useNoConsent ', useNoConsent);
+
 		banners.forEach((banner) => {
 			try {
 				const { allowedFormats, allowedOnPlus, invCode, name, pageTypes, siteName, sizes } = banner;
@@ -275,18 +274,8 @@ class BannerHandler {
 					: name;
 
 				/**
-				//  * Device filter
-				//  */
-				// if (this.device === DEVICE.smartphone && banner.name.indexOf('swedish') === -1) {
-				// 	return;
-				// } else if (this.device !== DEVICE.smartphone && banner.name.indexOf('swedish') !== -1) {
-				// 	return;
-				// }
-
-				/**
 				 * insufficient info
 				 */
-
 				if (!sizes || !pageTypes) {
 					return;
 				}
@@ -304,18 +293,6 @@ class BannerHandler {
 				if (premium && !allowedOnPlus) {
 					return;
 				}
-
-				/**
-				 * NoConsent filter
-				 */
-				// console.log('display-ads consentStatus siteName ', siteName);
-				// if (
-				// 	(useNoConsent && siteName.indexOf('noconsent') === -1) ||
-				// 	(!useNoConsent && siteName.indexOf('noconsent') !== -1)
-				// ) {
-				// 	console.log('display-ads consentStatus throwing ', banner.cleanName);
-				// 	return;
-				// }
 
 				const { prefixId, targetId } = getElementIds(banner.cleanName);
 
