@@ -40,10 +40,17 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 }
 
 export class AdsInterface {
+	#exists = false;
+
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: string | boolean, adnamiUnloadHandler?: () => void) {
 		if (!displayAdsData) return;
+		if (this.#exists) {
+			console.warn('displayads AdsInterface already initialized, skipping re-initialization.');
+			return;
+		}
+
 		console.log('display-ads', displayAdsData);
 		const disallowedSection = '';
 
@@ -113,6 +120,7 @@ export class AdsInterface {
 		if (extractedData.adNamiEnabled) handleAdnami(adnamiUnloadHandler);
 
 		this.bannerHandler = new BannerHandler(extractedData);
+		this.#exists = true;
 	}
 
 	public placementExists(placement: string, consent: boolean) {
