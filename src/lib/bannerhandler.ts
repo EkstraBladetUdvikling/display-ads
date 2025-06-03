@@ -10,7 +10,7 @@ export {
 } from './util';
 
 import { addHighImpact, highimpactInit } from './highimpact';
-import { addPlacement, getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
+import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
 
@@ -78,7 +78,7 @@ class BannerHandler {
 		// if (fullReset) {
 		// window.googletag.pubads().clearTargeting();
 		// window.googletag.pubads().updateCorrelator();
-		window.lwhb.resetCorrelator();
+		// window.lwhb.resetCorrelator();
 		window.lwhb.resetPage(true);
 
 		BANNERSTATE.reset();
