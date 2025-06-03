@@ -74,7 +74,12 @@ export class AdsInterface {
 			const newData =
 				this.#initData.displayAdsData &&
 				JSON.stringify(this.#initData.displayAdsData) === JSON.stringify(displayAdsData);
-			console.log('display-ads AdsInterface already initialized, newData:', newData);
+			console.log(
+				'display-ads AdsInterface already initialized, newData:',
+				newData,
+				displayAdsData,
+				this.#initData.displayAdsData
+			);
 			const newConsent = this.#initData.consent && this.#initData.consent === consent;
 			console.log('display-ads AdsInterface already initialized, newConsent:', newConsent);
 			this.updateContext(displayAdsData);
