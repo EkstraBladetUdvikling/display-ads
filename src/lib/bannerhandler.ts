@@ -10,7 +10,7 @@ export {
 } from './util';
 
 import { addHighImpact, highimpactInit } from './highimpact';
-import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
+import { addPlacement, getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
 
@@ -71,13 +71,20 @@ class BannerHandler {
 	 * updateContext
 	 * @param initOptions
 	 */
-	public updateContext(initOptions: Partial<IBannerInit>) {
+	public updateContext(initOptions: Partial<IBannerInit>, fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
+		console.log('displayads updateContext', fullReset);
 
-		BANNERSTATE.reset();
-		this.init();
-		this.setupAdUnits();
-		this.complete();
+		if (fullReset) {
+			// window.googletag.pubads().clearTargeting();
+			// window.googletag.pubads().updateCorrelator();
+			// window.lwhb.resetCorrelator();
+			BANNERSTATE.reset();
+			this.setupAdUnits();
+			this.complete();
+		} else {
+			this.replay();
+		}
 	}
 
 	/**
@@ -397,6 +404,18 @@ class BannerHandler {
 		});
 
 		BANNERSTATE.setupDone();
+	}
+
+	private replay() {
+		// TODO: Implement replay logic if needed
+		// BANNERSTATE.placements.forEach((placement) => {
+		// 	const { targetId } = getElementIds(placement);
+		// 	console.log('display-ads replaying placement:', placement, targetId);
+		// 	addPlacement({
+		// 		placement,
+		// 		tagId: targetId
+		// 	});
+		// });
 	}
 }
 

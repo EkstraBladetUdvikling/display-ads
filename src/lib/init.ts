@@ -1,4 +1,5 @@
 import BannerHandler, { handleHalfPage } from './bannerhandler';
+import { DEVICE } from './state';
 import { PAGETYPES } from './types/admanager';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
@@ -39,11 +40,56 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 	adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnload);
 }
 
+interface IDisplayAdsData {
+	adPlacements: any[];
+	anonIds: { adform: string; base: string; google: string };
+	device: DEVICE;
+	highImpactEnabled: boolean;
+	keywords: { [id: string]: string | string[] };
+	livewrappedKey: string;
+	pageContext: PAGETYPES;
+	userType: string;
+}
+
+interface IAdsInterfaceInitData {
+	displayAdsData?: IDisplayAdsData;
+	consent?: string | boolean;
+	adnamiUnloadHandler?: () => void;
+}
+
 export class AdsInterface {
+	#exists = false;
+	#initData: IAdsInterfaceInitData = {};
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: string | boolean, adnamiUnloadHandler?: () => void) {
 		if (!displayAdsData) return;
+		this.#initData = {
+			displayAdsData,
+			consent,
+			adnamiUnloadHandler
+		};
+		if (this.#exists) {
+			console.warn('displayads AdsInterface already initialized, skipping re-initialization.');
+			const newData =
+				this.#initData.displayAdsData &&
+				JSON.stringify(this.#initData.displayAdsData) !== JSON.stringify(displayAdsData);
+			console.log(
+				'display-ads AdsInterface already initialized, newData:',
+				newData,
+				displayAdsData,
+				this.#initData.displayAdsData
+			);
+			const newConsent = this.#initData.consent && this.#initData.consent !== consent;
+			console.log('display-ads AdsInterface already initialized, newConsent:', newConsent);
+
+			const extractedData = this.extractHandlerData(displayAdsData);
+
+			this.bannerHandler?.updateContext(extractedData);
+
+			return;
+		}
+
 		console.log('display-ads', displayAdsData);
 		const disallowedSection = '';
 
@@ -113,14 +159,20 @@ export class AdsInterface {
 		if (extractedData.adNamiEnabled) handleAdnami(adnamiUnloadHandler);
 
 		this.bannerHandler = new BannerHandler(extractedData);
+		this.#exists = true;
 	}
 
 	public placementExists(placement: string, consent: boolean) {
-		console.log('display-ads Checking if placement exists:', placement, this.bannerHandler);
+		console.log(
+			'display-ads placementExists Checking if placement exists:',
+			placement,
+			'consent',
+			consent
+		);
 		if (!this.bannerHandler) return false;
 
 		console.log(
-			'display-ads Checking if placement exists bannerhandler exists:',
+			'display-ads placementExists Checking if placement exists bannerhandler exists:',
 			this.bannerHandler.adUnits,
 			this.bannerHandler.adUnitsNoConsent
 		);
@@ -129,15 +181,13 @@ export class AdsInterface {
 			? this.bannerHandler.adUnits
 			: this.bannerHandler.adUnitsNoConsent;
 
+		console.log(
+			'display-ads placementExists Checking if placement exists bannerhandler exists: adUnitsToSearch',
+			adUnitsToSearch
+		);
 		return adUnitsToSearch.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
-	}
-
-	public updateContext(displayAdsData) {
-		const extractedData = this.extractHandlerData(displayAdsData);
-		console.log('display-ads Updating context with extracted data:', extractedData);
-		this.bannerHandler?.updateContext(extractedData);
 	}
 
 	private extractHandlerData(displayAds) {
