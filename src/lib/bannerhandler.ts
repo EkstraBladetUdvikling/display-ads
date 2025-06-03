@@ -75,16 +75,16 @@ class BannerHandler {
 		this.initOptions = { ...this.initOptions, ...initOptions };
 		console.log('displayads updateContext', fullReset);
 
-		if (fullReset) {
-			// window.googletag.pubads().clearTargeting();
-			// window.googletag.pubads().updateCorrelator();
-			// window.lwhb.resetCorrelator();
-			BANNERSTATE.reset();
-			this.setupAdUnits();
-			this.complete();
-		} else {
-			this.replay();
-		}
+		// if (fullReset) {
+		// window.googletag.pubads().clearTargeting();
+		// window.googletag.pubads().updateCorrelator();
+		// window.lwhb.resetCorrelator();
+		BANNERSTATE.reset();
+		this.setupAdUnits();
+		this.complete();
+		// } else {
+		// 	this.replay();
+		// }
 	}
 
 	/**
