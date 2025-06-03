@@ -82,7 +82,10 @@ class BannerHandler {
 		BANNERSTATE.reset();
 
 		window.googletag.pubads().clearTargeting();
+		window.googletag.pubads().updateCorrelator();
 		window.lwhb.resetCorrelator();
+
+		console.log('displayads updateContext googletag:', window.googletag, 'lwhb:', window.lwhb);
 
 		// this.init();
 		this.setupAdUnits();
