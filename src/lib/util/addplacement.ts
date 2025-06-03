@@ -67,7 +67,9 @@ export function addPlacement(options: IAddPlacementInput) {
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
-		const adUnitsToSearch = consent ? BANNERSTATE.adUnits : BANNERSTATE.adUnitsNoConsent;
+		const useNoConsent = window.ebCMP.noConsentGroup();
+		console.log('display-ads addPlacement useNoConsent:', useNoConsent);
+		const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
 		const bannerData = adUnitsToSearch.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
