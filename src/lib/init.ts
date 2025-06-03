@@ -81,7 +81,7 @@ export class AdsInterface {
 				'display-ads AdsInterface already initialized, newData:',
 				newData,
 				displayAdsData,
-				this.#initData.displayAdsData
+				oldData.displayAdsData
 			);
 			const newConsent = oldData.consent !== consent;
 			console.log('display-ads AdsInterface already initialized, newConsent:', newConsent);
