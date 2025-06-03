@@ -52,18 +52,23 @@ interface IDisplayAdsData {
 }
 
 interface IAdsInterfaceInitData {
-	displayAdsData?: IDisplayAdsData;
-	consent?: string | boolean;
+	displayAdsData: IDisplayAdsData | null;
+	consent: boolean | null;
 	adnamiUnloadHandler?: () => void;
 }
 
 export class AdsInterface {
 	#exists = false;
-	#initData: IAdsInterfaceInitData = {};
+	#initData: IAdsInterfaceInitData = {
+		consent: null,
+		displayAdsData: null
+	};
 	private bannerHandler: BannerHandler | null = null;
 
-	public init(displayAdsData: any, consent: string | boolean, adnamiUnloadHandler?: () => void) {
+	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
 		if (!displayAdsData) return;
+		const oldData = { ...this.#initData };
+
 		this.#initData = {
 			displayAdsData,
 			consent,
@@ -71,16 +76,14 @@ export class AdsInterface {
 		};
 		if (this.#exists) {
 			console.warn('displayads AdsInterface already initialized, skipping re-initialization.');
-			const newData =
-				this.#initData.displayAdsData &&
-				JSON.stringify(this.#initData.displayAdsData) !== JSON.stringify(displayAdsData);
+			const newData = JSON.stringify(oldData.displayAdsData) !== JSON.stringify(displayAdsData);
 			console.log(
 				'display-ads AdsInterface already initialized, newData:',
 				newData,
 				displayAdsData,
 				this.#initData.displayAdsData
 			);
-			const newConsent = this.#initData.consent && this.#initData.consent !== consent;
+			const newConsent = oldData.consent !== consent;
 			console.log('display-ads AdsInterface already initialized, newConsent:', newConsent);
 
 			const extractedData = this.extractHandlerData(displayAdsData);
