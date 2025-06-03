@@ -59,10 +59,10 @@ export function addPlacement(options: IAddPlacementInput) {
 	console.log(
 		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
 	);
-	if (!adsInterface.placementExists(placement, consent)) {
-		console.warn(`Placement "${placement}" does not exist.`);
-		return false;
-	}
+	// if (!adsInterface.placementExists(placement, consent)) {
+	// 	console.warn(`Placement "${placement}" does not exist.`);
+	// 	return false;
+	// }
 
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
@@ -71,6 +71,16 @@ export function addPlacement(options: IAddPlacementInput) {
 		const bannerData = adUnitsToSearch.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
+
+		console.log(
+			`display-ads addPlacement Searching for placement: ${placement} in adUnits:`,
+			adUnitsToSearch,
+			bannerData
+		);
+		if (!bannerData) {
+			console.log(`Placement "${placement}" does not exist.`);
+			throw new Error(`Placement "${placement}" does not exist.`);
+		}
 
 		const adPlaceholder = document.getElementById(tagId);
 
