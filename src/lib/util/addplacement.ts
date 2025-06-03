@@ -49,20 +49,12 @@ interface IAddPlacementInput {
 	placement: string;
 	tagId: string;
 	loadCallback?: () => void;
-	consent: boolean;
-	device: string;
+	device?: string;
 }
 
 export function addPlacement(options: IAddPlacementInput) {
-	//placement: string, tagId: string, loadCallback?: () => void) {
-	const { placement, tagId, loadCallback, consent, device } = options;
-	console.log(
-		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
-	);
-	// if (!adsInterface.placementExists(placement, consent)) {
-	// 	console.warn(`Placement "${placement}" does not exist.`);
-	// 	return false;
-	// }
+	const { placement, tagId, loadCallback, device } = options;
+	console.log(`display-ads addPlacement: ${placement} with tagId: ${tagId},  device: ${device}`);
 
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
@@ -102,7 +94,11 @@ export function addPlacement(options: IAddPlacementInput) {
 					adUnitName,
 					tagId
 				};
-
+				console.log(
+					'display-ads addPlacement has loadCallback:',
+					placement,
+					loadCallback !== undefined
+				);
 				if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
 				if (allowedMediaTypes) {
