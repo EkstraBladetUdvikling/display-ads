@@ -10,7 +10,7 @@ export {
 } from './util';
 
 import { addHighImpact, highimpactInit } from './highimpact';
-import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
+import { addPlacement, getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
 
@@ -71,7 +71,7 @@ class BannerHandler {
 	 * updateContext
 	 * @param initOptions
 	 */
-	public updateContext(initOptions: Partial<IBannerInit>) {
+	public updateContext(initOptions: Partial<IBannerInit>, fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
 		console.log(
 			'displayads updateContext',
@@ -80,7 +80,6 @@ class BannerHandler {
 			this.renderedBanners
 		);
 		console.log('displayads updateContext BANNERSTATE placements:', BANNERSTATE.placements);
-		BANNERSTATE.reset();
 
 		window.googletag.pubads().clearTargeting();
 		window.googletag.pubads().updateCorrelator();
@@ -88,9 +87,13 @@ class BannerHandler {
 
 		console.log('displayads updateContext googletag:', window.googletag, 'lwhb:', window.lwhb);
 
-		// this.init();
-		this.setupAdUnits();
-		this.complete();
+		if (fullReset) {
+			BANNERSTATE.reset();
+			this.setupAdUnits();
+			this.complete();
+		} else {
+			this.replay();
+		}
 	}
 
 	/**
@@ -410,6 +413,14 @@ class BannerHandler {
 		});
 
 		BANNERSTATE.setupDone();
+	}
+
+	private replay() {
+		BANNERSTATE.placements.forEach((placement) => {
+			const { targetId } = getElementIds(placement);
+
+			console.log('display-ads replaying placement:', placement, targetId);
+		});
 	}
 }
 
