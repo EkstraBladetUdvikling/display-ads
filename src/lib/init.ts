@@ -48,6 +48,7 @@ export class AdsInterface {
 		if (!displayAdsData) return;
 		if (this.#exists) {
 			console.warn('displayads AdsInterface already initialized, skipping re-initialization.');
+			this.updateContext(displayAdsData);
 			return;
 		}
 

@@ -73,9 +73,17 @@ class BannerHandler {
 	 */
 	public updateContext(initOptions: Partial<IBannerInit>) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
-
+		console.log(
+			'displayads updateContext',
+			this.initOptions,
+			'renderedBanners',
+			this.renderedBanners
+		);
 		BANNERSTATE.reset();
-		this.init();
+
+		// window.googletag.pubads().clearTargeting();
+
+		// this.init();
 		this.setupAdUnits();
 		this.complete();
 	}
