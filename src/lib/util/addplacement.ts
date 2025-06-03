@@ -56,67 +56,74 @@ export function addPlacement(options: IAddPlacementInput) {
 	const { placement, tagId, loadCallback, device } = options;
 	console.log(`display-ads addPlacement: ${placement} with tagId: ${tagId},  device: ${device}`);
 
-	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
+	if (!BANNERSTATE.placements.includes(placement)) {
+		BANNERSTATE.placements.push(placement);
 
-	BANNERSTATE.isReady(() => {
-		const useNoConsent = window.ebCMP.noConsentGroup();
-		console.log('display-ads addPlacement useNoConsent:', useNoConsent);
-		const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
-		const bannerData = adUnitsToSearch.find(
-			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
-		);
+		BANNERSTATE.isReady(() => {
+			const useNoConsent = window.ebCMP.noConsentGroup();
+			console.log('display-ads addPlacement useNoConsent:', useNoConsent);
+			const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+			const bannerData = adUnitsToSearch.find(
+				(adUnit) => adUnit.cleanName?.toLowerCase() === placement
+			);
 
-		console.log(
-			`display-ads addPlacement Searching for placement: ${placement} in adUnits:`,
-			adUnitsToSearch,
-			bannerData
-		);
-		if (!bannerData) {
-			console.log(`Placement "${placement}" does not exist.`);
-			throw new Error(`Placement "${placement}" does not exist.`);
-		}
+			console.log(
+				`display-ads addPlacement Searching for placement: ${placement} in adUnits:`,
+				adUnitsToSearch,
+				bannerData
+			);
+			if (!bannerData) {
+				console.log(`Placement "${placement}" does not exist.`);
+				throw new Error(`Placement "${placement}" does not exist.`);
+			}
 
-		const adPlaceholder = document.getElementById(tagId);
+			const adPlaceholder = document.getElementById(tagId);
 
-		if (!adPlaceholder) throw new Error('adPlacement not found');
+			if (!adPlaceholder) throw new Error('adPlacement not found');
 
-		while (adPlaceholder.firstChild) {
-			adPlaceholder.firstChild.remove();
-		}
+			while (adPlaceholder.firstChild) {
+				adPlaceholder.firstChild.remove();
+			}
 
-		console.log(`display-ads Adding placement: ${placement} with tagId: ${tagId}`, bannerData);
+			console.log(`display-ads Adding placement: ${placement} with tagId: ${tagId}`, bannerData);
 
-		if (bannerData) {
-			const { allowedFormats: allowedMediaTypes, lwName: adUnitName, gamSizes, sizes } = bannerData;
+			if (bannerData) {
+				const {
+					allowedFormats: allowedMediaTypes,
+					lwName: adUnitName,
+					gamSizes,
+					sizes
+				} = bannerData;
 
-			window.lwhb.cmd.push(() => {
-				const loadAdData: ILoadAdData = {
-					adUnitName,
-					tagId
-				};
-				console.log(
-					'display-ads addPlacement has loadCallback:',
-					placement,
-					loadCallback !== undefined
-				);
-				if (loadCallback) loadAdData.callbackMethod = loadCallback;
+				window.lwhb.cmd.push(() => {
+					const loadAdData: ILoadAdData = {
+						adUnitName,
+						tagId
+					};
+					console.log(
+						'display-ads addPlacement has loadCallback:',
+						placement,
+						loadCallback !== undefined
+					);
+					if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
-				if (allowedMediaTypes) {
-					const lowercasedMediaTypes = allowedMediaTypes.map((str) =>
-						str.toLowerCase()
-					) as IDefineTag['allowedFormats'];
-					loadAdData.allowedMediaTypes = lowercasedMediaTypes;
-				}
-				if (sizes) loadAdData.sizes = sizes;
-				if (gamSizes) loadAdData.gamSizes = gamSizes;
+					if (allowedMediaTypes) {
+						const lowercasedMediaTypes = allowedMediaTypes.map((str) =>
+							str.toLowerCase()
+						) as IDefineTag['allowedFormats'];
+						loadAdData.allowedMediaTypes = lowercasedMediaTypes;
+					}
+					if (sizes) loadAdData.sizes = sizes;
+					if (gamSizes) loadAdData.gamSizes = gamSizes;
 
-				if (BANNERSTATE.renderCalled) {
-					window.lwhb.loadAd(loadAdData);
-				} else {
-					window.lwhb.prepareAd(loadAdData);
-				}
-			});
-		}
-	});
+					if (BANNERSTATE.renderCalled) {
+						window.lwhb.loadAd(loadAdData);
+					} else {
+						window.lwhb.prepareAd(loadAdData);
+					}
+				});
+			}
+		});
+	}
 	return true;
 }
