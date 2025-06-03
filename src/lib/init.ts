@@ -1,4 +1,5 @@
 import BannerHandler, { handleHalfPage } from './bannerhandler';
+import { DEVICE } from './state';
 import { PAGETYPES } from './types/admanager';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
@@ -39,15 +40,43 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 	adnmEventHandler.connect(MACRO_UNLOAD, adnamiUnload);
 }
 
+interface IDisplayAdsData {
+	adPlacements: any[];
+	anonIds: { adform: string; base: string; google: string };
+	device: DEVICE;
+	highImpactEnabled: boolean;
+	keywords: { [id: string]: string | string[] };
+	livewrappedKey: string;
+	pageContext: PAGETYPES;
+	userType: string;
+}
+
+interface IAdsInterfaceInitData {
+	displayAdsData?: IDisplayAdsData;
+	consent?: string | boolean;
+	adnamiUnloadHandler?: () => void;
+}
+
 export class AdsInterface {
 	#exists = false;
-
+	#initData: IAdsInterfaceInitData = {};
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: string | boolean, adnamiUnloadHandler?: () => void) {
 		if (!displayAdsData) return;
+		this.#initData = {
+			displayAdsData,
+			consent,
+			adnamiUnloadHandler
+		};
 		if (this.#exists) {
 			console.warn('displayads AdsInterface already initialized, skipping re-initialization.');
+			const newData =
+				this.#initData.displayAdsData &&
+				JSON.stringify(this.#initData.displayAdsData) === JSON.stringify(displayAdsData);
+			console.log('display-ads AdsInterface already initialized, newData:', newData);
+			const newConsent = this.#initData.consent && this.#initData.consent === consent;
+			console.log('display-ads AdsInterface already initialized, newConsent:', newConsent);
 			this.updateContext(displayAdsData);
 			return;
 		}
