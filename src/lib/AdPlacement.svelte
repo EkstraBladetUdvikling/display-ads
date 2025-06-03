@@ -39,10 +39,10 @@
 	// 	showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
 	// });
 
-	onDestroy(() => {
-		console.log(`display-ads AdPlacement.svelte: Destroying placement ${placementName}`);
-		if (browser) removePlacement(targetId);
-	});
+	// onDestroy(() => {
+	// 	console.log(`display-ads AdPlacement.svelte: Destroying placement ${placementName}`);
+	// 	if (browser) removePlacement(targetId);
+	// });
 </script>
 
 {#if wallpaperContainer}
