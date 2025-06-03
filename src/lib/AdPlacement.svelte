@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -34,10 +34,10 @@
 		}
 	});
 
-	// onMount(() => {
-	// 	console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
-	// 	showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
-	// });
+	onMount(() => {
+		console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
+		showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
+	});
 
 	onDestroy(() => {
 		console.log(`display-ads AdPlacement.svelte: Destroying placement ${placementName}`);

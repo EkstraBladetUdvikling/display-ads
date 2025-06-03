@@ -49,32 +49,28 @@ interface IAddPlacementInput {
 	placement: string;
 	tagId: string;
 	loadCallback?: () => void;
-	device?: string;
+	consent: boolean;
+	device: string;
 }
 
 export function addPlacement(options: IAddPlacementInput) {
-	const { placement, tagId, loadCallback, device } = options;
-	console.log(`display-ads addPlacement: ${placement} with tagId: ${tagId},  device: ${device}`);
-
+	//placement: string, tagId: string, loadCallback?: () => void) {
+	const { placement, tagId, loadCallback, consent, device } = options;
+	console.log(
+		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
+	);
+	console.log(`display-ads addPlacement options:`, options);
+	if (!adsInterface.placementExists(placement, consent)) {
+		console.warn(`Placement "${placement}" does not exist.`);
+		return false;
+	}
+	console.log(`display-ads addPlacement: ${placement} with tagId: ${tagId}`);
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
-		const useNoConsent = window.ebCMP.noConsentGroup();
-		console.log('display-ads addPlacement useNoConsent:', useNoConsent);
-		const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
-		const bannerData = adUnitsToSearch.find(
+		const bannerData = BANNERSTATE.adUnits.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
-
-		console.log(
-			`display-ads addPlacement Searching for placement: ${placement} in adUnits:`,
-			adUnitsToSearch,
-			bannerData
-		);
-		if (!bannerData) {
-			console.log(`Placement "${placement}" does not exist.`);
-			throw new Error(`Placement "${placement}" does not exist.`);
-		}
 
 		const adPlaceholder = document.getElementById(tagId);
 
@@ -94,11 +90,7 @@ export function addPlacement(options: IAddPlacementInput) {
 					adUnitName,
 					tagId
 				};
-				console.log(
-					'display-ads addPlacement has loadCallback:',
-					placement,
-					loadCallback !== undefined
-				);
+
 				if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
 				if (allowedMediaTypes) {

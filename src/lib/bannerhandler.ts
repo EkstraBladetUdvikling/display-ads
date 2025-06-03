@@ -10,7 +10,7 @@ export {
 } from './util';
 
 import { addHighImpact, highimpactInit } from './highimpact';
-import { addPlacement, getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
+import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
 
@@ -73,12 +73,14 @@ class BannerHandler {
 	 */
 	public updateContext(initOptions: Partial<IBannerInit>, fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
-		console.log('displayads updateContext', fullReset);
+		console.log('displayads updateContext fullReset?', fullReset);
 
 		// if (fullReset) {
 		// window.googletag.pubads().clearTargeting();
 		// window.googletag.pubads().updateCorrelator();
 		// window.lwhb.resetCorrelator();
+		window.lwhb.resetPage(true);
+
 		BANNERSTATE.reset();
 		this.setupAdUnits();
 		this.complete();
