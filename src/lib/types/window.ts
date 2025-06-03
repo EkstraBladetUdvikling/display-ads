@@ -47,6 +47,7 @@ export interface ILiveWrapped {
 	render: () => void;
 	renderAd: () => void;
 	resetPage: (bool: boolean) => void;
+	resetCorrelator: () => void;
 }
 
 export interface IPrebidJS {

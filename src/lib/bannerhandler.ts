@@ -81,7 +81,8 @@ class BannerHandler {
 		);
 		BANNERSTATE.reset();
 
-		// window.googletag.pubads().clearTargeting();
+		window.googletag.pubads().clearTargeting();
+		window.lwhb.resetCorrelator();
 
 		// this.init();
 		this.setupAdUnits();
