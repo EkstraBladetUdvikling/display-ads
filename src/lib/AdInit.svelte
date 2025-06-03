@@ -20,8 +20,10 @@
 			const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 			displayAds.device = device;
 			if (consentStatus() !== 'unset') {
+				console.log('displayads init?');
 				adsInterface.init(displayAds, consentStatus(), adnamiUnloadHandler);
 			} else if (adsInterface) {
+				console.log('displayads updateContext?');
 				adsInterface.updateContext(displayAds);
 			}
 		}
