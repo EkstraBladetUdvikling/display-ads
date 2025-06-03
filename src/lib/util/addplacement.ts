@@ -59,12 +59,11 @@ export function addPlacement(options: IAddPlacementInput) {
 	console.log(
 		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
 	);
-	console.log(`display-ads addPlacement options:`, options);
 	if (!adsInterface.placementExists(placement, consent)) {
 		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
 	}
-	console.log(`display-ads addPlacement: ${placement} with tagId: ${tagId}`);
+
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {

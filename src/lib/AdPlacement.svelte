@@ -23,21 +23,18 @@
 
 	afterNavigate(() => {
 		if (browser) {
-			console.log(`display-ads AdPlacement: afterNavigate . Adding placement ${placementName}`);
-			console.log(`display-ads AdPlacement: targetId is ${targetId}`);
-			console.log(`display-ads AdPlacement: device is ${device}`);
-			console.log(`display-ads AdPlacement: consent is ${consent}`);
+			console.log(`display-ads AdPlacement: afterNavigate placement ${placementName}`);
 			showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
 		}
 	});
 
-	onMount(() => {
-		console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
-		showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
-	});
+	// onMount(() => {
+	// 	console.log(`display-ads AdPlacement: Mounting placement ${placementName}`);
+	// 	showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
+	// });
 
 	onDestroy(() => {
-		console.log(`display-ads AdPlacement: Destroying placement ${placementName}`);
+		console.log(`display-ads AdPlacement.svelte: Destroying placement ${placementName}`);
 		if (browser) removePlacement(targetId);
 	});
 </script>

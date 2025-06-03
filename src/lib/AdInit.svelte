@@ -29,17 +29,17 @@
 		}
 	});
 
-	$effect(() => {
-		if (!browser) return;
-		const displayAds = page.data?.displayAds;
-		if (!displayAds) {
-			console.error('displayAds is not defined in page data');
-			return;
-		}
-		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
-		displayAds.device = device;
-		console.log('hekko? displayAds.device', displayAds);
-		adsInterface.updateContext(displayAds);
-		console.log('hekko? consentStatus()', consentStatus());
-	});
+	// $effect(() => {
+	// 	if (!browser) return;
+	// 	const displayAds = page.data?.displayAds;
+	// 	if (!displayAds) {
+	// 		console.error('displayAds is not defined in page data');
+	// 		return;
+	// 	}
+	// 	const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
+	// 	displayAds.device = device;
+	// 	console.log('hekko? displayAds.device', displayAds);
+	// 	adsInterface.updateContext(displayAds);
+	// 	console.log('hekko? consentStatus()', consentStatus());
+	// });
 </script>
