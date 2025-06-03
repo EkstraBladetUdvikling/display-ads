@@ -125,11 +125,11 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string, consent: boolean) {
-		console.log('display-ads Checking if placement exists:', placement, this.bannerHandler);
+		console.log('display-ads placementExists Checking if placement exists:', placement, consent);
 		if (!this.bannerHandler) return false;
 
 		console.log(
-			'display-ads Checking if placement exists bannerhandler exists:',
+			'display-ads placementExists Checking if placement exists bannerhandler exists:',
 			this.bannerHandler.adUnits,
 			this.bannerHandler.adUnitsNoConsent
 		);
@@ -138,6 +138,10 @@ export class AdsInterface {
 			? this.bannerHandler.adUnits
 			: this.bannerHandler.adUnitsNoConsent;
 
+		console.log(
+			'display-ads placementExists Checking if placement exists bannerhandler exists: adUnitsToSearch',
+			adUnitsToSearch
+		);
 		return adUnitsToSearch.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
