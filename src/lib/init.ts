@@ -125,7 +125,12 @@ export class AdsInterface {
 	}
 
 	public placementExists(placement: string, consent: boolean) {
-		console.log('display-ads placementExists Checking if placement exists:', placement, consent);
+		console.log(
+			'display-ads placementExists Checking if placement exists:',
+			placement,
+			'consent',
+			consent
+		);
 		if (!this.bannerHandler) return false;
 
 		console.log(
