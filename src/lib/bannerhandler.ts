@@ -79,6 +79,7 @@ class BannerHandler {
 			'renderedBanners',
 			this.renderedBanners
 		);
+		console.log('displayads updateContext BANNERSTATE placements:', BANNERSTATE.placements);
 		BANNERSTATE.reset();
 
 		window.googletag.pubads().clearTargeting();
