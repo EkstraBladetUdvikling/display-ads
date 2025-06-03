@@ -416,15 +416,15 @@ class BannerHandler {
 	}
 
 	private replay() {
-		BANNERSTATE.placements.forEach((placement) => {
-			const { targetId } = getElementIds(placement);
-			window.lwhb.removeAdUnit(targetId);
-			console.log('display-ads replaying placement:', placement, targetId);
-			addPlacement({
-				placement,
-				tagId: targetId
-			});
-		});
+		// TODO: Implement replay logic if needed
+		// BANNERSTATE.placements.forEach((placement) => {
+		// 	const { targetId } = getElementIds(placement);
+		// 	console.log('display-ads replaying placement:', placement, targetId);
+		// 	addPlacement({
+		// 		placement,
+		// 		tagId: targetId
+		// 	});
+		// });
 	}
 }
 
