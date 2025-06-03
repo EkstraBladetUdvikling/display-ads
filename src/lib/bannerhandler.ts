@@ -73,21 +73,12 @@ class BannerHandler {
 	 */
 	public updateContext(initOptions: Partial<IBannerInit>, fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
-		console.log(
-			'displayads updateContext',
-			this.initOptions,
-			'renderedBanners',
-			this.renderedBanners
-		);
-		console.log('displayads updateContext BANNERSTATE placements:', BANNERSTATE.placements);
-
-		window.googletag.pubads().clearTargeting();
-		window.googletag.pubads().updateCorrelator();
-		window.lwhb.resetCorrelator();
-
-		console.log('displayads updateContext googletag:', window.googletag, 'lwhb:', window.lwhb);
+		console.log('displayads updateContext', fullReset);
 
 		if (fullReset) {
+			// window.googletag.pubads().clearTargeting();
+			// window.googletag.pubads().updateCorrelator();
+			// window.lwhb.resetCorrelator();
 			BANNERSTATE.reset();
 			this.setupAdUnits();
 			this.complete();
