@@ -11,7 +11,6 @@
 	let {
 		adMark = true,
 		consent,
-		device,
 		placementName,
 		placementType,
 		wallpaperContainer = false
@@ -25,7 +24,6 @@
 		if (browser) {
 			showContainer = addPlacement({
 				consent,
-				device,
 				placement: placementName,
 				tagId: targetId
 			});
@@ -33,7 +31,7 @@
 	});
 
 	onMount(() => {
-		showContainer = addPlacement({ consent, device, placement: placementName, tagId: targetId });
+		showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
 	});
 
 	onDestroy(() => {

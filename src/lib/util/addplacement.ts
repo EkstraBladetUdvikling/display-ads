@@ -46,25 +46,21 @@ export function addCustomPlacement(customplacement: ICustomPlacement, byPassLW: 
 }
 
 interface IAddPlacementInput {
+	consent: boolean;
+	loadCallback?: () => void;
 	placement: string;
 	tagId: string;
-	loadCallback?: () => void;
-	consent: boolean;
-	device: string;
 }
 
 export function addPlacement(options: IAddPlacementInput) {
 	//placement: string, tagId: string, loadCallback?: () => void) {
-	const { placement, tagId, loadCallback, consent, device } = options;
-	console.log(
-		`display-ads addPlacement: ${placement} with tagId: ${tagId}, consent: ${consent}, device: ${device}`
-	);
-	console.log(`display-ads addPlacement options:`, options);
+	const { placement, tagId, loadCallback, consent } = options;
+
 	if (!adsInterface.placementExists(placement, consent)) {
 		console.warn(`Placement "${placement}" does not exist.`);
 		return false;
 	}
-	console.log(`display-ads addPlacement: ${placement} with tagId: ${tagId}`);
+
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
@@ -79,8 +75,6 @@ export function addPlacement(options: IAddPlacementInput) {
 		while (adPlaceholder.firstChild) {
 			adPlaceholder.firstChild.remove();
 		}
-
-		console.log(`display-ads Adding placement: ${placement} with tagId: ${tagId}`, bannerData);
 
 		if (bannerData) {
 			const { allowedFormats: allowedMediaTypes, lwName: adUnitName, gamSizes, sizes } = bannerData;
