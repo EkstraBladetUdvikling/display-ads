@@ -330,6 +330,10 @@
   */
 	.wallpaper {
 		height: var(--wallpaper-pushdown);
+
+		position: absolute !important; /** Should be fixed in template & Ekstra Bladet */
+		left: 0;
+		right: 0;
 	}
 
 	/* .sitecontent--desktop {
