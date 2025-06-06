@@ -40,7 +40,7 @@
 </script>
 
 {#if wallpaperContainer}
-	<div id="wallpaperBackground"></div>
+	<div id="wallpaperBackground" class="wallpaper"></div>
 {/if}
 
 <div

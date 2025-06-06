@@ -320,7 +320,7 @@
 	height: var(--wallpaper-pushdown-initial, 0);
 }
 
-.wallpaper[data-wallpaper='true'] ~ .sitecontent--desktop .pushdownelement {
+.wallpaper[data-wallpaper='true'] ~ div .pushdownelement {
 	height: var(--wallpaper-pushdown);
 }
 
@@ -332,7 +332,7 @@
 		height: var(--wallpaper-pushdown);
 	}
 
-	.sitecontent--desktop {
+	/* .sitecontent--desktop {
 		position: relative;
 
 		margin-top: calc(var(--wallpaper-pushdown) * -1);
@@ -340,7 +340,7 @@
 
 	.previewing .sitecontent--desktop {
 		margin-top: 0;
-	}
+	} */
 
 	/**
   * /THIS BLOCK SHOULD BE HANDLED AS ONE
