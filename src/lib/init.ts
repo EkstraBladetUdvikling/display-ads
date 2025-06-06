@@ -96,6 +96,7 @@ export class AdsInterface {
 		 * Handling wallpapers from other sources
 		 */
 		window.jppolWallpaper = (callFunx?: string) => {
+			console.log('jppolWallpaper called', callFunx);
 			const wallpaper = document.getElementById('wallpaperBackground');
 			if (!wallpaper) return;
 			wallpaper.dataset.wallpaper = String(true);
