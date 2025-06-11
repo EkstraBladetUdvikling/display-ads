@@ -165,10 +165,6 @@ export class AdsInterface {
 			? this.bannerHandler.adUnits
 			: this.bannerHandler.adUnitsNoConsent;
 
-		console.log(
-			'display-ads placementExists Checking if placement exists bannerhandler exists: adUnitsToSearch',
-			adUnitsToSearch
-		);
 		return adUnitsToSearch.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});

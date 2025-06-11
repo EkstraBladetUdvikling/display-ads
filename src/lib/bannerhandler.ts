@@ -73,7 +73,7 @@ class BannerHandler {
 	 */
 	public updateContext(initOptions: Partial<IBannerInit>, fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
-		console.log('displayads updateContext fullReset?', fullReset);
+		// console.log('displayads updateContext fullReset?', fullReset);
 
 		// if (fullReset) {
 		// window.googletag.pubads().clearTargeting();
@@ -369,7 +369,7 @@ class BannerHandler {
 				});
 			}
 		});
-		console.log('display-ads adUnits (consentStatus)', adUnits);
+		// console.log('display-ads adUnits (consentStatus)', adUnits);
 		this.adUnits = adUnits;
 		this.adUnitsNoConsent = adUnitsNoConsent;
 
