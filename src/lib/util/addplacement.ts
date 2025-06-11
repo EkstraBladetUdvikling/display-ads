@@ -64,9 +64,22 @@ export function addPlacement(options: IAddPlacementInput) {
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
-		const bannerData = BANNERSTATE.adUnits.find(
+		const useNoConsent = window.ebCMP.noConsentGroup();
+		console.log('display-ads addPlacement useNoConsent:', useNoConsent);
+		const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+		const bannerData = adUnitsToSearch.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
+
+		console.log(
+			`display-ads addPlacement Searching for placement: ${placement} in adUnits:`,
+			adUnitsToSearch,
+			bannerData
+		);
+		if (!bannerData) {
+			console.log(`Placement "${placement}" does not exist.`);
+			throw new Error(`Placement "${placement}" does not exist.`);
+		}
 
 		const adPlaceholder = document.getElementById(tagId);
 
@@ -84,7 +97,11 @@ export function addPlacement(options: IAddPlacementInput) {
 					adUnitName,
 					tagId
 				};
-
+				console.log(
+					'display-ads addPlacement has loadCallback:',
+					placement,
+					loadCallback !== undefined
+				);
 				if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
 				if (allowedMediaTypes) {
