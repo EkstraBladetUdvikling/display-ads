@@ -20,8 +20,10 @@
 
 	let showContainer = $state(false);
 
+	const consentStatus = $derived(consent);
+
 	afterNavigate(() => {
-		if (browser) {
+		if (browser && consentStatus !== 'unset') {
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,
@@ -31,11 +33,24 @@
 	});
 
 	onMount(() => {
-		showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
+		if (consentStatus !== 'unset') {
+			showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
+		}
 	});
 
 	onDestroy(() => {
 		if (browser) removePlacement(targetId);
+	});
+
+	$effect(() => {
+		if (!browser) return;
+		if (consentStatus !== 'unset') {
+			showContainer = addPlacement({
+				consent,
+				placement: placementName,
+				tagId: targetId
+			});
+		}
 	});
 </script>
 

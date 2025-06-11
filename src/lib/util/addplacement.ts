@@ -64,9 +64,17 @@ export function addPlacement(options: IAddPlacementInput) {
 	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 	BANNERSTATE.isReady(() => {
-		const bannerData = BANNERSTATE.adUnits.find(
+		const useNoConsent = window.ebCMP.noConsentGroup();
+
+		const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+		const bannerData = adUnitsToSearch.find(
 			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 		);
+
+		if (!bannerData) {
+			console.warn(`Placement "${placement}" does not exist.`);
+			throw new Error(`Placement "${placement}" does not exist.`);
+		}
 
 		const adPlaceholder = document.getElementById(tagId);
 
@@ -84,7 +92,6 @@ export function addPlacement(options: IAddPlacementInput) {
 					adUnitName,
 					tagId
 				};
-
 				if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
 				if (allowedMediaTypes) {
