@@ -10,7 +10,7 @@
 
 	let { adnamiUnloadHandler = undefined } = $props();
 
-	const consentStatus = getContext('consent') as () => string | boolean;
+	const consentStatus = getContext('consent') as () => 'unset' | boolean;
 
 	let adsInterface: AdsInterface = adsInterfaceFromFile;
 
@@ -35,13 +35,9 @@
 		}
 		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 		displayAds.device = device;
-		// console.log('hekko? displayAds.device', displayAds);
-		console.log('hekko? consentStatus()', consentStatus());
+
 		if (consentStatus() !== 'unset') {
-			console.log('hekko? displayads init?', displayAds, consentStatus());
-			adsInterface.init(displayAds, consentStatus(), adnamiUnloadHandler);
+			adsInterface.init(displayAds, consentStatus() as boolean, adnamiUnloadHandler);
 		}
 	});
 </script>
-
-<!-- consentStatus: {consentStatus()} -->

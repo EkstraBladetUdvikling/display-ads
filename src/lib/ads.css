@@ -320,7 +320,7 @@
 	height: var(--wallpaper-pushdown-initial, 0);
 }
 
-.wallpaper[data-wallpaper='true'] ~ .sitecontent--desktop .pushdownelement {
+.wallpaper[data-wallpaper='true'] ~ div .pushdownelement {
 	height: var(--wallpaper-pushdown);
 }
 
@@ -330,9 +330,13 @@
   */
 	.wallpaper {
 		height: var(--wallpaper-pushdown);
+
+		position: absolute !important; /** Should be fixed in template & Ekstra Bladet */
+		left: 0;
+		right: 0;
 	}
 
-	.sitecontent--desktop {
+	/* .sitecontent--desktop {
 		position: relative;
 
 		margin-top: calc(var(--wallpaper-pushdown) * -1);
@@ -340,7 +344,7 @@
 
 	.previewing .sitecontent--desktop {
 		margin-top: 0;
-	}
+	} */
 
 	/**
   * /THIS BLOCK SHOULD BE HANDLED AS ONE
