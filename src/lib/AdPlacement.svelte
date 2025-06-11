@@ -23,6 +23,7 @@
 	const consentStatus = $derived(consent);
 
 	afterNavigate(() => {
+		console.log('AdPlacement.svelte afterNavigate', consentStatus);
 		if (browser && consentStatus !== 'unset') {
 			showContainer = addPlacement({
 				consent,
@@ -33,6 +34,7 @@
 	});
 
 	onMount(() => {
+		console.log('AdPlacement.svelte onMount', consentStatus);
 		if (consentStatus !== 'unset') {
 			showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
 		}
@@ -43,6 +45,7 @@
 	});
 
 	$effect(() => {
+		console.log('AdPlacement.svelte effect', consentStatus);
 		if (!browser) return;
 		if (consentStatus !== 'unset') {
 			showContainer = addPlacement({
