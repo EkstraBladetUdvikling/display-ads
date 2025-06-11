@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 
 	import { afterNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -20,22 +20,39 @@
 
 	let showContainer = $state(false);
 
+	const consentStatus = getContext('consent') as () => 'unset' | boolean;
+
 	afterNavigate(() => {
 		if (browser) {
+			if (consentStatus() !== 'unset') {
+				showContainer = addPlacement({
+					consent,
+					placement: placementName,
+					tagId: targetId
+				});
+			}
+		}
+	});
+
+	onMount(() => {
+		if (consentStatus() !== 'unset') {
+			showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
+		}
+	});
+
+	onDestroy(() => {
+		if (browser) removePlacement(targetId);
+	});
+
+	$effect(() => {
+		if (!browser) return;
+		if (consentStatus() !== 'unset') {
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,
 				tagId: targetId
 			});
 		}
-	});
-
-	onMount(() => {
-		showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
-	});
-
-	onDestroy(() => {
-		if (browser) removePlacement(targetId);
 	});
 </script>
 
