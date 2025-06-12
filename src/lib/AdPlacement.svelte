@@ -23,6 +23,7 @@
 
 	const consentStatus = $derived(consent);
 
+	let wallpaperContainerElement: HTMLDivElement | null = null;
 	afterNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
 			showContainer = addPlacement({
@@ -40,7 +41,16 @@
 	});
 
 	onDestroy(() => {
-		if (browser) removePlacement(targetId);
+		if (browser) {
+			removePlacement(targetId);
+			if (wallpaperContainerElement) {
+				while (wallpaperContainerElement.firstChild) {
+					wallpaperContainerElement.removeChild(wallpaperContainerElement.firstChild);
+					wallpaperContainerElement.dataset.wallpaper = 'false';
+					wallpaperContainerElement.removeAttribute('style');
+				}
+			}
+		}
 	});
 
 	$effect(() => {
@@ -56,7 +66,7 @@
 </script>
 
 {#if wallpaperContainer}
-	<div id="wallpaperBackground" class="wallpaper"></div>
+	<div bind:this={wallpaperContainer} id="wallpaperBackground" class="wallpaper"></div>
 {/if}
 
 <div
