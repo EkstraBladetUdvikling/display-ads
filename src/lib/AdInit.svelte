@@ -2,13 +2,12 @@
 	import { getContext } from 'svelte';
 
 	import { browser } from '$app/environment';
-	import { afterNavigate } from '$app/navigation';
 
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
 	import { DEVICE } from './state';
 	import { page } from '$app/state';
 
-	let { adnamiUnloadHandler = undefined, pageId } = $props();
+	let { adnamiUnloadHandler = undefined } = $props();
 
 	const consentStatus = getContext('consent') as () => 'unset' | boolean;
 
@@ -28,8 +27,8 @@
 
 	$effect(() => {
 		if (!browser) return;
-		console.log('AdInit effect triggered', pageId);
-		console.log('--------------17----');
+
+		console.log('--------------17----AdInit');
 		// if (pageId === oldPageId) {
 		// 	console.log('No change in pageId, skipping ad initialization');
 		// 	return;

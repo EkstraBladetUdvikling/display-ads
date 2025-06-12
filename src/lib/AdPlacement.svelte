@@ -11,12 +11,13 @@
 	let {
 		adMark = true,
 		consent,
+		pageId,
 		placementName,
 		placementType,
 		wallpaperContainer = false
 	} = $props();
 
-	const { prefixId, targetId } = getElementIds(placementName);
+	const { prefixId, targetId } = getElementIds(placementName, pageId);
 
 	let showContainer = $state(false);
 

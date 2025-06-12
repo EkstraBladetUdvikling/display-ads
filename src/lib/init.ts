@@ -65,8 +65,13 @@ export class AdsInterface {
 	};
 	private bannerHandler: BannerHandler | null = null;
 
-	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
-		console.log('trying to init... 17');
+	public init(
+		displayAdsData: any,
+		consent: boolean,
+
+		adnamiUnloadHandler?: () => void
+	) {
+		console.log('trying to init... 17', this.#exists);
 		if (!displayAdsData) return;
 		const oldData = { ...this.#initData };
 
