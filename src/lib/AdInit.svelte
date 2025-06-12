@@ -25,14 +25,15 @@
 	// 		}
 	// 	}
 	// });
-	let oldPageId = $derived(pageId);
+
 	$effect(() => {
 		if (!browser) return;
-		console.log('AdInit effect triggered', pageId, oldPageId);
-		if (pageId === oldPageId) {
-			console.log('No change in pageId, skipping ad initialization');
-			return;
-		}
+		console.log('AdInit effect triggered', pageId);
+		console.log('--------------17----');
+		// if (pageId === oldPageId) {
+		// 	console.log('No change in pageId, skipping ad initialization');
+		// 	return;
+		// }
 		const displayAds = page.data?.displayAds;
 		if (!displayAds) {
 			console.error('displayAds is not defined in page data');
