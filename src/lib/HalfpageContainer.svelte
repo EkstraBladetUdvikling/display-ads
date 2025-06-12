@@ -1,7 +1,7 @@
 <script>
 	import AdPlacement from './AdPlacement.svelte';
 
-	let { consent, device, placementName, position = 'left' } = $props();
+	let { consent, pageId, placementName, position = 'left' } = $props();
 </script>
 
 <div class="sidebanner-container">
@@ -10,7 +10,7 @@
 		<AdPlacement
 			adMark={true}
 			{consent}
-			{device}
+			{pageId}
 			{placementName}
 			placementType="halfpage"
 			wallpaperContainer={false}
