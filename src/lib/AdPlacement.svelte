@@ -26,6 +26,7 @@
 	let wallpaperContainerElement: HTMLDivElement | null = null;
 	afterNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
+			cleanupWallpaper();
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,
@@ -40,21 +41,26 @@
 		}
 	});
 
+	const cleanupWallpaper = () => {
+		if (wallpaperContainerElement) {
+			while (wallpaperContainerElement.firstChild) {
+				wallpaperContainerElement.removeChild(wallpaperContainerElement.firstChild);
+				wallpaperContainerElement.dataset.wallpaper = 'false';
+				wallpaperContainerElement.removeAttribute('style');
+			}
+		}
+	};
+
 	onDestroy(() => {
 		if (browser) {
 			removePlacement(targetId);
-			if (wallpaperContainerElement) {
-				while (wallpaperContainerElement.firstChild) {
-					wallpaperContainerElement.removeChild(wallpaperContainerElement.firstChild);
-					wallpaperContainerElement.dataset.wallpaper = 'false';
-					wallpaperContainerElement.removeAttribute('style');
-				}
-			}
+			cleanupWallpaper();
 		}
 	});
 
 	$effect(() => {
 		if (!browser) return;
+		cleanupWallpaper();
 		if (consentStatus !== 'unset') {
 			showContainer = addPlacement({
 				consent,
