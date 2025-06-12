@@ -8,7 +8,7 @@
 	import { DEVICE } from './state';
 	import { page } from '$app/state';
 
-	let { adnamiUnloadHandler = undefined } = $props();
+	let { adnamiUnloadHandler = undefined, pageId } = $props();
 
 	const consentStatus = getContext('consent') as () => 'unset' | boolean;
 
@@ -28,6 +28,7 @@
 
 	$effect(() => {
 		if (!browser) return;
+		console.log('AdInit effect triggered', pageId);
 		const displayAds = page.data?.displayAds;
 		if (!displayAds) {
 			console.error('displayAds is not defined in page data');
