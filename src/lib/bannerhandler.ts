@@ -79,7 +79,7 @@ class BannerHandler {
 		// window.googletag.pubads().clearTargeting();
 		// window.googletag.pubads().updateCorrelator();
 		// window.lwhb.resetCorrelator();
-		window.lwhb.resetPage(true);
+		if (window.lwhb && window.lwhb.resetPage) window.lwhb.resetPage(true);
 
 		BANNERSTATE.reset();
 		this.setupAdUnits();
