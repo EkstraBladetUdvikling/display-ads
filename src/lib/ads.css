@@ -328,7 +328,7 @@
 	/**
   * THIS BLOCK SHOULD BE HANDLED AS ONE
   */
-	.wallpaper {
+	.wallpaper[data-wallpaper='true'] {
 		height: var(--wallpaper-pushdown);
 
 		position: absolute !important; /** Should be fixed in template & Ekstra Bladet */
