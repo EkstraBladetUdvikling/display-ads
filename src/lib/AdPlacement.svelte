@@ -42,6 +42,7 @@
 		if (browser) removePlacement(targetId);
 	});
 
+	let wallpaperBackground: HTMLDivElement;
 	$effect(() => {
 		if (!browser) return;
 		if (consentStatus !== 'unset') {
@@ -51,11 +52,16 @@
 				tagId: targetId
 			});
 		}
+		if (wallpaperContainer && wallpaperBackground) {
+			while (wallpaperBackground.firstChild) {
+				wallpaperBackground.removeChild(wallpaperBackground.firstChild);
+			}
+		}
 	});
 </script>
 
 {#if wallpaperContainer}
-	<div id="wallpaperBackground" class="wallpaper"></div>
+	<div bind:this={wallpaperBackground} id="wallpaperBackground" class="wallpaper"></div>
 {/if}
 
 <div
