@@ -24,6 +24,11 @@
 
 	afterNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
+			if (wallpaperContainer && wallpaperBackground) {
+				while (wallpaperBackground.firstChild) {
+					wallpaperBackground.removeChild(wallpaperBackground.firstChild);
+				}
+			}
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,
@@ -51,11 +56,6 @@
 				placement: placementName,
 				tagId: targetId
 			});
-		}
-		if (wallpaperContainer && wallpaperBackground) {
-			while (wallpaperBackground.firstChild) {
-				wallpaperBackground.removeChild(wallpaperBackground.firstChild);
-			}
 		}
 	});
 </script>
