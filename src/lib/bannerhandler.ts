@@ -151,10 +151,12 @@ class BannerHandler {
 		// pubads setup
 		window.googletag.cmd.push(() => {
 			if (anonIds && anonIds.base) window.googletag.pubads().setPublisherProvidedId(anonIds.base);
-			// window.googletag.pubads().setTargeting('test', true);
-			window.googletag.pubads().enableSingleRequest();
-			window.googletag.pubads().collapseEmptyDivs();
-			window.googletag.pubads().disableInitialLoad();
+
+			window.googletag.setConfig({
+				collapseDiv: 'ON_NO_FILL',
+				disableInitialLoad: true,
+				signleRequest: true
+			});
 			if (adPlacements) {
 				window.googletag
 					.pubads()
@@ -243,12 +245,8 @@ class BannerHandler {
 		/**
 		 * Adding keywords to GPT
 		 */
-		window.googletag.cmd.push(() => {
-			for (const [key, value] of Object.entries(keywords)) {
-				if (value) {
-					window.googletag.pubads().setTargeting(key, value);
-				}
-			}
+		window.googletag.setConfig({
+			targeting: keywords
 		});
 
 		updateORTBData(keywords);
