@@ -245,8 +245,10 @@ class BannerHandler {
 		/**
 		 * Adding keywords to GPT
 		 */
-		window.googletag.setConfig({
-			targeting: keywords
+		window.lwhb.cmd.push(() => {
+			window.googletag.setConfig({
+				targeting: keywords
+			});
 		});
 
 		updateORTBData(keywords);
