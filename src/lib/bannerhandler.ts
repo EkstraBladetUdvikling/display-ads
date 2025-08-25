@@ -245,7 +245,7 @@ class BannerHandler {
 		/**
 		 * Adding keywords to GPT
 		 */
-		window.lwhb.cmd.push(() => {
+		window.googletag.cmd.push(() => {
 			window.googletag.setConfig({
 				targeting: keywords
 			});
