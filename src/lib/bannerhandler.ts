@@ -232,6 +232,7 @@ class BannerHandler {
 
 		const defaultKeywords = {
 			article: articleId,
+			consent: window.ebCMP ? !window.ebCMP.noConsentGroup() : false,
 			screen: getSizeValues(this.device),
 			userType
 		};
