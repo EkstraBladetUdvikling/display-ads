@@ -71,7 +71,7 @@ class BannerHandler {
 	 * updateContext
 	 * @param initOptions
 	 */
-	public updateContext(initOptions: Partial<IBannerInit>, fullReset = false) {
+	public updateContext(initOptions: Partial<IBannerInit>, _fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
 		// console.log('displayads updateContext fullReset?', fullReset);
 
@@ -232,7 +232,7 @@ class BannerHandler {
 
 		const defaultKeywords = {
 			article: articleId,
-			consent: window.ebCMP ? !window.ebCMP.noConsentGroup() : false,
+			consent: String(window.ebCMP ? !window.ebCMP.noConsentGroup() : false),
 			screen: getSizeValues(this.device),
 			userType
 		};
