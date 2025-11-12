@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 
 	import { browser } from '$app/environment';
-	import { afterNavigate } from '$app/navigation';
 
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
 	import { DEVICE } from './state';
