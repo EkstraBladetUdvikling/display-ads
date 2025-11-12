@@ -66,6 +66,7 @@ export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
+		console.log('___AdsInterface init called with data:', displayAdsData, consent);
 		if (!displayAdsData) return;
 		const oldData = { ...this.#initData };
 

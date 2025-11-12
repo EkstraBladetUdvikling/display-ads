@@ -54,6 +54,12 @@ export function highimpactInit() {
 export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 	const slot = banner.invCode;
 
+	console.log(
+		'___addHighImpact BANNERSTATE',
+		BANNERSTATE,
+		BANNERSTATE.device === 'desktop' ? 'desktop' : 'mobile'
+	);
+
 	const sizeMatchTopscroll =
 		BANNERSTATE.device === 'desktop'
 			? banner.sizes.find((size) => size[0] === 1 && size[1] === 2)
@@ -73,18 +79,19 @@ export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 				});
 			}
 		});
-	} else if (banner.cleanName?.indexOf('megaboard_top') !== -1) {
-		window.highImpactJs.cmd.push(() => {
-			if (window.highImpactJs.defineSlot) {
-				window.highImpactJs.defineSlot({
-					adUnitId,
-					sizes: [[970, 170]],
-					slot,
-					template: 'skins',
-					waitForAdSignal: true
-				});
-			}
-		});
+		// SKINS - disabled for now
+		// } else if (banner.cleanName?.indexOf('megaboard_top') !== -1) {
+		// 	window.highImpactJs.cmd.push(() => {
+		// 		if (window.highImpactJs.defineSlot) {
+		// 			window.highImpactJs.defineSlot({
+		// 				adUnitId,
+		// 				sizes: [[970, 170]],
+		// 				slot,
+		// 				template: 'skins',
+		// 				waitForAdSignal: true
+		// 			});
+		// 		}
+		// 	});
 	} else {
 		const sizeMatchMidscroll =
 			BANNERSTATE.device === 'desktop'
