@@ -85,30 +85,39 @@ export function addPlacement(options: IAddPlacementInput) {
 		}
 
 		if (bannerData) {
-			const { allowedFormats: allowedMediaTypes, lwName: adUnitName, gamSizes, sizes } = bannerData;
+			const {
+				addedToQueue,
+				allowedFormats: allowedMediaTypes,
+				lwName: adUnitName,
+				gamSizes,
+				sizes
+			} = bannerData;
 
-			window.lwhb.cmd.push(() => {
-				const loadAdData: ILoadAdData = {
-					adUnitName,
-					tagId
-				};
-				if (loadCallback) loadAdData.callbackMethod = loadCallback;
+			if (!addedToQueue) {
+				window.lwhb.cmd.push(() => {
+					const loadAdData: ILoadAdData = {
+						adUnitName,
+						tagId
+					};
+					if (loadCallback) loadAdData.callbackMethod = loadCallback;
 
-				if (allowedMediaTypes) {
-					const lowercasedMediaTypes = allowedMediaTypes.map((str) =>
-						str.toLowerCase()
-					) as IDefineTag['allowedFormats'];
-					loadAdData.allowedMediaTypes = lowercasedMediaTypes;
-				}
-				if (sizes) loadAdData.sizes = sizes;
-				if (gamSizes) loadAdData.gamSizes = gamSizes;
+					if (allowedMediaTypes) {
+						const lowercasedMediaTypes = allowedMediaTypes.map((str) =>
+							str.toLowerCase()
+						) as IDefineTag['allowedFormats'];
+						loadAdData.allowedMediaTypes = lowercasedMediaTypes;
+					}
+					if (sizes) loadAdData.sizes = sizes;
+					if (gamSizes) loadAdData.gamSizes = gamSizes;
 
-				if (BANNERSTATE.renderCalled) {
-					window.lwhb.loadAd(loadAdData);
-				} else {
-					window.lwhb.prepareAd(loadAdData);
-				}
-			});
+					if (BANNERSTATE.renderCalled) {
+						window.lwhb.loadAd(loadAdData);
+					} else {
+						window.lwhb.prepareAd(loadAdData);
+					}
+				});
+				bannerData.addedToQueue = true;
+			}
 		}
 	});
 	return true;
