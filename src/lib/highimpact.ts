@@ -58,7 +58,7 @@ export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 		BANNERSTATE.device === 'desktop'
 			? banner.sizes.find((size) => size[0] === 1 && size[1] === 2)
 			: banner.sizes.find((size) => size[0] === 300 && size[1] === 220);
-	console.log('___sizeMatch sizeMatchTopscroll', sizeMatchTopscroll, banner.cleanName, adUnitId);
+	console.log('___sizeMatch sizeMatchTopscroll', sizeMatchTopscroll, banner);
 	if (sizeMatchTopscroll) {
 		window.highImpactJs.cmd.push(() => {
 			const sizes = BANNERSTATE.device === 'desktop' ? [[1, 2]] : [[300, 220]];

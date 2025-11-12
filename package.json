@@ -1,17 +1,18 @@
 {
 	"name": "@ekstra-bladet/display-ads",
 	"main": "index.ts",
-	"version": "0.3.0-beta",
+	"version": "0.3.0-beta1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "yarn updatehighimpact && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"updatehighimpact": "node scripts/updatehighimpact.mjs"
 	},
 	"files": [
 		"src/lib"
