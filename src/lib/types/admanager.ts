@@ -41,6 +41,7 @@ export interface IDefineTag {
 }
 
 export interface IBANNERSTATEBANNER extends IAdmanagerBanners {
+	addedToQueue?: boolean;
 	cleanName?: string;
 	gamSizes?: (number[] | 'fluid'[])[]; // googletag.GeneralSize;
 	lwName: string;

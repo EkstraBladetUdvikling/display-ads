@@ -29,6 +29,7 @@
 					wallpaperBackground.removeChild(wallpaperBackground.firstChild);
 				}
 			}
+
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,

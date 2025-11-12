@@ -320,6 +320,7 @@
 	height: var(--wallpaper-pushdown-initial, 0);
 }
 
+[data-wallpaper='true'] .pushdownelement,
 .wallpaper[data-wallpaper='true'] ~ div .pushdownelement {
 	height: var(--wallpaper-pushdown);
 }
