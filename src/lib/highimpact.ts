@@ -54,17 +54,11 @@ export function highimpactInit() {
 export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 	const slot = banner.invCode;
 
-	console.log('___addHighImpact BANNERSTATE', BANNERSTATE, BANNERSTATE.device);
-
 	const sizeMatchTopscrollDesktop = banner.sizes.find((size) => size[0] === 1 && size[1] === 2);
 	const sizeMatchTopscrollSmartphone = banner.sizes.find(
 		(size) => size[0] === 300 && size[1] === 220
 	);
-	console.log(
-		'___sizeMatch sizeMatchTopscroll',
-		sizeMatchTopscrollDesktop || sizeMatchTopscrollSmartphone,
-		banner
-	);
+
 	if (sizeMatchTopscrollDesktop || sizeMatchTopscrollSmartphone) {
 		window.highImpactJs.cmd.push(() => {
 			const sizes = BANNERSTATE.device === 'desktop' ? [[1, 2]] : [[300, 220]];
@@ -99,12 +93,7 @@ export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 		const sizeMatchMidscrollSmartphone = banner.sizes.find(
 			(size) => size[0] === 300 && size[1] === 240
 		);
-		console.log(
-			'___sizeMatch sizeMatchMidscroll',
-			sizeMatchMidscrollDesktop || sizeMatchMidscrollSmartphone,
-			adUnitId,
-			banner.cleanName
-		);
+
 		if (sizeMatchMidscrollDesktop || sizeMatchMidscrollSmartphone) {
 			window.highImpactJs.cmd.push(() => {
 				const sizes = BANNERSTATE.device === 'desktop' ? [[970, 570]] : [[300, 240]];
