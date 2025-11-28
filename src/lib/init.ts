@@ -66,7 +66,12 @@ export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
-		console.log('___AdsInterface init called with data:', displayAdsData.device, consent);
+		console.log(
+			'DISPLAY',
+			'___AdsInterface init called with data:',
+			displayAdsData.device,
+			consent
+		);
 		if (!displayAdsData) return;
 		const oldData = { ...this.#initData };
 
@@ -107,7 +112,7 @@ export class AdsInterface {
 
 		window.jppolApn = {
 			endStickyMegaboard: () => {
-				console.log('endStickyMegaboard');
+				console.log('DISPLAY', 'endStickyMegaboard');
 				// const wrapperEl = document.getElementById('${wrapperId}');
 				// const megaboardContainer = document.getElementById('megaboardContainer');
 				// megaboardContainer.classList.remove('megaboard-follow');

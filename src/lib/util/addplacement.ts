@@ -92,7 +92,7 @@ export function addPlacement(options: IAddPlacementInput) {
 				gamSizes,
 				sizes
 			} = bannerData;
-
+			console.log('DISPLAY', 'Adding placement:', bannerData);
 			if (!addedToQueue) {
 				window.lwhb.cmd.push(() => {
 					const loadAdData: ILoadAdData = {
@@ -111,7 +111,6 @@ export function addPlacement(options: IAddPlacementInput) {
 					if (gamSizes) loadAdData.gamSizes = gamSizes;
 
 					if (BANNERSTATE.renderCalled) {
-						console.log('Loading ad via LW for placement:', placement);
 						window.lwhb.loadAd(loadAdData);
 					} else {
 						window.lwhb.prepareAd(loadAdData);
