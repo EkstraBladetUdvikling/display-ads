@@ -246,6 +246,7 @@ class BannerHandler {
 		/**
 		 * Adding keywords to GPT
 		 */
+		console.log('Setting keywords for GPT:', keywords);
 		window.googletag.cmd.push(() => {
 			window.googletag.setConfig({
 				targeting: keywords
