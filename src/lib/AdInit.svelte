@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 
 	import { browser } from '$app/environment';
-	import { afterNavigate } from '$app/navigation';
 
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
 	import { DEVICE } from './state';
@@ -20,7 +19,7 @@
 	// 		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 	// 		displayAds.device = device;
 	// 		if (consentStatus() !== 'unset') {
-	// 			console.log('displayads init?');
+	// 			console.log('DISPLAY','displayads init?');
 	// 			adsInterface.init(displayAds, consentStatus(), adnamiUnloadHandler);
 	// 		}
 	// 	}
