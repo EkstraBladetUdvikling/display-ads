@@ -111,6 +111,7 @@ export function addPlacement(options: IAddPlacementInput) {
 					if (gamSizes) loadAdData.gamSizes = gamSizes;
 
 					if (BANNERSTATE.renderCalled) {
+						console.log('Loading ad via LW for placement:', placement);
 						window.lwhb.loadAd(loadAdData);
 					} else {
 						window.lwhb.prepareAd(loadAdData);
