@@ -73,7 +73,7 @@ class BannerHandler {
 	 */
 	public updateContext(initOptions: Partial<IBannerInit>, _fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
-		// console.log('displayads updateContext fullReset?', fullReset);
+		// console.log('DISPLAY','displayads updateContext fullReset?', fullReset);
 
 		// if (fullReset) {
 		// window.googletag.pubads().clearTargeting();
@@ -237,7 +237,8 @@ class BannerHandler {
 			userType
 		};
 
-		const pp_audiences = escKeywords ? escKeywords.Relevance_Audiences : [];
+		const pp_audiences =
+			escKeywords && escKeywords.Relevance_Audiences ? escKeywords.Relevance_Audiences : [];
 
 		const split = String(Math.floor(Math.random() * 20) + 1);
 
@@ -370,7 +371,7 @@ class BannerHandler {
 				});
 			}
 		});
-		// console.log('display-ads adUnits (consentStatus)', adUnits);
+		// console.log('DISPLAY','display-ads adUnits (consentStatus)', adUnits);
 		this.adUnits = adUnits;
 		this.adUnitsNoConsent = adUnitsNoConsent;
 
@@ -390,7 +391,7 @@ class BannerHandler {
 		// TODO: Implement replay logic if needed
 		// BANNERSTATE.placements.forEach((placement) => {
 		// 	const { targetId } = getElementIds(placement);
-		// 	console.log('display-ads replaying placement:', placement, targetId);
+		// 	console.log('DISPLAY','display-ads replaying placement:', placement, targetId);
 		// 	addPlacement({
 		// 		placement,
 		// 		tagId: targetId

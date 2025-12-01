@@ -106,7 +106,7 @@ export class AdsInterface {
 
 		window.jppolApn = {
 			endStickyMegaboard: () => {
-				console.log('endStickyMegaboard');
+				console.log('DISPLAY', 'endStickyMegaboard');
 				// const wrapperEl = document.getElementById('${wrapperId}');
 				// const megaboardContainer = document.getElementById('megaboardContainer');
 				// megaboardContainer.classList.remove('megaboard-follow');

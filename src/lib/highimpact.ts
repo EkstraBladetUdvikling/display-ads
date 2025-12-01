@@ -54,7 +54,12 @@ export function highimpactInit() {
 export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 	const slot = banner.invCode;
 
-	if (banner.cleanName?.indexOf('topscroll') !== -1) {
+	const sizeMatchTopscrollDesktop = banner.sizes.find((size) => size[0] === 1 && size[1] === 2);
+	const sizeMatchTopscrollSmartphone = banner.sizes.find(
+		(size) => size[0] === 300 && size[1] === 220
+	);
+
+	if (sizeMatchTopscrollDesktop || sizeMatchTopscrollSmartphone) {
 		window.highImpactJs.cmd.push(() => {
 			const sizes = BANNERSTATE.device === 'desktop' ? [[1, 2]] : [[300, 220]];
 
@@ -68,23 +73,28 @@ export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 				});
 			}
 		});
-	} else if (banner.cleanName?.indexOf('megaboard_top') !== -1) {
-		window.highImpactJs.cmd.push(() => {
-			if (window.highImpactJs.defineSlot) {
-				window.highImpactJs.defineSlot({
-					adUnitId,
-					sizes: [[970, 170]],
-					slot,
-					template: 'skins',
-					waitForAdSignal: true
-				});
-			}
-		});
+		// SKINS - disabled for now
+		// } else if (banner.cleanName?.indexOf('megaboard_top') !== -1) {
+		// 	window.highImpactJs.cmd.push(() => {
+		// 		if (window.highImpactJs.defineSlot) {
+		// 			window.highImpactJs.defineSlot({
+		// 				adUnitId,
+		// 				sizes: [[970, 170]],
+		// 				slot,
+		// 				template: 'skins',
+		// 				waitForAdSignal: true
+		// 			});
+		// 		}
+		// 	});
 	} else {
-		if (
-			banner.cleanName?.indexOf('monster') !== -1 &&
-			banner.cleanName?.indexOf('artikel') === -1
-		) {
+		const sizeMatchMidscrollDesktop = banner.sizes.find(
+			(size) => size[0] === 970 && size[1] === 570
+		);
+		const sizeMatchMidscrollSmartphone = banner.sizes.find(
+			(size) => size[0] === 300 && size[1] === 240
+		);
+
+		if (sizeMatchMidscrollDesktop || sizeMatchMidscrollSmartphone) {
 			window.highImpactJs.cmd.push(() => {
 				const sizes = BANNERSTATE.device === 'desktop' ? [[970, 570]] : [[300, 240]];
 				if (window.highImpactJs.defineSlot) {
@@ -99,22 +109,22 @@ export function addHighImpact(banner: IBANNERSTATEBANNER, adUnitId: string) {
 			});
 		}
 
-		if (
-			banner.cleanName?.indexOf('swedishtakeover') !== -1 ||
-			banner.cleanName?.indexOf('swedish_artikel') !== -1
-		) {
-			window.highImpactJs.cmd.push(() => {
-				const sizes = BANNERSTATE.device === 'desktop' ? [[970, 570]] : [[300, 240]];
-				if (window.highImpactJs.defineSlot) {
-					window.highImpactJs.defineSlot({
-						adUnitId,
-						sizes,
-						slot,
-						template: 'midscroll',
-						waitForAdSignal: true
-					});
-				}
-			});
-		}
+		// if (
+		// 	banner.cleanName?.indexOf('swedishtakeover') !== -1 ||
+		// 	banner.cleanName?.indexOf('swedish_artikel') !== -1
+		// ) {
+		// 	window.highImpactJs.cmd.push(() => {
+		// 		const sizes = BANNERSTATE.device === 'desktop' ? [[970, 570]] : [[300, 240]];
+		// 		if (window.highImpactJs.defineSlot) {
+		// 			window.highImpactJs.defineSlot({
+		// 				adUnitId,
+		// 				sizes,
+		// 				slot,
+		// 				template: 'midscroll',
+		// 				waitForAdSignal: true
+		// 			});
+		// 		}
+		// 	});
+		// }
 	}
 }

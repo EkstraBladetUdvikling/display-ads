@@ -53,7 +53,6 @@ interface IAddPlacementInput {
 }
 
 export function addPlacement(options: IAddPlacementInput) {
-	//placement: string, tagId: string, loadCallback?: () => void) {
 	const { placement, tagId, loadCallback, consent } = options;
 
 	if (!adsInterface.placementExists(placement, consent)) {
@@ -83,7 +82,6 @@ export function addPlacement(options: IAddPlacementInput) {
 		while (adPlaceholder.firstChild) {
 			adPlaceholder.firstChild.remove();
 		}
-
 		if (bannerData) {
 			const {
 				addedToQueue,

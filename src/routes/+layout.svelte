@@ -27,7 +27,7 @@
 	}
 
 	function adnamiUnloadHandler() {
-		console.log('unload handler');
+		console.log('DISPLAY', 'unload handler');
 	}
 </script>
 
