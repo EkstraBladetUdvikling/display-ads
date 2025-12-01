@@ -237,7 +237,8 @@ class BannerHandler {
 			userType
 		};
 
-		const pp_audiences = escKeywords ? escKeywords.Relevance_Audiences : [];
+		const pp_audiences =
+			escKeywords && escKeywords.Relevance_Audiences ? escKeywords.Relevance_Audiences : [];
 
 		const split = String(Math.floor(Math.random() * 20) + 1);
 
@@ -246,7 +247,6 @@ class BannerHandler {
 		/**
 		 * Adding keywords to GPT
 		 */
-		console.log('DISPLAY', 'Setting keywords for GPT:', keywords);
 		window.googletag.cmd.push(() => {
 			window.googletag.setConfig({
 				targeting: keywords
