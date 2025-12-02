@@ -216,7 +216,6 @@ class BannerHandler {
 	 */
 	private setupAdUnits() {
 		const {
-			articleId,
 			adPlacements,
 			// dynamicSeparately = true,
 			highImpactEnabled,
@@ -231,7 +230,6 @@ class BannerHandler {
 		} = this.initOptions;
 
 		const defaultKeywords = {
-			article: articleId,
 			consent: String(window.ebCMP ? !window.ebCMP.noConsentGroup() : false),
 			screen: getSizeValues(this.device),
 			userType
@@ -248,6 +246,7 @@ class BannerHandler {
 		 * Adding keywords to GPT
 		 */
 		window.googletag.cmd.push(() => {
+			console.log('DISPLAY', 'display-ads setupAdUnits targeting keywords:', keywords);
 			window.googletag.setConfig({
 				targeting: keywords
 			});
