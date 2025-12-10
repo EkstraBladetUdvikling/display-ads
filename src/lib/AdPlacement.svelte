@@ -24,6 +24,7 @@
 
 	afterNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
+			removePlacement(targetId);
 			if (wallpaperContainer && wallpaperBackground) {
 				while (wallpaperBackground.firstChild) {
 					wallpaperBackground.removeChild(wallpaperBackground.firstChild);
@@ -38,11 +39,11 @@
 		}
 	});
 
-	onMount(() => {
-		if (consentStatus !== 'unset') {
-			showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
-		}
-	});
+	// onMount(() => {
+	// 	if (consentStatus !== 'unset') {
+	// 		showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
+	// 	}
+	// });
 
 	onDestroy(() => {
 		if (browser) removePlacement(targetId);

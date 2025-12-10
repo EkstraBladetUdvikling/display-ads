@@ -73,7 +73,6 @@ class BannerHandler {
 	 */
 	public updateContext(initOptions: Partial<IBannerInit>, _fullReset = false) {
 		this.initOptions = { ...this.initOptions, ...initOptions };
-		// console.log('DISPLAY','displayads updateContext fullReset?', fullReset);
 
 		// if (fullReset) {
 		// window.googletag.pubads().clearTargeting();
@@ -246,7 +245,6 @@ class BannerHandler {
 		 * Adding keywords to GPT
 		 */
 		window.googletag.cmd.push(() => {
-			console.log('DISPLAY', 'display-ads setupAdUnits targeting keywords:', keywords);
 			window.googletag.setConfig({
 				targeting: keywords
 			});
@@ -370,7 +368,7 @@ class BannerHandler {
 				});
 			}
 		});
-		// console.log('DISPLAY','display-ads adUnits (consentStatus)', adUnits);
+
 		this.adUnits = adUnits;
 		this.adUnitsNoConsent = adUnitsNoConsent;
 
@@ -390,7 +388,6 @@ class BannerHandler {
 		// TODO: Implement replay logic if needed
 		// BANNERSTATE.placements.forEach((placement) => {
 		// 	const { targetId } = getElementIds(placement);
-		// 	console.log('DISPLAY','display-ads replaying placement:', placement, targetId);
 		// 	addPlacement({
 		// 		placement,
 		// 		tagId: targetId
