@@ -24,7 +24,7 @@
 
 	afterNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
-			removePlacement(targetId);
+			removePlacement(targetId, placementName);
 			if (wallpaperContainer && wallpaperBackground) {
 				while (wallpaperBackground.firstChild) {
 					wallpaperBackground.removeChild(wallpaperBackground.firstChild);
