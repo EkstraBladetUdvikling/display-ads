@@ -16,7 +16,7 @@
 		wallpaperContainer = false
 	} = $props();
 
-	const { prefixId, targetId } = getElementIds(placementName);
+	const { prefixId, targetId } = $derived(getElementIds(placementName));
 
 	let showContainer = $state(false);
 
