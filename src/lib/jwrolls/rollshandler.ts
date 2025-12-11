@@ -55,11 +55,8 @@ export async function rollsHandler(
 		}
 
 		const isPlayVideo = false; // articleTypeName === 'article_video_standalone' && actAsPlay;
-		console.log('DISPLAY', 'sectionName', isPlayVideo);
 
 		const sectionName = sectionPath.split('/')[1];
-		console.log('DISPLAY', 'sectionName', sectionName);
-		console.log('DISPLAY', 'cookieless', cookieless);
 
 		const adscheduleFromJW = await getAdschedule({ adscheduleId, adschedulePath });
 

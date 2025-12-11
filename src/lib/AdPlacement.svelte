@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	import { addPlacement } from './util/addplacement';
@@ -16,20 +16,25 @@
 		wallpaperContainer = false
 	} = $props();
 
-	const { prefixId, targetId } = getElementIds(placementName);
+	const { prefixId, targetId } = $derived(getElementIds(placementName));
 
 	let showContainer = $state(false);
 
 	const consentStatus = $derived(consent);
 
-	afterNavigate(() => {
+	beforeNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
+			removePlacement(targetId, placementName);
 			if (wallpaperContainer && wallpaperBackground) {
 				while (wallpaperBackground.firstChild) {
 					wallpaperBackground.removeChild(wallpaperBackground.firstChild);
 				}
 			}
+		}
+	});
 
+	afterNavigate(() => {
+		if (browser && consentStatus !== 'unset') {
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,
@@ -38,11 +43,11 @@
 		}
 	});
 
-	onMount(() => {
-		if (consentStatus !== 'unset') {
-			showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
-		}
-	});
+	// onMount(() => {
+	// 	if (consentStatus !== 'unset') {
+	// 		showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
+	// 	}
+	// });
 
 	onDestroy(() => {
 		if (browser) removePlacement(targetId);

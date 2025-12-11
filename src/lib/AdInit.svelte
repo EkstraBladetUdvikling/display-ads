@@ -4,10 +4,10 @@
 	import { browser } from '$app/environment';
 
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
-	import { DEVICE } from './state';
+	// import { DEVICE } from './state';
 	import { page } from '$app/state';
 
-	let { adnamiUnloadHandler = undefined } = $props();
+	let { adnamiUnloadHandler = undefined, device } = $props();
 
 	const consentStatus = getContext('consent') as () => 'unset' | boolean;
 
@@ -32,7 +32,7 @@
 			console.error('displayAds is not defined in page data');
 			return;
 		}
-		const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
+		// const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 		displayAds.device = device;
 
 		if (consentStatus() !== 'unset') {

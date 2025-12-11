@@ -10,6 +10,7 @@
 	import AdPlacement from '$lib/AdPlacement.svelte';
 	import { PUBLIC_livewrappedKey } from '$env/static/public';
 	import HalfpageContainer from '$lib/HalfpageContainer.svelte';
+	import { DEVICE } from '$lib/state';
 
 	let { children } = $props();
 
@@ -38,20 +39,30 @@
 <CMP cbid="1f34e1cc-0bfc-4f89-a42d-841a0ae9133d" />
 <AdInit {adnamiUnloadHandler} livewrappedKey={PUBLIC_livewrappedKey} />
 
-<AdPlacement adMark={false} placementName="topscroll" placementType="topscroll" />
+<AdPlacement adMark={false} {consent} placementName="topscroll" placementType="topscroll" />
 
 <div class="wrapper wrapper--outer">
 	<nav>
 		<a href="/">frontpage</a><a href="/other">Other</a><a href="/other-also">Yet anOther</a>
 	</nav>
 	<div class="wrapper sidebanners">
-		<HalfpageContainer placementName="halfpage1" position="left" />
+		<HalfpageContainer
+			{consent}
+			device={DEVICE.desktop}
+			placementName="halfpage1"
+			position="left"
+		/>
 
 		<div class="middle">
 			{@render children()}
 		</div>
 
-		<HalfpageContainer placementName="halfpage2" position="right" />
+		<HalfpageContainer
+			{consent}
+			device={DEVICE.desktop}
+			placementName="halfpage2"
+			position="right"
+		/>
 	</div>
 </div>
 
