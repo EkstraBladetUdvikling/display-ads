@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	import { addPlacement } from './util/addplacement';
@@ -22,7 +22,7 @@
 
 	const consentStatus = $derived(consent);
 
-	afterNavigate(() => {
+	beforeNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
 			removePlacement(targetId, placementName);
 			if (wallpaperContainer && wallpaperBackground) {
@@ -30,7 +30,11 @@
 					wallpaperBackground.removeChild(wallpaperBackground.firstChild);
 				}
 			}
+		}
+	});
 
+	afterNavigate(() => {
+		if (browser && consentStatus !== 'unset') {
 			showContainer = addPlacement({
 				consent,
 				placement: placementName,
