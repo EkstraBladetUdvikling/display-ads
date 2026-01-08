@@ -1,7 +1,9 @@
+import { logger } from '../logger';
 import { BANNERSTATE } from '../state';
 
 export function removePlacement(tagId: string, placementName?: string) {
 	try {
+		logger(`Removing ad unit with tagId: ${tagId}`, placementName, BANNERSTATE.placements);
 		BANNERSTATE.placements = BANNERSTATE.placements.filter((p) => p !== placementName);
 
 		if (window.lwhb && window.lwhb.removeAdUnit) window.lwhb.removeAdUnit(tagId);

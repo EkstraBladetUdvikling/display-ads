@@ -1,11 +1,15 @@
-<script lang="ts">
+<script>
+	import AdPlacement from '$lib/AdPlacement.svelte';
 
-	import AdPlacement from "$lib/AdPlacement.svelte";
-
-
-
+	const adMark = false;
+	const consent = true;
+	const wallpaperContainer = false;
 </script>
 
-<h1>We went here</h1>
-
-<AdPlacement placementName="monster1" placementType="monster" />
+<AdPlacement
+	{adMark}
+	{consent}
+	placementName={'swedishtakeover1'}
+	placementType={'swedishtakeover'}
+	{wallpaperContainer}
+/>

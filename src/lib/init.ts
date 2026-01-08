@@ -1,4 +1,5 @@
 import BannerHandler, { handleHalfPage } from './bannerhandler';
+import { logger } from './logger';
 import { DEVICE } from './state';
 import { PAGETYPES } from './types/admanager';
 
@@ -157,16 +158,50 @@ export class AdsInterface {
 		this.#exists = true;
 	}
 
+	/**
+	 * placementExists
+	 * @description Check if a placement exists in the current ad units
+	 */
 	public placementExists(placement: string, consent: boolean) {
+		logger(`adsInterface.placementExists called with: ${placement}, consent: ${consent}`);
 		if (!this.bannerHandler) return false;
 
 		const adUnitsToSearch = consent
 			? this.bannerHandler.adUnits
 			: this.bannerHandler.adUnitsNoConsent;
-
-		return adUnitsToSearch.find((adUnit) => {
+		const doesExist = adUnitsToSearch.find((adUnit) => {
 			return adUnit.cleanName?.toLowerCase() === placement;
 		});
+
+		logger(`adsInterface.placementExists ${placement}`, ' doesExist:', doesExist);
+		return doesExist;
+	}
+
+	/**
+	 * placementExistsAndAllowed
+	 * @description Check if a placement exists in the current ad units
+	 */
+	public placementExistsAndAllowed(placement: string, consent: boolean) {
+		logger(`adsInterface.placementExistsAndAllowed called with: ${placement}, consent: ${consent}`);
+		if (!this.bannerHandler) return false;
+
+		const adUnitsToSearch = consent
+			? this.bannerHandler.adUnits
+			: this.bannerHandler.adUnitsNoConsent;
+		const doesExist = adUnitsToSearch.find((adUnit) => {
+			return adUnit.cleanName?.toLowerCase() === placement;
+		});
+		logger(
+			`adsInterface.placementExistsAndAllowed ${placement} adUnitsToSearch:`,
+			adUnitsToSearch,
+			' doesExist:',
+			doesExist
+		);
+		const isAllowed = doesExist?.devices.includes(
+			this.#initData.displayAdsData?.device || DEVICE.smartphone
+		);
+		logger(`adsInterface.placementExistsAndAllowed ${placement} isAllowed:`, isAllowed);
+		return doesExist && isAllowed;
 	}
 
 	private extractHandlerData(displayAds) {

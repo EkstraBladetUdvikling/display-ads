@@ -6,6 +6,7 @@
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
 	// import { DEVICE } from './state';
 	import { page } from '$app/state';
+	import { logger } from './logger';
 
 	let { adnamiUnloadHandler = undefined, device } = $props();
 
@@ -26,6 +27,8 @@
 	// });
 
 	$effect(() => {
+		logger('AdInit.svelte *******************************************************************');
+		logger('AdInit.svelte consentStatus:', consentStatus());
 		if (!browser) return;
 		const displayAds = page.data?.displayAds;
 		if (!displayAds) {
