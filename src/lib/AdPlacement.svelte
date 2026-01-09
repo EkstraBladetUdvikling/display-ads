@@ -56,7 +56,7 @@
 	// });
 
 	onDestroy(() => {
-		if (browser) removePlacement(targetId);
+		if (browser) removePlacement(targetId, placementName);
 	});
 
 	let wallpaperBackground: HTMLDivElement;

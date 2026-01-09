@@ -55,7 +55,7 @@ interface IAddPlacementInput {
 
 export function addPlacement(options: IAddPlacementInput) {
 	const { placement, tagId, loadCallback, consent } = options;
-
+	logger('addPlacement called with:', placement, tagId, consent);
 	try {
 		if (!adsInterface.placementExistsAndAllowed(placement, consent)) {
 			throw new Error(`Placement "${placement}" does not exist.`);
@@ -90,6 +90,7 @@ export function addPlacement(options: IAddPlacementInput) {
 					gamSizes,
 					sizes
 				} = bannerData;
+				logger('addPlacement called with:', placement, addedToQueue);
 
 				if (!addedToQueue) {
 					window.lwhb.cmd.push(() => {

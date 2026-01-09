@@ -1,7 +1,7 @@
 import BannerHandler, { handleHalfPage } from './bannerhandler';
 import { logger } from './logger';
-import { DEVICE } from './state';
 import { PAGETYPES } from './types/admanager';
+import { DEVICEFROMADMANAGER } from './util/device';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
 	/**
@@ -44,7 +44,7 @@ function handleAdnami(adnamiUnloadHandler?: () => void) {
 interface IDisplayAdsData {
 	adPlacements: any[];
 	anonIds: { adform: string; base: string; google: string };
-	device: DEVICE;
+	device: DEVICEFROMADMANAGER;
 	highImpactEnabled: boolean;
 	keywords: { [id: string]: string | string[] };
 	livewrappedKey: string;
@@ -197,8 +197,10 @@ export class AdsInterface {
 			' doesExist:',
 			doesExist
 		);
-		const isAllowed = doesExist?.devices.includes(
-			this.#initData.displayAdsData?.device || DEVICE.smartphone
+		const isAllowed = doesExist?.devices.find(
+			(dev) =>
+				dev.toLowerCase() === this.#initData.displayAdsData?.device ||
+				DEVICEFROMADMANAGER.smartphone
 		);
 		logger(`adsInterface.placementExistsAndAllowed ${placement} isAllowed:`, isAllowed);
 		return doesExist && isAllowed;
