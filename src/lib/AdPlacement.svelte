@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -7,6 +7,7 @@
 	import { addPlacement } from './util/addplacement';
 	import { getElementIds } from './util';
 	import { removePlacement } from './util/removeplacement';
+	import { logger } from './logger';
 
 	let {
 		adMark = true,
@@ -21,7 +22,6 @@
 	let showContainer = $state(false);
 
 	const consentStatus = $derived(consent);
-
 	beforeNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
 			removePlacement(targetId, placementName);
@@ -35,8 +35,14 @@
 
 	afterNavigate(() => {
 		if (browser && consentStatus !== 'unset') {
+			logger(
+				`adplacement.svelte ${placementName} afterNavigate consentStatus:`,
+				consentStatus,
+				consent
+			);
+
 			showContainer = addPlacement({
-				consent,
+				consent: consentStatus,
 				placement: placementName,
 				tagId: targetId
 			});
@@ -50,15 +56,16 @@
 	// });
 
 	onDestroy(() => {
-		if (browser) removePlacement(targetId);
+		if (browser) removePlacement(targetId, placementName);
 	});
 
 	let wallpaperBackground: HTMLDivElement;
 	$effect(() => {
 		if (!browser) return;
 		if (consentStatus !== 'unset') {
+			logger(`adplacement.svelte ${placementName} effect consentStatus:`, consentStatus, consent);
 			showContainer = addPlacement({
-				consent,
+				consent: consentStatus,
 				placement: placementName,
 				tagId: targetId
 			});

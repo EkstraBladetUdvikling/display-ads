@@ -1,3 +1,4 @@
+import { logger } from '../logger';
 import { adsInterface } from '../init';
 import { BANNERSTATE } from '../state';
 import type { ICustomPlacement, IDefineTag, ILoadAdData } from '../types';
@@ -54,69 +55,75 @@ interface IAddPlacementInput {
 
 export function addPlacement(options: IAddPlacementInput) {
 	const { placement, tagId, loadCallback, consent } = options;
-
-	if (!adsInterface.placementExists(placement, consent)) {
-		console.warn(`Placement "${placement}" does not exist.`);
-		return false;
-	}
-
-	if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
-
-	BANNERSTATE.isReady(() => {
-		const useNoConsent = window.ebCMP.noConsentGroup();
-
-		const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
-		const bannerData = adUnitsToSearch.find(
-			(adUnit) => adUnit.cleanName?.toLowerCase() === placement
-		);
-
-		if (!bannerData) {
-			console.warn(`Placement "${placement}" does not exist.`);
+	logger('addPlacement called with:', placement, tagId, consent);
+	try {
+		if (!adsInterface.placementExistsAndAllowed(placement, consent)) {
 			throw new Error(`Placement "${placement}" does not exist.`);
 		}
 
-		const adPlaceholder = document.getElementById(tagId);
+		if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
-		if (!adPlaceholder) throw new Error('adPlacement not found');
+		BANNERSTATE.isReady(() => {
+			const useNoConsent = window.ebCMP.noConsentGroup();
 
-		while (adPlaceholder.firstChild) {
-			adPlaceholder.firstChild.remove();
-		}
-		if (bannerData) {
-			const {
-				addedToQueue,
-				allowedFormats: allowedMediaTypes,
-				lwName: adUnitName,
-				gamSizes,
-				sizes
-			} = bannerData;
+			const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+			const bannerData = adUnitsToSearch.find(
+				(adUnit) => adUnit.cleanName?.toLowerCase() === placement
+			);
 
-			if (!addedToQueue) {
-				window.lwhb.cmd.push(() => {
-					const loadAdData: ILoadAdData = {
-						adUnitName,
-						tagId
-					};
-					if (loadCallback) loadAdData.callbackMethod = loadCallback;
-
-					if (allowedMediaTypes) {
-						const lowercasedMediaTypes = allowedMediaTypes.map((str) =>
-							str.toLowerCase()
-						) as IDefineTag['allowedFormats'];
-						loadAdData.allowedMediaTypes = lowercasedMediaTypes;
-					}
-					if (sizes) loadAdData.sizes = sizes;
-					if (gamSizes) loadAdData.gamSizes = gamSizes;
-
-					if (BANNERSTATE.renderCalled) {
-						window.lwhb.loadAd(loadAdData);
-					} else {
-						window.lwhb.prepareAd(loadAdData);
-					}
-				});
-				bannerData.addedToQueue = true;
+			if (!bannerData) {
+				throw new Error(`Placement "${placement}" does not have banner data.`);
 			}
-		}
-	});
-	return true;
+
+			const adPlaceholder = document.getElementById(tagId);
+
+			if (!adPlaceholder) throw new Error('adPlacement not found');
+
+			while (adPlaceholder.firstChild) {
+				adPlaceholder.firstChild.remove();
+			}
+			if (bannerData) {
+				const {
+					addedToQueue,
+					allowedFormats: allowedMediaTypes,
+					lwName: adUnitName,
+					gamSizes,
+					sizes
+				} = bannerData;
+				logger('addPlacement called with:', placement, addedToQueue);
+
+				if (!addedToQueue) {
+					window.lwhb.cmd.push(() => {
+						const loadAdData: ILoadAdData = {
+							adUnitName,
+							tagId
+						};
+						if (loadCallback) loadAdData.callbackMethod = loadCallback;
+
+						if (allowedMediaTypes) {
+							const lowercasedMediaTypes = allowedMediaTypes.map((str) =>
+								str.toLowerCase()
+							) as IDefineTag['allowedFormats'];
+							loadAdData.allowedMediaTypes = lowercasedMediaTypes;
+						}
+						if (sizes) loadAdData.sizes = sizes;
+						if (gamSizes) loadAdData.gamSizes = gamSizes;
+
+						if (BANNERSTATE.renderCalled) {
+							logger('addPlacement: Loading ad for placement:', placement, tagId, loadAdData);
+							window.lwhb.loadAd(loadAdData);
+						} else {
+							logger('addPlacement: preparing ad for placement:', placement, tagId, loadAdData);
+							window.lwhb.prepareAd(loadAdData);
+						}
+					});
+					bannerData.addedToQueue = true;
+				}
+			}
+		});
+		return true;
+	} catch (error) {
+		console.warn('addPlacement error:', error);
+		return false;
+	}
 }

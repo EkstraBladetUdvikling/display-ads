@@ -8,9 +8,10 @@
 	import { browser } from '$app/environment';
 	import AdInit from '$lib/AdInit.svelte';
 	import AdPlacement from '$lib/AdPlacement.svelte';
-	import { PUBLIC_livewrappedKey } from '$env/static/public';
+
 	import HalfpageContainer from '$lib/HalfpageContainer.svelte';
 	import { DEVICE } from '$lib/state';
+	import { page } from '$app/state';
 
 	let { children } = $props();
 
@@ -37,7 +38,7 @@
 </svelte:head>
 
 <CMP cbid="1f34e1cc-0bfc-4f89-a42d-841a0ae9133d" />
-<AdInit {adnamiUnloadHandler} livewrappedKey={PUBLIC_livewrappedKey} />
+<AdInit device={page.data.device} />
 
 <AdPlacement adMark={false} {consent} placementName="topscroll" placementType="topscroll" />
 
@@ -48,7 +49,7 @@
 	<div class="wrapper sidebanners">
 		<HalfpageContainer
 			{consent}
-			device={DEVICE.desktop}
+			device={page.data.device}
 			placementName="halfpage1"
 			position="left"
 		/>
@@ -59,7 +60,7 @@
 
 		<HalfpageContainer
 			{consent}
-			device={DEVICE.desktop}
+			device={page.data.device}
 			placementName="halfpage2"
 			position="right"
 		/>

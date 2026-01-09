@@ -1,3 +1,5 @@
+import { env as publicEnv } from '$env/dynamic/public';
+
 import { DEVICE } from '$lib/state';
 import { PAGETYPES } from '$lib/types/admanager';
 import { adPlacements } from './adplacements';
@@ -7,17 +9,20 @@ export const load = async () => {
 	const anonId_adform = crypto.randomUUID();
 
 	return {
+		device: DEVICE.smartphone,
 		displayAds: {
 			adPlacements,
 			anonIds: {
+				adform: anonId_adform,
 				base: anonId,
-				adform: anonId_adform
+				google: anonId
 			},
-			device: DEVICE.desktop,
+			device: DEVICE.smartphone, // Reference the already extracted device value
 			highImpactEnabled: true,
-			keywords: ['a', 'b'],
+			keywords: { test: String(publicEnv.PUBLIC_ENVIRONMENT === 'test') },
+			livewrappedKey: publicEnv.PUBLIC_LIVEWRAPPEDKEY,
 			pageContext: PAGETYPES.FRONTPAGE,
-			user: 'anonymous'
+			userType: 'anonymous'
 		}
 	};
 };

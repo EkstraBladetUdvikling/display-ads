@@ -22,29 +22,13 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage2',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
 			[160, 600],
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23278787859',
-		name: 'feltet_forside_halfpage_midt5',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage_midt5',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
 			[300, 250],
 			[300, 600]
 		]
@@ -57,7 +41,7 @@ export const adPlacements = [
 		isFluid: false,
 		annoncemarkering: false,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
@@ -71,9 +55,9 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover1',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
@@ -82,7 +66,8 @@ export const adPlacements = [
 			[300, 240],
 			[300, 250],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -107,7 +92,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_monster1',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -122,30 +107,14 @@ export const adPlacements = [
 		]
 	},
 	{
-		placementId: '23278799175',
-		name: 'feltet_noconsent_halfpage_midt1',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage_midt1',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
 		placementId: '23278824060',
 		name: 'feltet_forside_swedishtakeover4',
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover4',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
@@ -154,61 +123,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23278824771',
-		name: 'feltet_forside_swedishtakeover6',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover6',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23278826061',
-		name: 'feltet_artikler_halfpage_midt3',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage_midt3',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23278826100',
-		name: 'feltet_artikler_halfpage_midt4',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage_midt4',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -217,18 +135,19 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover1',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[15, 15],
 			[300, 230],
 			[300, 240],
 			[300, 250],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -237,19 +156,21 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover4',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[15, 15],
 			[300, 210],
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -258,18 +179,19 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover1',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
 			[15, 15],
 			[300, 230],
 			[300, 240],
 			[300, 250],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -278,7 +200,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_monster3',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -298,7 +220,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_monster4',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -320,7 +242,7 @@ export const adPlacements = [
 		isFluid: false,
 		annoncemarkering: false,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
@@ -334,9 +256,9 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover2',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
@@ -345,8 +267,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -355,9 +279,9 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover3',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
@@ -366,8 +290,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -376,9 +302,9 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover4',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
@@ -387,8 +313,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -413,7 +341,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage1',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -430,9 +358,9 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover2',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
@@ -441,8 +369,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -451,7 +381,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_monster2',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -471,7 +401,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_monster3',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -491,9 +421,9 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover3',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
@@ -502,8 +432,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -529,7 +461,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage1',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -541,46 +473,14 @@ export const adPlacements = [
 		]
 	},
 	{
-		placementId: '23279268814',
-		name: 'feltet_noconsent_halfpage_midt2',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage_midt2',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279274043',
-		name: 'feltet_noconsent_halfpage_midt3',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage_midt3',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
 		placementId: '23279291818',
 		name: 'feltet_forside_swedishtakeover5',
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover5',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['FRONTPAGE'],
 		sizes: [
@@ -589,67 +489,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279291905',
-		name: 'feltet_forside_swedishtakeover7',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover7',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279291944',
-		name: 'feltet_forside_swedishtakeover8',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover8',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 302],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279293204',
-		name: 'feltet_artikler_halfpage_midt1',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage_midt1',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -658,19 +501,21 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover3',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[15, 15],
 			[300, 210],
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -679,119 +524,21 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover5',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[15, 15],
 			[300, 210],
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279294812',
-		name: 'feltet_artikler_swedishtakeover8',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover8',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279294938',
-		name: 'feltet_artikler_swedishtakeover6',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover6',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279294980',
-		name: 'feltet_artikler_swedishtakeover7',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover7',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279295055',
-		name: 'feltet_artikler_swedishtakeover9',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover9',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279295232',
-		name: 'feltet_noconsent_halfpage_midt5',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage_midt5',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[300, 600]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -800,7 +547,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_monster1',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -815,76 +562,12 @@ export const adPlacements = [
 		]
 	},
 	{
-		placementId: '23279891624',
-		name: 'feltet_forside_halfpage_midt1',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage_midt1',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279891678',
-		name: 'feltet_forside_halfpage_midt2',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage_midt2',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279891906',
-		name: 'feltet_forside_halfpage_midt4',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage_midt4',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279892164',
-		name: 'feltet_forside_halfpage_midt3',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage_midt3',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
 		placementId: '23279896679',
 		name: 'feltet_forside_monster4',
 		invCode: '83172459/feltet/feltet_forside/feltet_forside_monster4',
 		siteName: 'feltet_forside',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -904,45 +587,13 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage2',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
 		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
 			[160, 600],
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279912612',
-		name: 'feltet_noconsent_halfpage_midt4',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage_midt4',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279927516',
-		name: 'feltet_artikler_halfpage_midt5',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage_midt5',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
 			[300, 250],
 			[300, 600]
 		]
@@ -955,54 +606,12 @@ export const adPlacements = [
 		isFluid: false,
 		annoncemarkering: false,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[300, 220],
 			[300, 280]
-		]
-	},
-	{
-		placementId: '23279928047',
-		name: 'feltet_forside_swedishtakeover9',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeover9',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279928080',
-		name: 'feltet_forside_swedishtakeove10',
-		invCode: '83172459/feltet/feltet_forside/feltet_forside_swedishtakeove10',
-		siteName: 'feltet_forside',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['FRONTPAGE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
 		]
 	},
 	{
@@ -1015,7 +624,7 @@ export const adPlacements = [
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[1, 2],
 			[970, 510]
@@ -1031,7 +640,7 @@ export const adPlacements = [
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[728, 90],
 			[930, 180],
@@ -1044,11 +653,11 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage1',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[160, 600],
 			[300, 250],
@@ -1061,29 +670,13 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage2',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[160, 600],
-			[300, 250],
-			[300, 600]
-		]
-	},
-	{
-		placementId: '23279928662',
-		name: 'feltet_artikler_halfpage_midt2',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage_midt2',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
 			[300, 250],
 			[300, 600]
 		]
@@ -1094,40 +687,21 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover2',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[15, 15],
 			[300, 210],
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279930585',
-		name: 'feltet_artikler_swedishtakeover10',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedishtakeover10',
-		siteName: 'feltet_artikler',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -1136,7 +710,7 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_monster2',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
@@ -1151,56 +725,14 @@ export const adPlacements = [
 		]
 	},
 	{
-		placementId: '23279930849',
-		name: 'feltet_noconsent_swedishtakeover8',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover8',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279930933',
-		name: 'feltet_noconsent_swedishtakeover10',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover10',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
 		placementId: '23279931005',
 		name: 'feltet_noconsent_swedishtakeover5',
 		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover5',
 		siteName: 'feltet_noconsent',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
 		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
 		sizes: [
@@ -1209,141 +741,10 @@ export const adPlacements = [
 			[300, 230],
 			[300, 240],
 			[300, 250],
+			[300, 600],
 			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279931032',
-		name: 'feltet_noconsent_swedishtakeover6',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover6',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279931062',
-		name: 'feltet_noconsent_swedishtakeover7',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover7',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23279931392',
-		name: 'feltet_noconsent_swedishtakeover9',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedishtakeover9',
-		siteName: 'feltet_noconsent',
-		isFluid: true,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[15, 15],
-			[300, 210],
-			[300, 230],
-			[300, 240],
-			[300, 250],
-			[320, 160],
-			[320, 320]
-		]
-	},
-	{
-		placementId: '23280668226',
-		name: 'feltet_artikler_ekstra1',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_ekstra1',
-		siteName: 'feltet_artikler',
-		isFluid: false,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[300, 250],
-			[650, 125],
-			[650, 200]
-		]
-	},
-	{
-		placementId: '23280668400',
-		name: 'feltet_artikler_ekstra2',
-		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_ekstra2',
-		siteName: 'feltet_artikler',
-		isFluid: false,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
-		sizes: [
-			[300, 250],
-			[650, 350],
-			[650, 365],
-			[650, 400]
-		]
-	},
-	{
-		placementId: '23280668583',
-		name: 'feltet_noconsent_ekstra2',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_ekstra2',
-		siteName: 'feltet_noconsent',
-		isFluid: false,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[650, 350],
-			[650, 365],
-			[650, 450]
-		]
-	},
-	{
-		placementId: '23281728647',
-		name: 'feltet_noconsent_ekstra1',
-		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_ekstra1',
-		siteName: 'feltet_noconsent',
-		isFluid: false,
-		annoncemarkering: false,
-		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
-		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
-		sizes: [
-			[300, 250],
-			[650, 125],
-			[650, 200]
+			[320, 320],
+			[320, 400]
 		]
 	},
 	{
@@ -1352,11 +753,11 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_monster1',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[930, 180],
 			[930, 600]
@@ -1368,11 +769,11 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_bottom_anchor_codeless',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP'],
+		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[728, 90],
 			[970, 90],
@@ -1386,11 +787,11 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_bottom_anchor_codeles',
 		siteName: 'feltet_artikler',
 		isFluid: true,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
-		devices: ['DESKTOP', 'TABLET'],
+		devices: ['SMARTPHONE'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[320, 50],
 			[320, 100]
@@ -1402,11 +803,11 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_interstitial_codeless',
 		siteName: 'feltet_artikler',
 		isFluid: false,
-		annoncemarkering: false,
+		annoncemarkering: true,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
 		allowedFormats: ['banner'],
-		pageTypes: ['ARTICLE'],
+		pageTypes: ['ARTICLE', 'SECTION'],
 		sizes: [
 			[300, 250],
 			[320, 480],
@@ -1419,6 +820,747 @@ export const adPlacements = [
 		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_interstitial_codeless',
 		siteName: 'feltet_artikler',
 		isFluid: false,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[300, 250],
+			[320, 480],
+			[336, 280]
+		]
+	},
+	{
+		placementId: '23293880176',
+		name: 'feltet_artikler_preroll',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_preroll',
+		siteName: 'feltet_artikler',
+		isFluid: false,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: [],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [[640, 480]]
+	},
+	{
+		placementId: '23294366396',
+		name: 'feltet_artikler_swedish_preroll',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_preroll',
+		siteName: 'feltet_artikler',
+		isFluid: false,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [[640, 480]]
+	},
+	{
+		placementId: '23301517536',
+		name: 'feltet_forside_halfpage4',
+		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage4',
+		siteName: 'feltet_forside',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['FRONTPAGE'],
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		]
+	},
+	{
+		placementId: '23301517569',
+		name: 'feltet_artikler_megaboard_artikel',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_megaboard_artikel',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[728, 90],
+			[930, 180],
+			[970, 250]
+		]
+	},
+	{
+		placementId: '23301518226',
+		name: 'feltet_artikler_halfpage3',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage3',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE', 'TABLET'],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		]
+	},
+	{
+		placementId: '23301518280',
+		name: 'feltet_artikler_halfpage4',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_halfpage4',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE', 'TABLET'],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		]
+	},
+	{
+		placementId: '23301518466',
+		name: 'feltet_artikler_megaboard_dynamisk3',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_megaboard_dynamisk3',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23301518511',
+		name: 'feltet_artikler_megaboard_dynamisk4',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_megaboard_dynamisk4',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23301518616',
+		name: 'feltet_artikler_monster_bund',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_monster_bund',
+		siteName: 'feltet_artikler',
+		isFluid: false,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: [],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[930, 600],
+			[970, 250],
+			[970, 550],
+			[970, 560],
+			[970, 570]
+		]
+	},
+	{
+		placementId: '23301522069',
+		name: 'feltet_artikler_swedish_dynamisk2',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_dynamisk2',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23301526296',
+		name: 'feltet_noconsent_megaboard_artikel',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_megaboard_artikel',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[728, 90],
+			[930, 180],
+			[970, 250]
+		]
+	},
+	{
+		placementId: '23301526341',
+		name: 'feltet_noconsent_megaboard_dynamisk1',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_megaboard_dynamisk1',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23301528996',
+		name: 'feltet_noconsent_megaboard_dynamisk4',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_megaboard_dynamisk4',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23301529155',
+		name: 'feltet_noconsent_monster_bund',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_monster_bund',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[930, 600],
+			[970, 250],
+			[970, 550],
+			[970, 560],
+			[970, 570]
+		]
+	},
+	{
+		placementId: '23301529791',
+		name: 'feltet_noconsent_halfpage3',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage3',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		]
+	},
+	{
+		placementId: '23301532353',
+		name: 'feltet_noconsent_swedish_dynamisk2',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_dynamisk2',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23301633381',
+		name: 'feltet_noconsent_swedish_live',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_live',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE'],
+		sizes: [
+			[300, 230],
+			[300, 250],
+			[320, 160],
+			[320, 320]
+		]
+	},
+	{
+		placementId: '23302186831',
+		name: 'feltet_artikler_megaboard_dynamisk1',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_megaboard_dynamisk1',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23302187083',
+		name: 'feltet_artikler_monster3',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_monster3',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: [],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[930, 600],
+			[970, 250],
+			[970, 550],
+			[970, 560],
+			[970, 570]
+		]
+	},
+	{
+		placementId: '23302189045',
+		name: 'feltet_artikler_swedish_artikel',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_artikel',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 230],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302191022',
+		name: 'feltet_artikler_swedish_dynamisk1',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_dynamisk1',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302197910',
+		name: 'feltet_noconsent_swedish_dynamisk4',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_dynamisk4',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302198372',
+		name: 'feltet_noconsent_megaboard_dynamisk2',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_megaboard_dynamisk2',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23302204009',
+		name: 'feltet_noconsent_swedish_bund',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_bund',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302289059',
+		name: 'feltet_artikler_swedish_live',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_live',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE'],
+		sizes: [
+			[300, 230],
+			[300, 250],
+			[320, 160],
+			[320, 320]
+		]
+	},
+	{
+		placementId: '23302603334',
+		name: 'feltet_forside_halfpage3',
+		invCode: '83172459/feltet/feltet_forside/feltet_forside_halfpage3',
+		siteName: 'feltet_forside',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['FRONTPAGE'],
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		]
+	},
+	{
+		placementId: '23302604243',
+		name: 'feltet_artikler_megaboard_dynamisk2',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_megaboard_dynamisk2',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23302604363',
+		name: 'feltet_artikler_monster2',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_monster2',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: [],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[930, 600],
+			[970, 250],
+			[970, 550],
+			[970, 560],
+			[970, 570]
+		]
+	},
+	{
+		placementId: '23302605605',
+		name: 'feltet_artikler_swedish_dynamisk3',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_dynamisk3',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302607852',
+		name: 'feltet_artikler_swedish_dynamisk4',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_dynamisk4',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302608029',
+		name: 'feltet_artikler_swedish_bund',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_swedish_bund',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: [],
+		pageTypes: ['ARTICLE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302613261',
+		name: 'feltet_noconsent_halfpage4',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_halfpage4',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[160, 600],
+			[300, 250],
+			[300, 600]
+		]
+	},
+	{
+		placementId: '23302613609',
+		name: 'feltet_noconsent_megaboard_dynamisk3',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_megaboard_dynamisk3',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[728, 90],
+			[930, 180],
+			[970, 250],
+			[970, 560]
+		]
+	},
+	{
+		placementId: '23302616354',
+		name: 'feltet_noconsent_swedish_dynamisk3',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_dynamisk3',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 50],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302616660',
+		name: 'feltet_noconsent_swedish_artikel',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_artikel',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[15, 15],
+			[300, 240],
+			[300, 250],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302616936',
+		name: 'feltet_noconsent_swedish_dynamisk1',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_swedish_dynamisk1',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
+		annoncemarkering: true,
+		allowedOnPlus: false,
+		devices: ['SMARTPHONE'],
+		allowedFormats: ['banner'],
+		pageTypes: ['ARTICLE', 'FRONTPAGE', 'SECTION'],
+		sizes: [
+			[1, 1],
+			[15, 15],
+			[300, 230],
+			[300, 240],
+			[300, 250],
+			[320, 160],
+			[320, 320],
+			[320, 400]
+		]
+	},
+	{
+		placementId: '23302704833',
+		name: 'feltet_artikler_live',
+		invCode: '83172459/feltet/feltet_artikler/feltet_artikler_live',
+		siteName: 'feltet_artikler',
+		isFluid: true,
+		annoncemarkering: false,
+		allowedOnPlus: false,
+		devices: ['DESKTOP', 'TABLET'],
+		allowedFormats: ['banner', 'video'],
+		pageTypes: ['ARTICLE'],
+		sizes: [
+			[300, 250],
+			[728, 90],
+			[930, 180],
+			[930, 600]
+		]
+	},
+	{
+		placementId: '23302705235',
+		name: 'feltet_noconsent_live',
+		invCode: '83172459/feltet/feltet_noconsent/feltet_noconsent_live',
+		siteName: 'feltet_noconsent',
+		isFluid: true,
 		annoncemarkering: false,
 		allowedOnPlus: false,
 		devices: ['DESKTOP', 'TABLET'],
@@ -1426,8 +1568,9 @@ export const adPlacements = [
 		pageTypes: ['ARTICLE'],
 		sizes: [
 			[300, 250],
-			[320, 480],
-			[336, 280]
+			[728, 90],
+			[930, 180],
+			[930, 600]
 		]
 	}
 ];
