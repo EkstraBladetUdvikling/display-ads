@@ -2,9 +2,8 @@ import { env as publicEnv } from '$env/dynamic/public';
 
 export const logger = (...arg: unknown[]) => {
 	const displayadsDebug =
-		window.location.search.includes('displayads_debug') ||
-		publicEnv.PUBLIC_DEBUG_DISPLAYADS === 'true';
-	// || window.location.href.indexOf('localhost') !== -1;
+		sessionStorage.getItem('DISPLAYADS_DEBUG') === 'true' ||
+		publicEnv.PUBLIC_DISPLAYADS_DEBUG === 'true';
 	if (displayadsDebug) {
 		console.log('DISPLAY ADS', ...arg);
 	}
