@@ -1,7 +1,7 @@
 {
 	"name": "@ekstrabladetudvikling/display-ads",
 	"main": "index.ts",
-	"version": "0.5.2",
+	"version": "0.6.0-beta",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
