@@ -21,6 +21,7 @@ export interface IBannerInit {
 	};
 	articleId?: string;
 	adPlacements: IAdmanagerBanners[];
+	consent: boolean;
 	device: DEVICE;
 	dynamicSeparately?: boolean;
 	highImpactEnabled?: boolean;

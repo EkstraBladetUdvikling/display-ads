@@ -216,6 +216,7 @@ class BannerHandler {
 	private setupAdUnits() {
 		const {
 			adPlacements,
+			consent,
 			// dynamicSeparately = true,
 			highImpactEnabled,
 			pageContext,
@@ -224,12 +225,11 @@ class BannerHandler {
 			premium,
 			reloadOnBack,
 			segments = [],
-
 			userType
 		} = this.initOptions;
 
 		const defaultKeywords = {
-			consent: String(window.ebCMP ? !window.ebCMP.noConsentGroup() : false),
+			consent: String(consent),
 			screen: getSizeValues(this.device),
 			userType
 		};

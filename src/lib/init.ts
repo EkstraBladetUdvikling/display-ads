@@ -67,6 +67,7 @@ export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
+		logger('adsInterface.init called with:', { displayAdsData, consent, adnamiUnloadHandler });
 		if (!displayAdsData) return;
 		const oldData = { ...this.#initData };
 
@@ -156,6 +157,11 @@ export class AdsInterface {
 
 		this.bannerHandler = new BannerHandler(extractedData);
 		this.#exists = true;
+		logger(
+			'adsInterface.init called with: BannerHandler initialized',
+			this.bannerHandler,
+			this.#initData
+		);
 	}
 
 	/**

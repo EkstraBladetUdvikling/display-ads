@@ -64,7 +64,7 @@ export function addPlacement(options: IAddPlacementInput) {
 		if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
 
 		BANNERSTATE.isReady(() => {
-			const useNoConsent = window.ebCMP.noConsentGroup();
+			const useNoConsent = consent === false;
 
 			const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
 			const bannerData = adUnitsToSearch.find(
