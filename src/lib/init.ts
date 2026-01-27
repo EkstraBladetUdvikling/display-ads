@@ -67,6 +67,11 @@ export class AdsInterface {
 	private bannerHandler: BannerHandler | null = null;
 
 	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
+		if (window.location.search.includes('displayads_debug')) {
+			sessionStorage.setItem('DISPLAYADS_DEBUG', 'true');
+		}
+
+		logger('adsInterface.init called with:', { displayAdsData, consent, adnamiUnloadHandler });
 		if (!displayAdsData) return;
 		const oldData = { ...this.#initData };
 
