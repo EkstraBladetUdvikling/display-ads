@@ -24,6 +24,7 @@ export function addPlacement(options: IAddPlacementInput) {
 			const useNoConsent = consent === false;
 
 			const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+			logger('addPlacement: adUnitsToSearch:', adUnitsToSearch);
 			const bannerData = adUnitsToSearch.find(
 				(adUnit) => adUnit.cleanName?.toLowerCase() === placement
 			);
