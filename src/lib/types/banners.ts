@@ -2,8 +2,6 @@ import { DEVICE } from '../state';
 import type { ebDynamicBanners } from '../dynamicbanners/DynamicBanners';
 import type { IAdmanagerBanners, PAGETYPES } from './admanager';
 
-import type { ILoadAdData } from './livewrapped';
-
 import type { getElementIds, getKeyValues, getLiveBlogBanners } from '../util';
 
 import type { updateORTBData } from '../util/updateortbdata';
@@ -39,14 +37,7 @@ export interface IBannerInit {
 	userType?: string;
 }
 
-export interface ICustomPlacement extends Partial<ILoadAdData> {
-	addPrefix?: boolean;
-	invCode?: string;
-	prefixId?: string;
-}
-
 export interface ISiteBanners {
-	addCustomPlacement: (customOptions: ICustomPlacement, skipLW: boolean) => void;
 	addPlacement: (placementName: string, targetId?: string) => void;
 	ebDynamicBanners: typeof ebDynamicBanners;
 	getElementIds: typeof getElementIds;

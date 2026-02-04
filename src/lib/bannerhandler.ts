@@ -1,6 +1,5 @@
 export { ebDynamicBanners } from './dynamicbanners/DynamicBanners';
 export {
-	addCustomPlacement,
 	addPlacement,
 	getElementIds,
 	getKeyValues,
@@ -154,7 +153,7 @@ class BannerHandler {
 			window.googletag.setConfig({
 				collapseDiv: 'ON_NO_FILL',
 				disableInitialLoad: true,
-				signleRequest: true
+				singleRequest: true
 			});
 			if (adPlacements) {
 				window.googletag
@@ -167,7 +166,6 @@ class BannerHandler {
 						if (event.isEmpty && bannerWrapper) {
 							bannerWrapper.classList.add('hidden');
 						} else {
-							// Came from addCustomPlacement and wont be found in bannerData
 							if (!bannerData) return;
 
 							// add the banner to list of rendered banners unless its a topbanner
