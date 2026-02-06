@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-
 	import { browser } from '$app/environment';
 
 	import { type AdsInterface, adsInterface as adsInterfaceFromFile } from './init';
@@ -8,9 +6,9 @@
 	import { page } from '$app/state';
 	import { logger } from './logger';
 
-	let { adnamiUnloadHandler = undefined, device } = $props();
+	let { adnamiUnloadHandler = undefined, consent, device } = $props();
 
-	const consentStatus = getContext('consent') as () => 'unset' | boolean;
+	// const consentStatus = getContext('consent') as () => 'unset' | boolean;
 
 	let adsInterface: AdsInterface = adsInterfaceFromFile;
 
@@ -28,7 +26,7 @@
 
 	$effect(() => {
 		logger('AdInit.svelte *******************************************************************');
-		logger('AdInit.svelte consentStatus:', consentStatus());
+		logger('AdInit.svelte consentStatus:', consent);
 		if (!browser) return;
 		const displayAds = page.data?.displayAds;
 		if (!displayAds) {
@@ -38,8 +36,8 @@
 		// const device = matchMedia('(min-width: 768px)').matches ? DEVICE.desktop : DEVICE.smartphone;
 		displayAds.device = device;
 
-		if (consentStatus() !== 'unset') {
-			adsInterface.init(displayAds, consentStatus() as boolean, adnamiUnloadHandler);
+		if (consent !== 'unset') {
+			adsInterface.init(displayAds, consent as boolean, adnamiUnloadHandler);
 		}
 	});
 </script>

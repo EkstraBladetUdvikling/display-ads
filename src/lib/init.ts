@@ -1,3 +1,4 @@
+import { writable } from 'svelte/store';
 import BannerHandler, { handleHalfPage } from './bannerhandler';
 import { logger } from './logger';
 import { PAGETYPES } from './types/admanager';
@@ -65,6 +66,7 @@ export class AdsInterface {
 		displayAdsData: null
 	};
 	private bannerHandler: BannerHandler | null = null;
+	private isInited = writable(false);
 
 	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
 		if (window.location.search.includes('displayads_debug')) {
@@ -161,6 +163,7 @@ export class AdsInterface {
 
 		this.bannerHandler = new BannerHandler(extractedData);
 		this.#exists = true;
+		this.isInited.set(true);
 		logger(
 			'adsInterface.init called with: BannerHandler initialized',
 			this.bannerHandler,
@@ -191,29 +194,38 @@ export class AdsInterface {
 	 * placementExistsAndAllowed
 	 * @description Check if a placement exists in the current ad units
 	 */
-	public placementExistsAndAllowed(placement: string, consent: boolean) {
+	public async placementExistsAndAllowed(placement: string, consent: boolean) {
 		logger(`adsInterface.placementExistsAndAllowed called with: ${placement}, consent: ${consent}`);
-		if (!this.bannerHandler) return false;
-
-		const adUnitsToSearch = consent
-			? this.bannerHandler.adUnits
-			: this.bannerHandler.adUnitsNoConsent;
-		const doesExist = adUnitsToSearch.find((adUnit) => {
-			return adUnit.cleanName?.toLowerCase() === placement;
+		return await new Promise((resolve, reject) => {
+			this.isInited.subscribe((value) => {
+				if (value) {
+					if (!this.bannerHandler) {
+						reject('BannerHandler not initialized');
+					} else {
+						const adUnitsToSearch = consent
+							? this.bannerHandler.adUnits
+							: this.bannerHandler.adUnitsNoConsent;
+						const doesExist = adUnitsToSearch.find((adUnit) => {
+							return adUnit.cleanName?.toLowerCase() === placement;
+						});
+						logger(
+							`adsInterface.placementExistsAndAllowed ${placement} adUnitsToSearch:`,
+							adUnitsToSearch,
+							' doesExist:',
+							doesExist
+						);
+						const isAllowed = doesExist?.devices.find(
+							(dev) =>
+								dev.toLowerCase() === this.#initData.displayAdsData?.device ||
+								DEVICEFROMADMANAGER.smartphone
+						);
+						logger(`adsInterface.placementExistsAndAllowed ${placement} isAllowed:`, isAllowed);
+						// return doesExist && isAllowed;
+						resolve(doesExist && isAllowed);
+					}
+				}
+			});
 		});
-		logger(
-			`adsInterface.placementExistsAndAllowed ${placement} adUnitsToSearch:`,
-			adUnitsToSearch,
-			' doesExist:',
-			doesExist
-		);
-		const isAllowed = doesExist?.devices.find(
-			(dev) =>
-				dev.toLowerCase() === this.#initData.displayAdsData?.device ||
-				DEVICEFROMADMANAGER.smartphone
-		);
-		logger(`adsInterface.placementExistsAndAllowed ${placement} isAllowed:`, isAllowed);
-		return doesExist && isAllowed;
 	}
 
 	private extractHandlerData(displayAds) {

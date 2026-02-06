@@ -1,19 +1,21 @@
 <script>
 	import AdPlacement from './AdPlacement.svelte';
 
-	let { consent, device, placementName, position = 'left' } = $props();
+	let { consent, placementName, position = 'left' } = $props();
 </script>
 
 <div class="sidebanner-container">
 	<div class="pushdownelement"></div>
 	<div class="sidebanner sidebanner--{position}">
-		<AdPlacement
-			adMark={true}
-			{consent}
-			{device}
-			{placementName}
-			placementType="halfpage"
-			wallpaperContainer={false}
-		/>
+		{#if typeof consent === 'boolean'}
+			added after consent change {consent}
+			<AdPlacement
+				adMark={true}
+				{consent}
+				{placementName}
+				placementType="halfpage"
+				wallpaperContainer={false}
+			/>
+		{/if}
 	</div>
 </div>

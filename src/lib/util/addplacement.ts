@@ -10,11 +10,12 @@ interface IAddPlacementInput {
 	tagId: string;
 }
 
-export function addPlacement(options: IAddPlacementInput) {
+export async function addPlacement(options: IAddPlacementInput) {
 	const { placement, tagId, loadCallback, consent } = options;
 	logger('addPlacement called with:', placement, tagId, consent);
 	try {
-		if (!adsInterface.placementExistsAndAllowed(placement, consent)) {
+		const existsAndAllowed = await adsInterface.placementExistsAndAllowed(placement, consent);
+		if (!existsAndAllowed) {
 			throw new Error(`Placement "${placement}" does not exist.`);
 		}
 
@@ -48,7 +49,7 @@ export function addPlacement(options: IAddPlacementInput) {
 					gamSizes,
 					sizes
 				} = bannerData;
-				logger('addPlacement called with:', placement, addedToQueue);
+				logger('addPlacement called with:', placement, 'addedToQueue', addedToQueue);
 
 				if (!addedToQueue) {
 					window.lwhb.cmd.push(() => {

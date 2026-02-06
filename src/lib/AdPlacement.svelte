@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { beforeNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	import { addPlacement } from './util/addplacement';
@@ -21,9 +21,10 @@
 
 	let showContainer = $state(false);
 
-	const consentStatus = $derived(consent);
+	let wallpaperBackground: HTMLDivElement;
+
 	beforeNavigate(() => {
-		if (browser && consentStatus !== 'unset') {
+		if (browser && consent !== 'unset') {
 			removePlacement(targetId, placementName);
 			if (wallpaperContainer && wallpaperBackground) {
 				while (wallpaperBackground.firstChild) {
@@ -33,25 +34,15 @@
 		}
 	});
 
-	afterNavigate(() => {
-		if (browser && consentStatus !== 'unset') {
-			logger(
-				`adplacement.svelte ${placementName} afterNavigate consentStatus:`,
-				consentStatus,
-				consent
-			);
+	// afterNavigate(async () => {
+	// 	if (browser && consent !== 'unset') {
+	// 		logger(`adplacement.svelte ${placementName} afterNavigate consent:`, consent);
 
-			showContainer = addPlacement({
-				consent: consentStatus,
-				placement: placementName,
-				tagId: targetId
-			});
-		}
-	});
-
-	// onMount(() => {
-	// 	if (consentStatus !== 'unset') {
-	// 		showContainer = addPlacement({ consent, placement: placementName, tagId: targetId });
+	// 		showContainer = await addPlacement({
+	// 			consent: consent,
+	// 			placement: placementName,
+	// 			tagId: targetId
+	// 		});
 	// 	}
 	// });
 
@@ -59,15 +50,16 @@
 		if (browser) removePlacement(targetId, placementName);
 	});
 
-	let wallpaperBackground: HTMLDivElement;
 	$effect(() => {
 		if (!browser) return;
-		if (consentStatus !== 'unset') {
-			logger(`adplacement.svelte ${placementName} effect consentStatus:`, consentStatus, consent);
-			showContainer = addPlacement({
-				consent: consentStatus,
+		if (consent !== 'unset') {
+			logger(`adplacement.svelte ${placementName} effect consent:`, consent);
+			addPlacement({
+				consent: consent,
 				placement: placementName,
 				tagId: targetId
+			}).then((result) => {
+				showContainer = result;
 			});
 		}
 	});
