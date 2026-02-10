@@ -2,8 +2,6 @@
 
 Giver mulighed for at håndtere annoncer i Ekstra Bladet familien
 
-Dette er afhængig af @ekstra-bladet/eb-cmp
-
 ## Getting started
 
 ```

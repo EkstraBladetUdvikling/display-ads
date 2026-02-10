@@ -8,7 +8,6 @@
 	<div class="pushdownelement"></div>
 	<div class="sidebanner sidebanner--{position}">
 		{#if typeof consent === 'boolean'}
-			added after consent change {consent}
 			<AdPlacement
 				adMark={true}
 				{consent}

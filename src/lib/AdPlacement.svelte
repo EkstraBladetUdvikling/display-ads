@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 
-	import { beforeNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	import { addPlacement } from './util/addplacement';
@@ -34,25 +34,24 @@
 		}
 	});
 
-	// afterNavigate(async () => {
-	// 	if (browser && consent !== 'unset') {
-	// 		logger(`adplacement.svelte ${placementName} afterNavigate consent:`, consent);
+	afterNavigate(async () => {
+		if (browser && consent !== 'unset') {
+			logger(`adplacement.svelte ${placementName} afterNavigate consent:`, consent);
 
-	// 		showContainer = await addPlacement({
-	// 			consent: consent,
-	// 			placement: placementName,
-	// 			tagId: targetId
-	// 		});
-	// 	}
-	// });
+			showContainer = await addPlacement({
+				consent: consent,
+				placement: placementName,
+				tagId: targetId
+			});
+		}
+	});
 
 	onDestroy(() => {
 		if (browser) removePlacement(targetId, placementName);
 	});
 
 	$effect(() => {
-		if (!browser) return;
-		if (consent !== 'unset') {
+		if (browser && consent !== 'unset') {
 			logger(`adplacement.svelte ${placementName} effect consent:`, consent);
 			addPlacement({
 				consent: consent,
