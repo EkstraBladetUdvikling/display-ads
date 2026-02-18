@@ -17,6 +17,7 @@ import { type IBANNERSTATEBANNER } from './types/admanager';
 
 import type { IBannerInit, IDefineTag } from './types';
 import { getDeviceInfo } from './util/isipados';
+import { logger } from './logger';
 
 class BannerHandler {
 	public adUnits: IBANNERSTATEBANNER[] = [];
@@ -78,6 +79,7 @@ class BannerHandler {
 		// window.googletag.pubads().updateCorrelator();
 		// window.lwhb.resetCorrelator();
 		if (window.lwhb && window.lwhb.resetPage) window.lwhb.resetPage(true);
+		if (window.lwhb && window.lwhb.disablePrebid) window.lwhb.disablePrebid = false;
 
 		BANNERSTATE.reset();
 		this.setupAdUnits();
@@ -91,11 +93,21 @@ class BannerHandler {
 	 * complete
 	 */
 	private complete() {
+		logger('complete: BannerHandler complete called', { BANNERSTATE });
 		if (!BANNERSTATE.completeCalled) {
 			BANNERSTATE.completeCalled = true;
+			logger('complete: BANNERSTATE complete called, checking if ready');
 			BANNERSTATE.isReady(() => {
+				logger('complete: Rendering ads for placements:', BANNERSTATE.placements);
+				logger('complete: Rendering ads for placements: - window.lwhb:', 'lwhb' in window);
 				if (window.lwhb) {
+					logger('complete: Rendering ads for placements: - window.lwhb:', 'lwhb' in window);
 					window.lwhb.cmd.push(() => {
+						logger(
+							'complete: This does not actaully render the ads, it tells lwhb that we have all',
+							'lwhb' in window
+						);
+
 						// This does not actaully render the ads, it tells lwhb that we have all
 						// expected ads in the queue, lwhb handles lazyloading
 						window.lwhb.render();
@@ -119,7 +131,9 @@ class BannerHandler {
 	private fallbackQueue() {
 		window.googletag.cmd.push(() => {
 			BANNERSTATE.placements.forEach((placement) => {
-				const bannerData = BANNERSTATE.adUnits.find((adUnit) => adUnit.cleanName === placement);
+				const useNoConsent = this.initOptions.consent === false;
+				const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+				const bannerData = adUnitsToSearch.find((adUnit) => adUnit.cleanName === placement);
 
 				if (!bannerData) return;
 
