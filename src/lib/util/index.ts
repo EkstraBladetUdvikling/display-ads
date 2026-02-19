@@ -7,4 +7,4 @@ export { onPersisted } from './onpersisted';
 export { prebidKeywords } from './prebidkeywords';
 export { sortPlacements } from './sortplacements';
 export { updateORTBData } from './updateortbdata';
-export { addCustomPlacement, addPlacement } from './addplacement';
+export { addPlacement } from './addplacement';

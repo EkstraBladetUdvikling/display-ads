@@ -2,8 +2,7 @@
 	import '$lib/ads.css';
 
 	// @ts-ignore
-	import CMP from '@ekstra-bladet/eb-cmp/svelte/CMP.svelte';
-	import CMPUrl from '@ekstra-bladet/eb-cmp/dist/eb-cmp.js?url';
+
 	import { setContext } from 'svelte';
 	import { browser } from '$app/environment';
 	import AdInit from '$lib/AdInit.svelte';

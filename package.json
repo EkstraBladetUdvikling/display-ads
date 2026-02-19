@@ -1,7 +1,7 @@
 {
 	"name": "@ekstrabladetudvikling/display-ads",
 	"main": "index.ts",
-	"version": "0.5.2",
+	"version": "0.6.0-beta.13",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -36,12 +36,10 @@
 		"vite": "^6.3.5"
 	},
 	"dependencies": {
-		"@ekstra-bladet/eb-cmp": "^3.0.1",
 		"@types/googletag": "^3.3.0",
 		"@types/jwplayer": "^8.31.3"
 	},
 	"peerDependencies": {
-		"@ekstra-bladet/eb-cmp": "^3.0.1",
 		"@types/googletag": "^3.3.0"
 	}
 }
