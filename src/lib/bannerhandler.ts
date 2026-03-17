@@ -130,9 +130,10 @@ class BannerHandler {
 	 */
 	private fallbackQueue() {
 		window.googletag.cmd.push(() => {
-			BANNERSTATE.placements.forEach((placement) => {
+			BANNERSTATE.placements.forEach((placementKey) => {
 				const useNoConsent = this.initOptions.consent === false;
 				const adUnitsToSearch = useNoConsent ? BANNERSTATE.adUnitsNoConsent : BANNERSTATE.adUnits;
+				const placement = placementKey.split('_')[0];
 				const bannerData = adUnitsToSearch.find((adUnit) => adUnit.cleanName === placement);
 
 				if (!bannerData) return;

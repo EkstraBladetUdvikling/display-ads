@@ -1,14 +1,18 @@
 import { logger } from '../logger';
 import { BANNERSTATE } from '../state';
+import { getPlacementKey } from './getplacementkey';
 
-export function removePlacement(tagId: string, placementName?: string) {
+export function removePlacement(tagId: string, placementName: string) {
 	try {
 		logger(
 			`removePlacement Removing ad unit with tagId: ${tagId}`,
 			placementName,
 			BANNERSTATE.placements
 		);
-		BANNERSTATE.placements = BANNERSTATE.placements.filter((p) => p !== placementName);
+
+		const placementKey = getPlacementKey(placementName, tagId);
+
+		BANNERSTATE.placements = BANNERSTATE.placements.filter((p) => p !== placementKey);
 		logger('removePlacement Updated BANNERSTATE.placements:', BANNERSTATE.placements);
 		if (window.lwhb && window.lwhb.removeAdUnit) window.lwhb.removeAdUnit(tagId);
 
