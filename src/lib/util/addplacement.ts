@@ -1,6 +1,7 @@
 import { logger } from '../logger';
 import { adsInterface } from '../init';
 import { BANNERSTATE } from '../state';
+import { getPlacementKey } from './getplacementkey';
 import type { IDefineTag, ILoadAdData } from '../types';
 
 interface IAddPlacementInput {
@@ -19,7 +20,7 @@ export async function addPlacement(options: IAddPlacementInput) {
 			throw new Error(`Placement "${placement}" does not exist.`);
 		}
 
-		if (!BANNERSTATE.placements.includes(placement)) BANNERSTATE.placements.push(placement);
+		const placementKey = getPlacementKey(placement, tagId);
 
 		BANNERSTATE.isReady(() => {
 			const useNoConsent = consent === false;
@@ -36,7 +37,9 @@ export async function addPlacement(options: IAddPlacementInput) {
 
 			const adPlaceholder = document.getElementById(tagId);
 
-			if (!adPlaceholder) throw new Error('adPlacement not found');
+			if (!adPlaceholder) {
+				throw new Error(`adPlacement not found for tagId: ${tagId} - placement: ${placement}`);
+			}
 
 			while (adPlaceholder.firstChild) {
 				adPlaceholder.firstChild.remove();
@@ -47,11 +50,17 @@ export async function addPlacement(options: IAddPlacementInput) {
 					allowedFormats: allowedMediaTypes,
 					lwName: adUnitName,
 					gamSizes,
-					sizes
+					sizes,
+					targetId
 				} = bannerData;
+				logger('addPlacement bannerData:', targetId);
 				logger('addPlacement called with:', placement, 'addedToQueue', addedToQueue);
 
-				if (!addedToQueue) {
+				if (!BANNERSTATE.placements.includes(placementKey)) {
+					logger('addPlacement: Adding placementKey to BANNERSTATE.placements:', placementKey);
+					BANNERSTATE.placements.push(placementKey);
+					// }
+					// 		if (!addedToQueue) {
 					window.lwhb.cmd.push(() => {
 						const loadAdData: ILoadAdData = {
 							adUnitName,
