@@ -46,7 +46,6 @@ export async function addPlacement(options: IAddPlacementInput) {
 			}
 			if (bannerData) {
 				const {
-					addedToQueue,
 					allowedFormats: allowedMediaTypes,
 					lwName: adUnitName,
 					gamSizes,
@@ -54,13 +53,20 @@ export async function addPlacement(options: IAddPlacementInput) {
 					targetId
 				} = bannerData;
 				logger('addPlacement bannerData:', targetId);
-				logger('addPlacement called with:', placement, 'addedToQueue', addedToQueue);
 
-				if (!BANNERSTATE.placements.includes(placementKey)) {
+				const isAlreadyAdded = BANNERSTATE.placements.includes(placementKey);
+				logger(
+					'addPlacement: isAlreadyAdded:',
+					isAlreadyAdded,
+					'placementKey:',
+					placementKey,
+					'placement',
+					placement
+				);
+				if (!isAlreadyAdded) {
 					logger('addPlacement: Adding placementKey to BANNERSTATE.placements:', placementKey);
 					BANNERSTATE.placements.push(placementKey);
-					// }
-					// 		if (!addedToQueue) {
+
 					window.lwhb.cmd.push(() => {
 						const loadAdData: ILoadAdData = {
 							adUnitName,
@@ -85,7 +91,6 @@ export async function addPlacement(options: IAddPlacementInput) {
 							window.lwhb.prepareAd(loadAdData);
 						}
 					});
-					bannerData.addedToQueue = true;
 				}
 			}
 		});

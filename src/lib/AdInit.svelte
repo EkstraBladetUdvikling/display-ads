@@ -5,6 +5,7 @@
 	// import { DEVICE } from './state';
 	import { page } from '$app/state';
 	import { logger } from './logger';
+	import { beforeNavigate } from '$app/navigation';
 
 	let { adnamiUnloadHandler = undefined, consent, device } = $props();
 
@@ -23,6 +24,9 @@
 	// 		}
 	// 	}
 	// });
+	beforeNavigate(() => {
+		if (adsInterface) adsInterface.cleanup();
+	});
 
 	$effect(() => {
 		logger('AdInit.svelte *******************************************************************');
