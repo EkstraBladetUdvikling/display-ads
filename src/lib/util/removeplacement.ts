@@ -15,17 +15,6 @@ export function removePlacement(tagId: string, placementName: string) {
 		BANNERSTATE.placements = BANNERSTATE.placements.filter((p) => p !== placementKey);
 		logger('removePlacement Updated BANNERSTATE.placements:', BANNERSTATE.placements);
 		if (window.lwhb && window.lwhb.removeAdUnit) window.lwhb.removeAdUnit(tagId);
-
-		const bannerData = BANNERSTATE.adUnits.find(
-			(adUnit) => adUnit.cleanName?.toLowerCase() === placementName
-		);
-		if (bannerData) bannerData.addedToQueue = false;
-
-		const bannerDataNC = BANNERSTATE.adUnitsNoConsent.find(
-			(adUnit) => adUnit.cleanName?.toLowerCase() === placementName
-		);
-		if (bannerDataNC) bannerDataNC.addedToQueue = false;
-		logger('removePlacement Updated bannerData:', bannerData, bannerDataNC);
 	} catch (error) {
 		console.error(`Error removing ad unit with tagId: ${tagId}`, error);
 	}

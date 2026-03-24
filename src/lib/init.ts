@@ -1,8 +1,12 @@
 import { writable } from 'svelte/store';
-import BannerHandler, { handleHalfPage } from './bannerhandler';
+
+import { BANNERSTATE } from './state';
+import { dataFromPlacementKey } from './util/getplacementkey';
+import { DEVICEFROMADMANAGER } from './util/device';
 import { logger } from './logger';
 import { PAGETYPES } from './types/admanager';
-import { DEVICEFROMADMANAGER } from './util/device';
+
+import BannerHandler, { handleHalfPage } from './bannerhandler';
 
 function handleAdnami(adnamiUnloadHandler?: () => void) {
 	/**
@@ -60,13 +64,24 @@ interface IAdsInterfaceInitData {
 }
 
 export class AdsInterface {
+	private bannerHandler: BannerHandler | null = null;
+	private isInited = writable(false);
+
 	#exists = false;
 	#initData: IAdsInterfaceInitData = {
 		consent: null,
 		displayAdsData: null
 	};
-	private bannerHandler: BannerHandler | null = null;
-	private isInited = writable(false);
+
+	public cleanup() {
+		logger('adsInterface.cleanup called');
+		BANNERSTATE.placements.forEach((placement) => {
+			const { placement: placementName, tagId } = dataFromPlacementKey(placement);
+			logger('adsInterface.cleanup removing placement:', placementName, tagId);
+			if (window.lwhb && window.lwhb.removeAdUnit) window.lwhb.removeAdUnit(tagId);
+		});
+		BANNERSTATE.placements = [];
+	}
 
 	public init(displayAdsData: any, consent: boolean, adnamiUnloadHandler?: () => void) {
 		if (window.location.search.includes('displayads_debug')) {
