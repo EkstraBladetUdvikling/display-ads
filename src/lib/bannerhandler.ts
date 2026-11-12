@@ -8,7 +8,6 @@ export {
 	updateORTBData
 } from './util';
 
-import { addHighImpact, highimpactInit } from './highimpact';
 import { getElementIds, getSizeValues, onPersisted, updateORTBData } from './util';
 
 import { BANNERSTATE, DEVICE } from './state';
@@ -231,7 +230,6 @@ class BannerHandler {
 			adPlacements,
 			consent,
 			// dynamicSeparately = true,
-			highImpactEnabled,
 			pageContext,
 			keywords: escKeywords,
 			lwReplaceValues,
@@ -264,8 +262,6 @@ class BannerHandler {
 		});
 
 		updateORTBData(keywords);
-
-		if (highImpactEnabled) highimpactInit();
 
 		if (!adPlacements) return;
 
@@ -355,8 +351,6 @@ class BannerHandler {
 				} else {
 					adUnits.push({ ...banner, gamSizes, prefixId, sizes: defineTag.sizes, targetId });
 				}
-
-				if (highImpactEnabled) addHighImpact(banner, targetId);
 
 				/**
 				 * Fixed sizes on monster banners
