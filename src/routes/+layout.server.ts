@@ -18,7 +18,6 @@ export const load = async () => {
 				google: anonId
 			},
 			device: DEVICE.smartphone, // Reference the already extracted device value
-			highImpactEnabled: true,
 			keywords: { test: String(publicEnv.PUBLIC_ENVIRONMENT === 'test') },
 			livewrappedKey: publicEnv.PUBLIC_LIVEWRAPPEDKEY,
 			pageContext: PAGETYPES.FRONTPAGE,
