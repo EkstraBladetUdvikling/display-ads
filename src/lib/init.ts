@@ -50,7 +50,6 @@ interface IDisplayAdsData {
 	adPlacements: any[];
 	anonIds: { adform: string; base: string; google: string };
 	device: DEVICEFROMADMANAGER;
-	highImpactEnabled: boolean;
 	keywords: { [id: string]: string | string[] };
 	livewrappedKey: string;
 	pageContext: PAGETYPES;
@@ -166,14 +165,6 @@ export class AdsInterface {
 			firstScript.parentNode.insertBefore(gptScript, firstScript);
 		}
 
-		if (extractedData.highImpactEnabled) {
-			const hiScript = document.createElement('script');
-			hiScript.src = '/highimpact/highimpact.min.js';
-			if (firstScript && firstScript.parentNode) {
-				firstScript.parentNode.insertBefore(hiScript, firstScript);
-			}
-		}
-
 		if (extractedData.adNamiEnabled) handleAdnami(adnamiUnloadHandler);
 
 		this.bannerHandler = new BannerHandler(extractedData);
@@ -251,7 +242,6 @@ export class AdsInterface {
 			articleId,
 			device,
 			segments,
-			highImpactEnabled,
 			livewrappedKey,
 			pageContext,
 			premium,
@@ -268,7 +258,6 @@ export class AdsInterface {
 			articleId,
 			device,
 			segments,
-			highImpactEnabled,
 			livewrappedKey,
 			pageContext,
 			premium,

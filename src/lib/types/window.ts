@@ -26,13 +26,6 @@ export interface IADSM {
 	};
 }
 
-export interface IHighImpact {
-	cmd: Array<() => void>;
-	defineSlot: (inputObj: IUnknowObject) => void;
-	setConfig: (inputObj: IUnknowObject) => void;
-	setTemplateConfig: (placementName: string, inputObj: IUnknowObject) => void;
-}
-
 export interface ILiveWrapped {
 	adsRendered: boolean;
 	cmd: Array<() => void>;
@@ -56,7 +49,6 @@ export interface IPrebidJS {
 
 export interface IDisplayAdsWindow {
 	adsm: IADSM;
-	highImpactJs: IHighImpact;
 	jppolWallpaper: (callerName?: string) => void;
 	jppolApn: {
 		ebSkyskraper: {

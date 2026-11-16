@@ -22,7 +22,6 @@ export interface IBannerInit {
 	consent: boolean;
 	device: DEVICE;
 	dynamicSeparately?: boolean;
-	highImpactEnabled?: boolean;
 	keywords?: IKeywords;
 	lwReplaceValues?: string[];
 	livewrappedKey?: string;
